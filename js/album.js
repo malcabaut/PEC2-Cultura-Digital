@@ -51,11 +51,18 @@ function getDiagnosisForShot(shotData) {
     };
   }
 
+  const focusShortExtra = shotData.isUnfocused ? ' + 🔴 Desenf.' : '';
+  const focusDetailExtra = shotData.isUnfocused ? ' • 🔴 DESENFOCADA (Prisma desalineado)' : '';
+  const shakyShortExtra = shotData.isShaky ? ` + 👋 Movida` : '';
+  const shakyDetailExtra = shotData.isShaky ? ` • 👋 TREPIDADA (1/${sp}s)` : '';
+  const combinedShortExtra = `${focusShortExtra}${shakyShortExtra}`;
+  const combinedDetailExtra = `${focusDetailExtra}${shakyDetailExtra}`;
+
   if (delta >= 2.85) {
     return {
-      shortLabel: `⬜ Blanca 100% (+3EV)`,
-      negShortLabel: `⬛ Neg. Negro 100% (+3EV)`,
-      detailLabel: `⬜ BLANCA / QUEMADA AL 100% (+${clamped.toFixed(1)} EV al tope del exposímetro) • ƒ/${ap} • 1/${sp}s (${originTag})`,
+      shortLabel: `⬜ Blanca 100% (+3EV)${combinedShortExtra}`,
+      negShortLabel: `⬛ Neg. Negro 100% (+3EV)${combinedShortExtra}`,
+      detailLabel: `⬜ BLANCA / QUEMADA AL 100% (+${clamped.toFixed(1)} EV al tope del exposímetro)${combinedDetailExtra} • ƒ/${ap} • 1/${sp}s (${originTag})`,
       cssClass: 'exposure-overexposed',
       badgeClass: 'badge-over'
     };
@@ -64,34 +71,34 @@ function getDiagnosisForShot(shotData) {
     return {
       shortLabel: `⬛ Negra 100% (-3EV)`,
       negShortLabel: `⬜ Neg. Vacío 100% (-3EV)`,
-      detailLabel: `⬛ NEGRA / SUBEXPUESTA AL 100% (${clamped.toFixed(1)} EV al mínimo del exposímetro) • ƒ/${ap} • 1/${sp}s (${originTag})`,
+      detailLabel: `⬛ NEGRA / SUBEXPUESTA AL 100% (${clamped.toFixed(1)} EV al mínimo del exposímetro)${combinedDetailExtra} • ƒ/${ap} • 1/${sp}s (${originTag})`,
       cssClass: 'exposure-underexposed',
       badgeClass: 'badge-under'
     };
   }
   if (delta > 0.6) {
     return {
-      shortLabel: `☀️ Sobreexp. ${pct}% (+${clamped.toFixed(1)}EV)`,
-      negShortLabel: `🎞️ Neg. Denso ${pct}% (+${clamped.toFixed(1)}EV)`,
-      detailLabel: `☀️ SOBREEXPUESTA AL ${pct}% (+${clamped.toFixed(1)} EV de +3.0 EV) • ƒ/${ap} • 1/${sp}s (${originTag})`,
+      shortLabel: `☀️ Sobreexp. ${pct}% (+${clamped.toFixed(1)}EV)${combinedShortExtra}`,
+      negShortLabel: `🎞️ Neg. Denso ${pct}% (+${clamped.toFixed(1)}EV)${combinedShortExtra}`,
+      detailLabel: `☀️ SOBREEXPUESTA AL ${pct}% (+${clamped.toFixed(1)} EV de +3.0 EV)${combinedDetailExtra} • ƒ/${ap} • 1/${sp}s (${originTag})`,
       cssClass: 'exposure-overexposed',
       badgeClass: 'badge-over'
     };
   }
   if (delta < -0.6) {
     return {
-      shortLabel: `🌑 Subexp. ${pct}% (${clamped.toFixed(1)}EV)`,
-      negShortLabel: `🎞️ Neg. Claro ${pct}% (${clamped.toFixed(1)}EV)`,
-      detailLabel: `🌑 SUBEXPUESTA AL ${pct}% (${clamped.toFixed(1)} EV de -3.0 EV) • ƒ/${ap} • 1/${sp}s (${originTag})`,
+      shortLabel: `🌑 Subexp. ${pct}% (${clamped.toFixed(1)}EV)${combinedShortExtra}`,
+      negShortLabel: `🎞️ Neg. Claro ${pct}% (${clamped.toFixed(1)}EV)${combinedShortExtra}`,
+      detailLabel: `🌑 SUBEXPUESTA AL ${pct}% (${clamped.toFixed(1)} EV de -3.0 EV)${combinedDetailExtra} • ƒ/${ap} • 1/${sp}s (${originTag})`,
       cssClass: 'exposure-underexposed',
       badgeClass: 'badge-under'
     };
   }
   if (shotData.isUnfocused) {
     return {
-      shortLabel: '🔴 Desenfocada',
-      negShortLabel: '🎞️ Neg. Desenfocado',
-      detailLabel: `❌ DESENFOCADA (Prisma desalineado) • Exposición ${clamped >= 0 ? '+' : ''}${clamped.toFixed(1)} EV (${pct}%) • ƒ/${ap} • 1/${sp}s (${originTag})`,
+      shortLabel: `🔴 Desenfocada${shakyShortExtra}`,
+      negShortLabel: `🎞️ Neg. Desenfocado${shakyShortExtra}`,
+      detailLabel: `🔴 DESENFOCADA (Prisma desalineado)${shakyDetailExtra} • Exposición Óptima (${clamped >= 0 ? '+' : ''}${clamped.toFixed(1)} EV • ${pct}%) • ƒ/${ap} • 1/${sp}s (${originTag})`,
       cssClass: 'exposure-unfocused',
       badgeClass: 'badge-unfocused'
     };
@@ -100,7 +107,7 @@ function getDiagnosisForShot(shotData) {
     return {
       shortLabel: `👋 Movida (1/${sp}s)`,
       negShortLabel: `🎞️ Neg. Movido`,
-      detailLabel: `👋 TREPIDADA sin trípode • ƒ/${ap} • 1/${sp}s (${originTag})`,
+      detailLabel: `👋 TREPIDADA sin trípode • Exposición Óptima (${clamped >= 0 ? '+' : ''}${clamped.toFixed(1)} EV) • ƒ/${ap} • 1/${sp}s (${originTag})`,
       cssClass: 'exposure-shaky',
       badgeClass: 'badge-shaky'
     };
@@ -118,23 +125,23 @@ function updateDarkroomTray() {
   const photos = getPhotos();
   if (photos.length === 0) return;
 
-  const totalReel = photos.length; // 10
-  const maxBatchIdx = Math.max(0, Math.ceil(totalReel / 5) - 1); // 1 (2 tiras de 5)
+  const totalReel = photos.length; // 12
+  const maxBatchIdx = Math.max(0, Math.ceil(totalReel / 4) - 1); // 2 (3 tiras de 4)
   if (AppState.darkroomCurrentBatch > maxBatchIdx) {
     AppState.darkroomCurrentBatch = 0;
   }
 
   const batchIdx = AppState.darkroomCurrentBatch || 0;
   const batchObj = AppState.darkroomBatches[batchIdx] || { stage: 0, progress: 0 };
-  const startIdx = batchIdx * 5;
-  const endIdx = Math.min(totalReel, startIdx + 5);
+  const startIdx = batchIdx * 4;
+  const endIdx = Math.min(totalReel, startIdx + 4);
   const countInBatch = endIdx - startIdx;
 
   if (AppState.darkroomSelectedSlot >= countInBatch) {
     AppState.darkroomSelectedSlot = 0;
   }
 
-  // Actualizar pestañas de lotes (2 tiras de 5 fotos = 10 fotos)
+  // Actualizar pestañas de lotes (3 tiras de 4 fotos = 12 fotos)
   document.querySelectorAll('.batch-tab').forEach(tab => {
     const b = parseInt(tab.getAttribute('data-batch'), 10);
     const bState = AppState.darkroomBatches[b];
@@ -144,8 +151,8 @@ function updateDarkroomTray() {
     }
     tab.style.display = '';
     tab.classList.toggle('active', b === batchIdx);
-    const rangeStart = b * 5 + 1;
-    const rangeEnd = Math.min(totalReel, (b + 1) * 5);
+    const rangeStart = b * 4 + 1;
+    const rangeEnd = Math.min(totalReel, (b + 1) * 4);
     const statusIcon = bState.stage === 2 ? '✅' : bState.stage === 1 ? '🎞️' : '⬛';
     tab.textContent = `${statusIcon} Tira ${b + 1}: Fotos ${rangeStart}–${rangeEnd}`;
   });
@@ -252,10 +259,10 @@ function updateDarkroomTray() {
           : `Foto #${String(selectedPhotoIdx + 1).padStart(2, '0')} • ⬛ FOTO NO TOMADA`;
       }
       if (timeElapsed) {
-        timeElapsed.textContent = `Paso Actual: 1️⃣ Emulsión Oculta (Fotos ${startIdx + 1}–${endIdx} de 10)`;
+        timeElapsed.textContent = `Paso Actual: 1️⃣ Emulsión Oculta (Fotos ${startIdx + 1}–${endIdx} de ${totalReel})`;
       }
       if (trayTitle) {
-        trayTitle.textContent = '👉 Siguiente paso: Pulsa el botón inferior para revelar las 5 fotos en NEGATIVO (Colores Invertidos y Densidad de Plata)';
+        trayTitle.textContent = '👉 Siguiente paso: Pulsa el botón inferior para revelar las 4 fotos de la tira en NEGATIVO (Colores Invertidos)';
       }
       if (btnDevelop) {
         btnDevelop.disabled = false;
@@ -273,7 +280,7 @@ function updateDarkroomTray() {
           : `Foto #${String(selectedPhotoIdx + 1).padStart(2, '0')} • ⬛ FOTO NO TOMADA`;
       }
       if (timeElapsed) {
-        timeElapsed.textContent = `Paso Actual: 2️⃣ ${selectedDiag.negShortLabel || 'Negativo Invertido'} (Fotos ${startIdx + 1}–${endIdx} de 10)`;
+        timeElapsed.textContent = `Paso Actual: 2️⃣ ${selectedDiag.negShortLabel || 'Negativo Invertido'} (Fotos ${startIdx + 1}–${endIdx} de ${totalReel})`;
       }
       if (trayTitle) {
         trayTitle.textContent = '👉 Siguiente paso: Pulsa el botón inferior para POSITIVAR y enviar estas copias al Álbum Físico (Fase 3)';
@@ -297,17 +304,16 @@ function updateDarkroomTray() {
         timeElapsed.textContent = `Paso Actual: 3️⃣ ¡Tira ${batchIdx + 1} Revelada y Lista para el Álbum! (${selectedDiag.shortLabel})`;
       }
       if (trayTitle) {
-        trayTitle.textContent = '✅ Tira revelada: Estas 5 copias ya están disponibles en el sobre del Álbum Físico (Fase 3)';
+        trayTitle.textContent = '✅ Tira revelada: Estas 4 copias ya están disponibles en el sobre del Álbum Físico (Fase 3)';
       }
       if (btnDevelop) {
         btnDevelop.disabled = false;
         btnDevelop.classList.add('btn-gentle-blink');
-        const otherBatchIdx = batchIdx === 0 ? 1 : 0;
-        const otherBatch = AppState.darkroomBatches[otherBatchIdx];
-        if (otherBatch && otherBatch.stage < 2) {
-          btnDevelop.textContent = `🎞️ PASAR A TIRA ${otherBatchIdx + 1}: Revelar Fotos ${otherBatchIdx * 5 + 1}–${Math.min(10, (otherBatchIdx + 1) * 5)} ▶`;
+        const nextPendingIdx = AppState.darkroomBatches.findIndex((b, idx) => idx !== batchIdx && b.stage < 2);
+        if (nextPendingIdx !== -1) {
+          btnDevelop.textContent = `🎞️ PASAR A TIRA ${nextPendingIdx + 1}: Revelar Fotos ${nextPendingIdx * 4 + 1}–${Math.min(totalReel, (nextPendingIdx + 1) * 4)} ▶`;
         } else {
-          btnDevelop.textContent = '📒 IR A LA FASE 3: Montar mis 10 Copias en el Álbum Físico ▶';
+          btnDevelop.textContent = `📒 IR A LA FASE 3: Montar mis ${totalReel} Copias en el Álbum Físico ▶`;
         }
       }
     }
@@ -373,44 +379,207 @@ function updatePipelineViews() {
 }
 
 /**
- * Inicializa o recupera el estado de montaje de una página del álbum (0..9)
+ * Inicializa o recupera el estado de montaje de un fotograma del carrete (0..11)
  */
-function getOrInitAlbumPageMount(pageIdx, photo) {
-  if (!AppState.albumMountedPages[pageIdx]) {
-    AppState.albumMountedPages[pageIdx] = {
+function getOrInitAlbumPageMount(photoIdx) {
+  if (!AppState.albumMountedPages[photoIdx]) {
+    AppState.albumMountedPages[photoIdx] = {
       corners: { tl: false, tr: false, bl: false, br: false },
       mounted: false,
       customNote: ''
     };
   }
-  return AppState.albumMountedPages[pageIdx];
+  return AppState.albumMountedPages[photoIdx];
 }
 
 /**
- * Renderiza el Álbum Físico con continuidad total (Fase 1 -> Fase 2 -> Fase 3)
- * y su minijuego ampliado de montaje con esquineras y notas manuscritas.
+ * Asegura que el orden de los 12 huecos del álbum físico esté inicializado
+ */
+function getAlbumSlotOrder(totalPhotos = 12) {
+  if (!Array.isArray(AppState.albumSlotOrder) || AppState.albumSlotOrder.length !== totalPhotos) {
+    AppState.albumSlotOrder = Array.from({ length: totalPhotos }, (_, i) => i);
+  }
+  return AppState.albumSlotOrder;
+}
+
+/**
+ * Construye una tarjeta de foto para uno de los 4 huecos del pliego abierto (2 en pág. izquierda, 2 en pág. derecha)
+ */
+function createAlbumSpreadSlotElement(slotPos, photoIdx, photo, isSelectedSlot) {
+  const shotData = evaluateFrameShotData(photoIdx, photo);
+  const devStage = getFrameDevelopmentStage(photoIdx);
+  const mountState = getOrInitAlbumPageMount(photoIdx);
+  const shotDiag = getDiagnosisForShot(shotData);
+  const coverSvg = renderUniquePhotoSvg(photo.svg);
+
+  // Si la foto ya está revelada en positivo y el usuario la había montado o si queremos mostrarla con sus esquineros
+  const cornersCount = Object.values(mountState.corners).filter(Boolean).length;
+  const isMounted = !!mountState.mounted;
+
+  const slotCard = document.createElement('div');
+  slotCard.className = `album-spread-slot ${isSelectedSlot ? 'selected-slot' : ''} ${isMounted ? 'is-mounted-slot' : 'is-unmounted-slot'}`;
+  slotCard.setAttribute('data-slot-pos', String(slotPos));
+  slotCard.setAttribute('data-photo-idx', String(photoIdx));
+
+  const defaultCaption = shotData.wasShotByUser
+    ? photo.analogCaption
+    : 'Fotograma sin exponer en la cámara.';
+  const handwrittenNote = (mountState.customNote && mountState.customNote.trim())
+    ? `“${mountState.customNote.trim()}”`
+    : defaultCaption;
+
+  let innerVisualHtml = '';
+  let filterInline = '';
+  let statusPillText = '';
+
+  if (devStage === 0) {
+    statusPillText = '⬛ Sin revelar';
+    innerVisualHtml = `
+      <div class="slot-unrevealed-box">
+        <span class="slot-unrev-icon">🎞️</span>
+        <strong>Copia #${String(photoIdx + 1).padStart(2, '0')} en el carrete</strong>
+        <small>${shotData.wasShotByUser ? `Disparada a ƒ/${shotData.aperture} • 1/${shotData.speed}s` : 'Sin disparar aún'}</small>
+        <button type="button" class="btn-slot-action btn-slot-go-darkroom" data-go-batch="${Math.floor(photoIdx / 4)}" data-go-slot="${photoIdx % 4}">
+          🧪 Revelar en Fase 2
+        </button>
+      </div>
+    `;
+  } else if (devStage === 1) {
+    const negStyle = getPhotoChemicalFilterStyles(shotData, 'negative');
+    filterInline = `style="filter: ${negStyle.filterCss};"`;
+    statusPillText = '🎞️ En Negativo';
+    innerVisualHtml = `
+      <div class="slot-photo-surface" ${filterInline}>${shotData.wasShotByUser ? coverSvg : ''}</div>
+      <div class="slot-action-overlay">
+        <span>Negativo de plástico</span>
+        <button type="button" class="btn-slot-action btn-slot-QuickMount" data-mount-photo="${photoIdx}">
+          ✨ Positivar y Pegar Copia
+        </button>
+      </div>
+    `;
+  } else {
+    const posStyle = getPhotoChemicalFilterStyles(shotData, 'positive');
+    filterInline = `style="filter: ${posStyle.filterCss};"`;
+    statusPillText = isMounted ? `📌 ${shotDiag.shortLabel}` : `✉️ En sobre (${cornersCount}/4 esq.)`;
+    innerVisualHtml = `
+      <div class="slot-photo-surface ${!isMounted ? 'loose-print-tilt' : ''}" ${filterInline}>
+        ${shotData.wasShotByUser ? coverSvg : ''}
+      </div>
+      ${!isMounted ? `
+        <div class="slot-action-overlay">
+          <span>Copia suelta del laboratorio</span>
+          <button type="button" class="btn-slot-action btn-slot-QuickMount" data-mount-photo="${photoIdx}">
+            📌 Pegar con 4 Esquineros
+          </button>
+        </div>
+      ` : ''}
+    `;
+  }
+
+  slotCard.innerHTML = `
+    <div class="slot-top-meta">
+      <span class="slot-pos-label">Hueco ${slotPos + 1} • Foto #${String(photoIdx + 1).padStart(2, '0')}</span>
+      <span class="slot-diag-pill">${statusPillText}</span>
+    </div>
+
+    <div class="slot-frame-paper">
+      <button type="button" class="photo-corner corner-tl ${mountState.corners.tl ? 'corner-fixed' : 'corner-pending'}" data-corner="tl" data-photo-idx="${photoIdx}" title="Esquinero superior izquierdo"></button>
+      <button type="button" class="photo-corner corner-tr ${mountState.corners.tr ? 'corner-fixed' : 'corner-pending'}" data-corner="tr" data-photo-idx="${photoIdx}" title="Esquinero superior derecho"></button>
+      <button type="button" class="photo-corner corner-bl ${mountState.corners.bl ? 'corner-fixed' : 'corner-pending'}" data-corner="bl" data-photo-idx="${photoIdx}" title="Esquinero inferior izquierdo"></button>
+      <button type="button" class="photo-corner corner-br ${mountState.corners.br ? 'corner-fixed' : 'corner-pending'}" data-corner="br" data-photo-idx="${photoIdx}" title="Esquinero inferior derecho"></button>
+      ${innerVisualHtml}
+    </div>
+
+    <div class="slot-handwritten-caption" title="Haz clic para editar esta nota manuscrita abajo">
+      <span class="slot-caption-pen">✒️</span>
+      <p>${handwrittenNote}</p>
+    </div>
+  `;
+
+  // Seleccionar este hueco al hacer clic en la tarjeta
+  slotCard.addEventListener('click', (e) => {
+    if (e.target.closest('.btn-slot-go-darkroom') || e.target.closest('.btn-slot-QuickMount') || e.target.closest('.photo-corner')) {
+      return;
+    }
+    AppState.albumPageIndex = slotPos;
+    AudioFX.playDialClick();
+    renderAlbumPage();
+  });
+
+  // Eventos de los 4 esquineros individuales
+  slotCard.querySelectorAll('.photo-corner').forEach(cornerBtn => {
+    cornerBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      AppState.albumPageIndex = slotPos;
+      const pIdx = parseInt(cornerBtn.getAttribute('data-photo-idx'), 10);
+      const bIdx = Math.floor(pIdx / 4);
+      if (AppState.darkroomBatches[bIdx] && AppState.darkroomBatches[bIdx].stage < 2) {
+        AppState.darkroomBatches[bIdx].stage = 2;
+        AppState.darkroomBatches[bIdx].progress = 100;
+      }
+      const mState = getOrInitAlbumPageMount(pIdx);
+      const cKey = cornerBtn.getAttribute('data-corner');
+      mState.corners[cKey] = !mState.corners[cKey];
+      mState.mounted = Object.values(mState.corners).every(Boolean);
+      AudioFX.playDialClick();
+      renderAlbumPage();
+    });
+  });
+
+  // Botón directo de pegar copia con sus 4 esquineros
+  const quickMountBtn = slotCard.querySelector('.btn-slot-QuickMount');
+  if (quickMountBtn) {
+    quickMountBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      AppState.albumPageIndex = slotPos;
+      const pIdx = parseInt(quickMountBtn.getAttribute('data-mount-photo'), 10);
+      const bIdx = Math.floor(pIdx / 4);
+      if (AppState.darkroomBatches[bIdx] && AppState.darkroomBatches[bIdx].stage < 2) {
+        AppState.darkroomBatches[bIdx].stage = 2;
+        AppState.darkroomBatches[bIdx].progress = 100;
+      }
+      const mState = getOrInitAlbumPageMount(pIdx);
+      mState.corners = { tl: true, tr: true, bl: true, br: true };
+      mState.mounted = true;
+      AudioFX.playPageFlip();
+      renderAlbumPage();
+    });
+  }
+
+  // Botón de ir al cuarto oscuro si no está revelada
+  const goDarkBtn = slotCard.querySelector('.btn-slot-go-darkroom');
+  if (goDarkBtn) {
+    goDarkBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      AppState.darkroomCurrentBatch = parseInt(goDarkBtn.getAttribute('data-go-batch'), 10) || 0;
+      AppState.darkroomSelectedSlot = parseInt(goDarkBtn.getAttribute('data-go-slot'), 10) || 0;
+      if (typeof switchPhase === 'function') switchPhase(2);
+    });
+  }
+
+  return slotCard;
+}
+
+/**
+ * Renderiza el Álbum Familiar Clásico a Doble Página (Pliegos de 4 fotos, Sobre del Laboratorio + Tira de Negativos)
  */
 function renderAlbumPage() {
   const photos = getPhotos();
   if (photos.length === 0) return;
 
-  if (AppState.albumPageIndex >= photos.length) {
+  const slotOrder = getAlbumSlotOrder(photos.length);
+  if (typeof AppState.albumPageIndex !== 'number' || AppState.albumPageIndex < 0 || AppState.albumPageIndex >= photos.length) {
     AppState.albumPageIndex = 0;
   }
 
-  const pageIdx = AppState.albumPageIndex;
-  const photo = photos[pageIdx];
-  const photoContainer = document.getElementById('album-photo-display');
-  const captionEl = document.getElementById('album-caption');
-  const pageIndicator = document.getElementById('album-page-indicator');
-  const pageWrapper = document.getElementById('album-current-page');
-  const badgeEl = document.getElementById('album-exposure-badge');
-  const traceEl = document.getElementById('album-continuity-trace');
-  const cornersTag = document.getElementById('corners-progress-tag');
-  const mountOverlay = document.getElementById('album-mount-overlay');
-  const noteInput = document.getElementById('album-custom-note-input');
+  // El pliego activo (0, 1 o 2) viene determinado por el hueco seleccionado (0..3 -> pliego 0, 4..7 -> pliego 1, 8..11 -> pliego 2)
+  const activeSlotPos = AppState.albumPageIndex;
+  const spreadIdx = Math.floor(activeSlotPos / 4);
+  AppState.albumSpreadIndex = spreadIdx;
+  const activePhotoIdx = slotOrder[activeSlotPos];
+  const activePhoto = photos[activePhotoIdx];
 
-  // Estadísticas globales de continuidad (10 fotos)
+  // Estadísticas globales de continuidad (12 fotos)
   let totalShot = 0;
   let totalRevealed = 0;
   let totalMounted = 0;
@@ -426,53 +595,78 @@ function renderAlbumPage() {
   const statMountEl = document.getElementById('album-stat-mounted');
   if (statShotEl) statShotEl.textContent = `📸 Tomadas: ${totalShot}/${photos.length}`;
   if (statRevEl) statRevEl.textContent = `🧪 Reveladas: ${totalRevealed}/${photos.length}`;
-  if (statMountEl) statMountEl.textContent = `📒 Montadas: ${totalMounted}/${photos.length}`;
+  if (statMountEl) statMountEl.textContent = `📒 En Álbum: ${totalMounted}/${photos.length}`;
 
-  // Renderizar la tira-sobre del laboratorio con las 10 miniaturas interactivas
+  // Actualizar pestañas de los 3 pliegos del libro abierto
+  document.querySelectorAll('.spread-tab').forEach(tab => {
+    const s = parseInt(tab.getAttribute('data-spread'), 10);
+    tab.classList.toggle('active', s === spreadIdx);
+  });
+
+  // 1. Renderizar el Sobre del Laboratorio + Tira de Negativos en Plástico (12 fotogramas)
   const envelopeStrip = document.getElementById('album-envelope-strip');
   if (envelopeStrip) {
     envelopeStrip.innerHTML = '';
     photos.forEach((p, idx) => {
       const wasShot = !!AppState.shotsHistory[idx];
       const devStage = getFrameDevelopmentStage(idx);
-      const mountState = getOrInitAlbumPageMount(idx, p);
+      const mountState = getOrInitAlbumPageMount(idx);
       const shotEval = evaluateFrameShotData(idx, p);
       const diag = getDiagnosisForShot(shotEval);
 
       const slotBtn = document.createElement('button');
       slotBtn.type = 'button';
-      slotBtn.className = `envelope-thumb-slot ${idx === pageIdx ? 'active' : ''} ${mountState.mounted ? 'is-mounted' : ''}`;
+      const posInAlbum = slotOrder.indexOf(idx);
+      slotBtn.className = `envelope-thumb-slot ${idx === activePhotoIdx ? 'active' : ''} ${mountState.mounted ? 'is-mounted' : ''}`;
+      slotBtn.title = `Copia #${idx + 1} (${p.title}) • Haz clic para verla o colocarla en el hueco seleccionado`;
 
       let stateBadge = '⬛ Latente';
       let thumbVisualClass = 'env-latent';
       let thumbInner = '';
       let thumbStyleAttr = '';
 
+      // Mini tira superior de negativo con colores invertidos (si ya pasó por el baño químico)
+      const negFilter = getPhotoChemicalFilterStyles(shotEval, 'negative').filterCss;
+      const negStripHtml = (devStage >= 1 && wasShot)
+        ? `<div class="env-mini-negative-strip" style="filter: ${negFilter};">${renderUniquePhotoSvg(p.svg)}</div>`
+        : `<div class="env-mini-negative-strip unexposed-neg"><span>35mm</span></div>`;
+
       if (devStage === 1) {
         const negStyle = getPhotoChemicalFilterStyles(shotEval, 'negative');
         stateBadge = diag.negShortLabel || '🎞️ Negativo';
-        thumbVisualClass = `env-negative`;
+        thumbVisualClass = 'env-negative';
         thumbStyleAttr = `style="filter: ${negStyle.filterCss};"`;
         thumbInner = wasShot ? renderUniquePhotoSvg(p.svg) : '';
       } else if (devStage === 2) {
         const posStyle = getPhotoChemicalFilterStyles(shotEval, 'positive');
-        stateBadge = mountState.mounted ? `📌 ${diag.shortLabel}` : `✨ ${diag.shortLabel}`;
-        thumbVisualClass = `env-positive`;
+        stateBadge = mountState.mounted ? `📌 Pág. ${Math.floor(posInAlbum / 2) + 1}` : `✨ Copia 10×15`;
+        thumbVisualClass = 'env-positive';
         thumbStyleAttr = `style="filter: ${posStyle.filterCss};"`;
         thumbInner = wasShot ? renderUniquePhotoSvg(p.svg) : '';
       }
 
       slotBtn.innerHTML = `
         <div class="env-slot-top">
-          <span>#${String(idx + 1).padStart(2, '0')}</span>
-          <span>${wasShot ? '📸' : '🎞️'}</span>
+          <span>#${String(idx + 1).padStart(2, '0')}A</span>
+          <span>${mountState.mounted ? '📌' : (wasShot ? '📸' : '🎞️')}</span>
         </div>
+        ${negStripHtml}
         <div class="env-slot-preview ${thumbVisualClass}" ${thumbStyleAttr}>${thumbInner}</div>
         <span class="env-slot-status">${stateBadge}</span>
       `;
 
       slotBtn.addEventListener('click', () => {
-        AppState.albumPageIndex = idx;
+        // Si el usuario hace clic en una foto del sobre:
+        // Si ya está en el pliego o quiere ir a donde está colocada, o si hace clic para montarla
+        const targetSlotPos = slotOrder.indexOf(idx);
+        if (targetSlotPos !== -1) {
+          AppState.albumPageIndex = targetSlotPos;
+        }
+        // Si estaba revelada y aún no pegada, la pega directamente con sus 4 esquineros para que sea comodísimo
+        if (devStage === 2 && !mountState.mounted) {
+          mountState.corners = { tl: true, tr: true, bl: true, br: true };
+          mountState.mounted = true;
+        }
         AudioFX.playPageFlip();
         renderAlbumPage();
       });
@@ -481,133 +675,119 @@ function renderAlbumPage() {
     });
   }
 
-  if (pageWrapper) {
-    pageWrapper.style.transform = 'scale(0.985)';
-    setTimeout(() => { pageWrapper.style.transform = 'scale(1)'; }, 120);
-  }
+  // 2. Renderizar el Libro Abierto a Doble Página (4 huecos por pliego: 2 en izquierda, 2 en derecha)
+  const leftSlotsContainer = document.getElementById('album-left-slots');
+  const rightSlotsContainer = document.getElementById('album-right-slots');
+  const leftPageNum = document.getElementById('left-page-num');
+  const rightPageNum = document.getElementById('right-page-num');
+  const leftChapter = document.getElementById('left-page-chapter');
+  const rightChapter = document.getElementById('right-page-chapter');
 
-  const shotData = evaluateFrameShotData(pageIdx, photo);
-  const devStage = getFrameDevelopmentStage(pageIdx);
-  const mountState = getOrInitAlbumPageMount(pageIdx, photo);
-  const coverSvg = renderUniquePhotoSvg(photo.svg);
+  const spreadChapters = [
+    ['Pliego I • Inicio del Carrete', 'Viajes y Recuerdos en Papel'],
+    ['Pliego II • Mitad del Carrete', 'Reuniones, Amigos y Naturaleza'],
+    ['Pliego III • Final del Carrete', 'Últimas Exposiciones Reveladas']
+  ];
 
-  // Actualizar estado visual de las 4 esquineras interactivas
-  const cornersCount = Object.values(mountState.corners).filter(Boolean).length;
-  document.querySelectorAll('#album-mounted-frame .photo-corner').forEach(cornerBtn => {
-    const cKey = cornerBtn.getAttribute('data-corner');
-    const isFixed = !!mountState.corners[cKey];
-    cornerBtn.classList.toggle('corner-fixed', isFixed);
-    cornerBtn.classList.toggle('corner-pending', devStage === 2 && !isFixed);
-  });
+  if (leftPageNum) leftPageNum.textContent = `Pág. 0${spreadIdx * 2 + 1}`;
+  if (rightPageNum) rightPageNum.textContent = `Pág. 0${spreadIdx * 2 + 2}`;
+  if (leftChapter && spreadChapters[spreadIdx]) leftChapter.textContent = spreadChapters[spreadIdx][0];
+  if (rightChapter && spreadChapters[spreadIdx]) rightChapter.textContent = spreadChapters[spreadIdx][1];
 
-  if (cornersTag) {
-    if (devStage < 2) {
-      cornersTag.textContent = '🧪 Pendiente de revelar en Fase 2';
-    } else if (mountState.mounted) {
-      cornersTag.textContent = '📌 Copia pegada en álbum (4/4 esquineras)';
-    } else {
-      cornersTag.textContent = `📐 Esquineras fijadas: ${cornersCount}/4 (haz clic en las esquinas)`;
+  const startSlot = spreadIdx * 4;
+  if (leftSlotsContainer) {
+    leftSlotsContainer.innerHTML = '';
+    for (let s = startSlot; s < Math.min(photos.length, startSlot + 2); s++) {
+      const pIdx = slotOrder[s];
+      const cardEl = createAlbumSpreadSlotElement(s, pIdx, photos[pIdx], s === activeSlotPos);
+      leftSlotsContainer.appendChild(cardEl);
     }
   }
 
-  // Continuidad visual en la página del álbum según Fase 1 y Fase 2
-  const shotDiag = getDiagnosisForShot(shotData);
-  if (photoContainer) {
-    photoContainer.className = 'physical-photo-print';
-    photoContainer.style.filter = '';
-
-    if (devStage === 0) {
-      // Aún NO se ha revelado en el Cuarto Oscuro (Fase 2)
-      photoContainer.innerHTML = `
-        <div class="album-unrevealed-placeholder">
-          <span class="unrev-icon">🎞️</span>
-          <strong>Fotograma #${String(pageIdx + 1).padStart(2, '0')} sin revelar aún</strong>
-          <p>${shotData.wasShotByUser
-            ? `Disparaste esta foto en la Fase 1 a ƒ/${shotData.aperture} y 1/${shotData.speed}s (${shotDiag.shortLabel}), pero sigue oculta en el carrete.`
-            : 'Este fotograma del carrete aún no ha pasado por los líquidos del cuarto oscuro.'}</p>
-          <button type="button" class="btn-go-darkroom-inline" id="btn-inline-go-phase2">
-            🧪 Ir a Fase 2 (Cuarto Oscuro) para revelarla
-          </button>
-        </div>
-      `;
-      if (mountOverlay) mountOverlay.style.display = 'none';
-      if (badgeEl) {
-        badgeEl.className = 'photo-exposure-badge badge-under';
-        badgeEl.textContent = `⬛ EMULSIÓN LATENTE • Revela la Tira ${Math.floor(pageIdx / 5) + 1} en Fase 2`;
-      }
-    } else if (devStage === 1) {
-      // Se quedó a medias en Negativo (Paso 1 de Fase 2): muestra el negativo con la densidad real de plata según los EV (-3 a +3)
-      const negStyle = getPhotoChemicalFilterStyles(shotData, 'negative');
-      photoContainer.innerHTML = shotData.wasShotByUser ? coverSvg : '';
-      photoContainer.style.filter = negStyle.filterCss;
-      if (mountOverlay) {
-        mountOverlay.style.display = 'flex';
-        const mTitle = document.getElementById('mount-overlay-title');
-        const mDesc = document.getElementById('mount-overlay-desc');
-        const mBtn = document.getElementById('btn-mount-current-photo');
-        if (mTitle) mTitle.textContent = `🎞️ ${negStyle.negDescription}`;
-        if (mDesc) mDesc.textContent = 'En el negativo químico la luz actúa al revés (+EV ennegrece la plata; -EV deja el celuloide claro). Pulsa abajo para positivar a papel y montar en el álbum.';
-        if (mBtn) mBtn.textContent = '✨ Positivar a copia en papel y montar ahora';
-      }
-      if (badgeEl) {
-        badgeEl.className = 'photo-exposure-badge badge-shaky';
-        const techSpec = shotData.wasShotByUser ? ` • ƒ/${shotData.aperture} • 1/${shotData.speed}s` : '';
-        badgeEl.textContent = `🎞️ ${negStyle.negDescription}${techSpec}`;
-      }
-    } else {
-      // devStage === 2: Foto revelada en positivo con su porcentaje proporcional al exposímetro (-3 a +3 EV)
-      const posStyle = getPhotoChemicalFilterStyles(shotData, 'positive');
-      photoContainer.innerHTML = shotData.wasShotByUser ? coverSvg : '';
-      photoContainer.style.filter = posStyle.filterCss;
-
-      if (badgeEl) {
-        badgeEl.className = `photo-exposure-badge ${shotDiag.badgeClass || ''}`;
-        badgeEl.textContent = shotDiag.detailLabel;
-      }
-
-      if (!mountState.mounted) {
-        photoContainer.classList.add('unmounted-preview');
-        if (mountOverlay) {
-          mountOverlay.style.display = 'flex';
-          const mTitle = document.getElementById('mount-overlay-title');
-          const mDesc = document.getElementById('mount-overlay-desc');
-          const mBtn = document.getElementById('btn-mount-current-photo');
-          if (mTitle) mTitle.textContent = `📐 Montar Copia #${String(pageIdx + 1).padStart(2, '0')} (${shotDiag.shortLabel} • ${cornersCount}/4 esquineras)`;
-          if (mDesc) mDesc.textContent = 'Haz clic en las 4 esquineras del marco o pulsa el botón para pegar esta fotografía revelada en la página.';
-          if (mBtn) mBtn.textContent = '📌 Pegar copia y fijar las 4 esquineras';
-        }
-      } else {
-        if (mountOverlay) mountOverlay.style.display = 'none';
-      }
-    }
-
-    const inlineBtn = document.getElementById('btn-inline-go-phase2');
-    if (inlineBtn) {
-      inlineBtn.addEventListener('click', () => {
-        AppState.darkroomCurrentBatch = Math.floor(pageIdx / 5);
-        AppState.darkroomSelectedSlot = pageIdx % 5;
-        if (typeof switchPhase === 'function') switchPhase(2);
-      });
+  if (rightSlotsContainer) {
+    rightSlotsContainer.innerHTML = '';
+    for (let s = startSlot + 2; s < Math.min(photos.length, startSlot + 4); s++) {
+      const pIdx = slotOrder[s];
+      const cardEl = createAlbumSpreadSlotElement(s, pIdx, photos[pIdx], s === activeSlotPos);
+      rightSlotsContainer.appendChild(cardEl);
     }
   }
 
-  if (traceEl) {
-    const shotStr = shotData.wasShotByUser ? `📸 Tomada (ƒ/${shotData.aperture}, 1/${shotData.speed}s)` : '🎞️ En carrete';
-    const revStr = devStage === 2 ? '✅ Revelada' : devStage === 1 ? '🎞️ En negativo' : '⬛ Sin revelar';
-    const mntStr = mountState.mounted ? '📌 Pegada en álbum' : '📐 Sin pegar';
-    traceEl.textContent = `${shotStr} ➔ ${revStr} ➔ ${mntStr}`;
-  }
+  // 3. Actualizar la Barra Inspectora Inferior del Hueco Seleccionado
+  const selectedBadge = document.getElementById('album-selected-slot-badge');
+  const badgeEl = document.getElementById('album-exposure-badge');
+  const noteInput = document.getElementById('album-custom-note-input');
 
-  const defaultCaption = shotData.wasShotByUser
-    ? photo.analogCaption
-    : 'Fotograma sin exponer (la foto nunca fue disparada en el carrete).';
-  const finalCaption = mountState.customNote && mountState.customNote.trim()
-    ? `“${mountState.customNote.trim()}”`
-    : defaultCaption;
-  if (captionEl) captionEl.textContent = finalCaption;
-  if (noteInput) noteInput.value = mountState.customNote || '';
-  if (pageIndicator) pageIndicator.textContent = `Fotograma ${String(pageIdx + 1).padStart(2, '0')} de ${photos.length}`;
+  if (activePhoto) {
+    const activeShot = evaluateFrameShotData(activePhotoIdx, activePhoto);
+    const activeDiag = getDiagnosisForShot(activeShot);
+    const activeMount = getOrInitAlbumPageMount(activePhotoIdx);
+
+    if (selectedBadge) {
+      selectedBadge.textContent = `📌 Hueco ${activeSlotPos + 1} (Pág. 0${Math.floor(activeSlotPos / 2) + 1}) • Foto #${String(activePhotoIdx + 1).padStart(2, '0')}: ${activePhoto.title}`;
+    }
+    if (badgeEl) {
+      badgeEl.className = `slot-exposure-summary photo-exposure-badge ${activeDiag.badgeClass || ''}`;
+      badgeEl.textContent = activeDiag.detailLabel;
+    }
+    if (noteInput) {
+      noteInput.value = activeMount.customNote || '';
+      noteInput.placeholder = `✒️ Escribe pie de foto para "${activePhoto.title}" (ej. "${activePhoto.analogCaption.slice(0, 48)}...")`;
+    }
+  }
 }
+
+/**
+ * Activa o actualiza la Portada de Álbum Inteligente en Google Photos (Fase 3 Digital)
+ * demostrando cómo el software remedia la portada y estructura del álbum familiar al instante.
+ */
+function updateSmartAlbumHeroBanner(queryTerm, customTitle = null, customSub = null, filteredPhotos = []) {
+  const heroBox = document.getElementById('gphotos-instant-album-hero');
+  const coverSvgBox = document.getElementById('instant-album-cover-svg');
+  const titleEl = document.getElementById('instant-album-title');
+  const subEl = document.getElementById('instant-album-subtitle');
+  const countBadge = document.getElementById('instant-album-count-badge');
+  const metaPills = document.getElementById('instant-album-meta-pills');
+  const modeIndicator = document.getElementById('grid-mode-indicator');
+
+  if (!heroBox) return;
+
+  if (!queryTerm || queryTerm === 'all' || filteredPhotos.length === 0) {
+    heroBox.style.display = 'none';
+    if (modeIndicator) modeIndicator.textContent = 'Orden cronológico automático';
+    return;
+  }
+
+  heroBox.style.display = 'grid';
+  const coverPhoto = filteredPhotos[0];
+  if (coverSvgBox && coverPhoto) {
+    coverSvgBox.innerHTML = renderUniquePhotoSvg(coverPhoto.svg);
+  }
+
+  const cleanQuery = queryTerm.charAt(0).toUpperCase() + queryTerm.slice(1);
+  if (titleEl) {
+    titleEl.textContent = customTitle || `Álbum Inteligente: "${cleanQuery}"`;
+  }
+  if (subEl) {
+    subEl.textContent = customSub || `Portada y recopilación generadas al instante mediante metadatos EXIF, geolocalización y visión IA.`;
+  }
+  if (countBadge) {
+    countBadge.textContent = `${filteredPhotos.length} ${filteredPhotos.length === 1 ? 'recuerdo' : 'recuerdos'}`;
+  }
+  if (metaPills && coverPhoto) {
+    const sampleGps = (coverPhoto.exif && coverPhoto.exif.gps) ? coverPhoto.exif.gps.split('(')[0].trim() : 'GPS Activo';
+    const sampleTag = (coverPhoto.aiTags && coverPhoto.aiTags[0]) ? coverPhoto.aiTags[0].label : cleanQuery;
+    metaPills.innerHTML = `
+      <span>📍 ${sampleGps}</span>
+      <span>🤖 IA: ${sampleTag}</span>
+      <span>📅 ${coverPhoto.year}</span>
+    `;
+  }
+  if (modeIndicator) {
+    modeIndicator.textContent = '📖 Álbum Estructurado al Instante (IA)';
+  }
+}
+window.updateSmartAlbumHeroBanner = updateSmartAlbumHeroBanner;
 
 function initDarkroomAndAlbum() {
   const btnDevelop = document.getElementById('btn-start-develop');
@@ -615,7 +795,7 @@ function initDarkroomAndAlbum() {
   const step1 = document.getElementById('chem-step-1');
   const step2 = document.getElementById('chem-step-2');
 
-  // Selector de lotes de 5 en 5 fotos (2 tiras = 10 fotos)
+  // Selector de lotes de 4 en 4 fotos (3 tiras = 12 fotos)
   document.querySelectorAll('.batch-tab').forEach(tab => {
     tab.addEventListener('click', () => {
       const b = parseInt(tab.getAttribute('data-batch'), 10);
@@ -643,10 +823,9 @@ function initDarkroomAndAlbum() {
       AudioFX.playChemicalSplash();
       updateDarkroomTray();
     } else {
-      const otherBatchIdx = bIdx === 0 ? 1 : 0;
-      const otherBatch = AppState.darkroomBatches[otherBatchIdx];
-      if (otherBatch && otherBatch.stage < 2) {
-        AppState.darkroomCurrentBatch = otherBatchIdx;
+      const nextPendingIdx = AppState.darkroomBatches.findIndex((b, idx) => idx !== bIdx && b.stage < 2);
+      if (nextPendingIdx !== -1) {
+        AppState.darkroomCurrentBatch = nextPendingIdx;
         AppState.darkroomSelectedSlot = 0;
         AudioFX.playDialClick();
         updateDarkroomTray();
@@ -685,58 +864,48 @@ function initDarkroomAndAlbum() {
   }
 
   // =========================================================================
-  // MINIJUEGO AMPLIADO DEL ÁLBUM FÍSICO (Esquineras, Pegado y Nota Manuscrita)
+  // CONTROLES DEL ÁLBUM FAMILIAR A DOBLE PÁGINA (Pliegos, Orden, Notas y Montaje)
   // =========================================================================
-  document.querySelectorAll('#album-mounted-frame .photo-corner').forEach(cornerBtn => {
-    cornerBtn.addEventListener('click', () => {
-      const pageIdx = AppState.albumPageIndex;
-      const devStage = getFrameDevelopmentStage(pageIdx);
-      if (devStage < 2) {
-        // Si estaba en negativo, lo positivamos al tocar la esquinera
-        const bIdx = Math.floor(pageIdx / 5);
-        if (AppState.darkroomBatches[bIdx]) {
-          AppState.darkroomBatches[bIdx].stage = 2;
-          AppState.darkroomBatches[bIdx].progress = 100;
-        }
-      }
-      const mountState = getOrInitAlbumPageMount(pageIdx);
-      const cKey = cornerBtn.getAttribute('data-corner');
-      mountState.corners[cKey] = !mountState.corners[cKey];
-      const allFixed = Object.values(mountState.corners).every(Boolean);
-      mountState.mounted = allFixed;
-      AudioFX.playDialClick();
-      renderAlbumPage();
-    });
-  });
-
-  const btnMountCurrent = document.getElementById('btn-mount-current-photo');
-  if (btnMountCurrent) {
-    btnMountCurrent.addEventListener('click', () => {
-      const pageIdx = AppState.albumPageIndex;
-      const bIdx = Math.floor(pageIdx / 5);
-      if (AppState.darkroomBatches[bIdx] && AppState.darkroomBatches[bIdx].stage < 2) {
-        AppState.darkroomBatches[bIdx].stage = 2;
-        AppState.darkroomBatches[bIdx].progress = 100;
-      }
-      const mountState = getOrInitAlbumPageMount(pageIdx);
-      mountState.corners = { tl: true, tr: true, bl: true, br: true };
-      mountState.mounted = true;
+  document.querySelectorAll('.spread-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const s = parseInt(tab.getAttribute('data-spread'), 10) || 0;
+      AppState.albumSpreadIndex = s;
+      AppState.albumPageIndex = s * 4;
       AudioFX.playPageFlip();
       renderAlbumPage();
     });
-  }
+  });
 
   const btnQuickMountAll = document.getElementById('btn-quick-mount-all');
   if (btnQuickMountAll) {
     btnQuickMountAll.addEventListener('click', () => {
       const photos = getPhotos();
-      // Revela las tiras que falten y monta las 10 fotos en el álbum
+      // Si alguna foto aún no se había disparado en Fase 1, le damos una toma equilibrada para que el usuario pueda ver el álbum completo funcionando al instante
+      photos.forEach((p, idx) => {
+        if (!AppState.shotsHistory[idx]) {
+          const opt = typeof window.findOptimalSettingsForPhoto === 'function'
+            ? window.findOptimalSettingsForPhoto(p)
+            : { aperture: 8.0, speed: 250, focus: 50 };
+          AppState.shotsHistory[idx] = {
+            photoId: p.id,
+            aperture: opt.aperture,
+            speed: opt.speed,
+            deltaEV: 0,
+            clampedMeterEV: 0,
+            meterPercent: 0,
+            isUnfocused: false,
+            focusDiff: 0,
+            status: 'ok',
+            isShaky: false
+          };
+        }
+      });
       AppState.darkroomBatches.forEach(b => {
         b.stage = 2;
         b.progress = 100;
       });
       photos.forEach((p, idx) => {
-        const m = getOrInitAlbumPageMount(idx, p);
+        const m = getOrInitAlbumPageMount(idx);
         m.corners = { tl: true, tr: true, bl: true, br: true };
         m.mounted = true;
       });
@@ -745,12 +914,60 @@ function initDarkroomAndAlbum() {
     });
   }
 
+  const btnResetOrder = document.getElementById('btn-reset-album-order');
+  if (btnResetOrder) {
+    btnResetOrder.addEventListener('click', () => {
+      const photos = getPhotos();
+      AppState.albumSlotOrder = Array.from({ length: photos.length }, (_, i) => i);
+      AppState.albumPageIndex = 0;
+      AudioFX.playPageFlip();
+      renderAlbumPage();
+    });
+  }
+
+  const btnSwapPrev = document.getElementById('btn-swap-prev');
+  const btnSwapNext = document.getElementById('btn-swap-next');
+
+  if (btnSwapPrev) {
+    btnSwapPrev.addEventListener('click', () => {
+      const photos = getPhotos();
+      const order = getAlbumSlotOrder(photos.length);
+      const curSlot = AppState.albumPageIndex || 0;
+      if (curSlot > 0) {
+        const tmp = order[curSlot - 1];
+        order[curSlot - 1] = order[curSlot];
+        order[curSlot] = tmp;
+        AppState.albumPageIndex = curSlot - 1;
+        AudioFX.playPageFlip();
+        renderAlbumPage();
+      }
+    });
+  }
+
+  if (btnSwapNext) {
+    btnSwapNext.addEventListener('click', () => {
+      const photos = getPhotos();
+      const order = getAlbumSlotOrder(photos.length);
+      const curSlot = AppState.albumPageIndex || 0;
+      if (curSlot < order.length - 1) {
+        const tmp = order[curSlot + 1];
+        order[curSlot + 1] = order[curSlot];
+        order[curSlot] = tmp;
+        AppState.albumPageIndex = curSlot + 1;
+        AudioFX.playPageFlip();
+        renderAlbumPage();
+      }
+    });
+  }
+
   const btnSaveNote = document.getElementById('btn-save-album-note');
   const noteInput = document.getElementById('album-custom-note-input');
   if (btnSaveNote && noteInput) {
     const saveNoteFn = () => {
-      const pageIdx = AppState.albumPageIndex;
-      const mountState = getOrInitAlbumPageMount(pageIdx);
+      const photos = getPhotos();
+      const order = getAlbumSlotOrder(photos.length);
+      const activePhotoIdx = order[AppState.albumPageIndex || 0];
+      const mountState = getOrInitAlbumPageMount(activePhotoIdx);
       mountState.customNote = noteInput.value;
       AudioFX.playDialClick();
       renderAlbumPage();
@@ -764,7 +981,7 @@ function initDarkroomAndAlbum() {
     });
   }
 
-  // Pestañas del pipeline de Google Photos
+  // Pestañas del pipeline de Google Photos (Fase 2)
   const pipeTabs = document.querySelectorAll('.pipe-tab');
   pipeTabs.forEach(tab => {
     tab.addEventListener('click', () => {
@@ -782,14 +999,15 @@ function initDarkroomAndAlbum() {
     });
   });
 
-  // Navegación secuencial de páginas del álbum
+  // Navegación secuencial por pliegos del álbum físico (Pliego Anterior / Pliego Siguiente)
   const btnPrev = document.getElementById('btn-album-prev');
   const btnNext = document.getElementById('btn-album-next');
 
   if (btnPrev) {
     btnPrev.addEventListener('click', () => {
-      if (AppState.albumPageIndex > 0) {
-        AppState.albumPageIndex--;
+      const curSpread = Math.floor((AppState.albumPageIndex || 0) / 4);
+      if (curSpread > 0) {
+        AppState.albumPageIndex = (curSpread - 1) * 4;
         AudioFX.playPageFlip();
         renderAlbumPage();
       }
@@ -799,41 +1017,73 @@ function initDarkroomAndAlbum() {
   if (btnNext) {
     btnNext.addEventListener('click', () => {
       const photos = getPhotos();
-      if (AppState.albumPageIndex < photos.length - 1) {
-        AppState.albumPageIndex++;
+      const maxSpread = Math.ceil(photos.length / 4) - 1;
+      const curSpread = Math.floor((AppState.albumPageIndex || 0) / 4);
+      if (curSpread < maxSpread) {
+        AppState.albumPageIndex = (curSpread + 1) * 4;
         AudioFX.playPageFlip();
         renderAlbumPage();
       }
     });
   }
 
-  // Buscador y chips de Google Photos
+  // =========================================================================
+  // BUSCADOR INTELIGENTE, ROSTROS IA, GEOLOCALIZACIÓN Y ÁLBUMES ESTRUCTURADOS
+  // =========================================================================
   const searchInput = document.getElementById('gphotos-search-input');
   const clearBtn = document.getElementById('btn-clear-search');
   const filterChips = document.querySelectorAll('.filter-chip');
+  const faceButtons = document.querySelectorAll('.face-avatar-btn');
+  const placeButtons = document.querySelectorAll('.place-map-pill');
+  const btnCloseInstantAlbum = document.getElementById('btn-close-instant-album');
+
+  const clearSmartActiveStates = () => {
+    faceButtons.forEach(b => b.classList.remove('active'));
+    placeButtons.forEach(b => b.classList.remove('active'));
+  };
 
   if (searchInput) {
     searchInput.addEventListener('input', (e) => {
-      const query = e.target.value.trim().toLowerCase();
+      const rawVal = e.target.value.trim();
+      const query = rawVal.toLowerCase();
       if (clearBtn) clearBtn.style.display = query ? 'block' : 'none';
-      filterDatabasePhotos(query);
+      clearSmartActiveStates();
+
+      // Si el usuario escribe una frase como "fotos del viaje a París", extraemos el término clave o buscamos
+      let effectiveQuery = query;
+      if (query.includes('parís') || query.includes('paris')) effectiveQuery = 'parís';
+      else if (query.includes('playa') || query.includes('costa')) effectiveQuery = 'playa';
+      else if (query.includes('mascota') || query.includes('perro') || query.includes('toby')) effectiveQuery = 'mascotas';
+      else if (query.includes('familia') || query.includes('abuelo')) effectiveQuery = 'familia';
+
+      filterDatabasePhotos(effectiveQuery, rawVal ? `Álbum: "${rawVal}"` : null, null);
     });
   }
 
+  const resetToAllLibrary = () => {
+    if (searchInput) searchInput.value = '';
+    if (clearBtn) clearBtn.style.display = 'none';
+    clearSmartActiveStates();
+    filterChips.forEach(c => c.classList.toggle('active', c.getAttribute('data-filter') === 'all'));
+    filterDatabasePhotos('');
+  };
+
   if (clearBtn) {
-    clearBtn.addEventListener('click', () => {
-      if (searchInput) searchInput.value = '';
-      clearBtn.style.display = 'none';
-      filterDatabasePhotos('');
-    });
+    clearBtn.addEventListener('click', resetToAllLibrary);
+  }
+  if (btnCloseInstantAlbum) {
+    btnCloseInstantAlbum.addEventListener('click', resetToAllLibrary);
   }
 
   filterChips.forEach(chip => {
     chip.addEventListener('click', () => {
       filterChips.forEach(c => c.classList.remove('active'));
+      clearSmartActiveStates();
       chip.classList.add('active');
 
       const filterVal = chip.getAttribute('data-filter');
+      const albumTitle = chip.getAttribute('data-album-title');
+      const albumSub = chip.getAttribute('data-album-sub');
       AppState.activeFilter = filterVal;
 
       if (filterVal === 'all') {
@@ -841,10 +1091,40 @@ function initDarkroomAndAlbum() {
         if (clearBtn) clearBtn.style.display = 'none';
         filterDatabasePhotos('');
       } else {
-        if (searchInput) searchInput.value = filterVal;
+        if (searchInput) searchInput.value = albumTitle ? albumTitle.replace(/[^\w\sáéíóúñÁÉÍÓÚÑ]/g, '').trim() : filterVal;
         if (clearBtn) clearBtn.style.display = 'block';
-        filterDatabasePhotos(filterVal.toLowerCase());
+        filterDatabasePhotos(filterVal.toLowerCase(), albumTitle, albumSub);
       }
+    });
+  });
+
+  // Clic en Rostros (Reconocimiento Facial IA)
+  faceButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const q = btn.getAttribute('data-smart-query') || '';
+      const aTitle = btn.getAttribute('data-album-title');
+      const aSub = btn.getAttribute('data-album-sub');
+      clearSmartActiveStates();
+      filterChips.forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      if (searchInput) searchInput.value = aTitle || q;
+      if (clearBtn) clearBtn.style.display = 'block';
+      filterDatabasePhotos(q.toLowerCase(), aTitle, aSub);
+    });
+  });
+
+  // Clic en Lugares (Geolocalización Instantánea EXIF)
+  placeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const q = btn.getAttribute('data-smart-query') || '';
+      const aTitle = btn.getAttribute('data-album-title');
+      const aSub = btn.getAttribute('data-album-sub');
+      clearSmartActiveStates();
+      filterChips.forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      if (searchInput) searchInput.value = aTitle || q;
+      if (clearBtn) clearBtn.style.display = 'block';
+      filterDatabasePhotos(q.toLowerCase(), aTitle, aSub);
     });
   });
 

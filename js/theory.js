@@ -20,7 +20,7 @@ window.TheoryContent = {
         </div>
         <p><strong>1. El Signo Indexical (Charles S. Peirce):</strong> En la fotografía argéntica tradicional, la luz reflejada por el referente golpea físicamente los cristales de haluro de plata. Existe un vínculo material, causal y físico entre el objeto real y su huella en el celuloide (la <em>indexicalidad</em>).</p>
         <p><strong>2. El Prisma de Imagen Partida y el Exposímetro TTL:</strong> Enfocar y medir la luz son operaciones mecánicas sujetas al error físico. Si no alineas las dos mitades del prisma o no equilibras la aguja galvanométrica con las ruedas de velocidad y diafragma, la emulsión quedará desenfocada o quemada de forma irreversible.</p>
-        <p><strong>3. El Noema Clásico (“Esto ha sido”):</strong> Durante siglo y medio, la escasez del carrete (10 exposiciones) y el registro fotoquímico sostuvieron la fe en el realismo fotográfico como certificado de presencia del pasado, aunque —como matiza Paula Velasco Padial— toda toma conllevó siempre una mirada subjetiva (un <em>"para mí"</em>) y una vocación de escritura visual.</p>
+        <p><strong>3. El Noema de Roland Barthes (“Esto ha sido” / <em>Ça a été</em>):</strong> En <em>La cámara lúcida</em> (1980), <strong>Roland Barthes</strong> definió el noema de la fotografía como el certificado de presencia real del referente ante el objetivo. Durante siglo y medio, la finitud de los carretes de 35 mm (12, 24 o 36 exposiciones) y el registro fotoquímico sostuvieron la fe en el realismo documental; sin embargo —como matiza críticamente <strong>Paula Velasco Padial</strong> (2017)— la fotografía nunca fue un registro neutro: todo <em>"esto ha sido"</em> contuvo siempre un <em>"para mí"</em> implícito (una mirada subjetiva) y una vocación de escritura visual.</p>
       `
     },
     digital: {
@@ -44,7 +44,7 @@ window.TheoryContent = {
           <blockquote>"En los albores de lo fotográfico, la dificultad de un procedimiento cuasi alquímico hacía que la imagen estuviese ligada a una materialidad lenta, finita e irreversible sobre sales de plata y papel baritado."</blockquote>
           <cite>— Paula Velasco Padial (2017) & Lev Manovich (2001)</cite>
         </div>
-        <p><strong>1. La Latencia y la Espera:</strong> En el paradigma analógico existe una separación temporal obligatoria entre el instante de la toma y la contemplación de la imagen. Las 10 exposiciones permanecen invisibles (imagen latente) hasta sumergirse en los baños del cuarto oscuro.</p>
+        <p><strong>1. La Latencia y la Espera:</strong> En el paradigma analógico existe una separación temporal obligatoria entre el instante de la toma y la contemplación de la imagen. Las 12 exposiciones del carrete permanecen invisibles (imagen latente) hasta sumergirse por tiras en los baños del cuarto oscuro.</p>
         <p><strong>2. Huella Continua e Inmutable:</strong> Al pasar del estado oculto al negativo de colores invertidos y finalmente al positivo en papel, la reacción química fija para siempre los aciertos o errores de exposición (diafragma/velocidad) y de enfoque cometidos en la Fase 1.</p>
       `
     },

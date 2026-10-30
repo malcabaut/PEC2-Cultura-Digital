@@ -165,6 +165,15 @@
   color: #fff;
 }
 
+.btn-upload-photos.is-disabled {
+  background: #6c6158;
+  color: #d6cec6;
+  border-color: #8c7f73;
+  cursor: not-allowed;
+  opacity: 0.72;
+  pointer-events: none;
+}
+
 .btn-shuffle-reel {
   background: #fff8eb;
   color: #3b281c;
@@ -1052,8 +1061,8 @@
 
 .film-strip-5-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 6px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
   margin: 6px 0;
 }
 
@@ -1372,32 +1381,34 @@
   border-left: 3px solid #ff5252;
 }
 
-/* ==================== FASE 3: ÁLBUM FÍSICO AMPLIADO Y MINIJUEGO DE MONTAJE ==================== */
+/* ==================== FASE 3: ÁLBUM FAMILIAR ENCUADERNADO A DOBLE PÁGINA + SOBRE DEL LABORATORIO ==================== */
 .album-card {
   background: #eadecc;
   border-color: #c9b49b;
+  gap: 14px;
 }
 
 .album-spine-decor {
   text-align: center;
   font-family: 'Courier Prime', monospace;
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 700;
   color: #634b35;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.2px;
   border-bottom: 2px solid #b89f84;
-  padding-bottom: 8px;
+  padding-bottom: 6px;
 }
 
-/* Barra superior del minijuego del álbum: Sobre del laboratorio y continuidad */
+/* 1. Sobre del laboratorio y tira de negativos de plástico */
 .album-continuity-bar {
-  background: #dfceb7;
-  border: 1px solid #bfa688;
+  background: linear-gradient(180deg, #e7d6be 0%, #dcc6a8 100%);
+  border: 1.5px solid #bfa27e;
   border-radius: 10px;
   padding: 10px 12px;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 3px 8px rgba(61, 40, 23, 0.12);
 }
 
 .continuity-summary-row {
@@ -1406,6 +1417,25 @@
   justify-content: space-between;
   gap: 8px;
   flex-wrap: wrap;
+}
+
+.lab-envelope-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.lab-brand-seal {
+  background: #e5a823;
+  color: #1f140d;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.62rem;
+  font-weight: 900;
+  padding: 2px 7px;
+  border-radius: 4px;
+  border: 1px solid #8c620a;
+  letter-spacing: 0.5px;
 }
 
 .continuity-title {
@@ -1418,19 +1448,26 @@
 .continuity-stats-pills {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   flex-wrap: wrap;
 }
 
 .c-pill {
   font-family: 'Courier Prime', monospace;
-  font-size: 0.65rem;
+  font-size: 0.63rem;
   font-weight: 700;
   background: #faf5ea;
   color: #4a3525;
   border: 1px solid #c5b095;
-  padding: 2px 8px;
+  padding: 2px 7px;
   border-radius: 12px;
+}
+
+.album-quick-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
 }
 
 .btn-quick-mount-all {
@@ -1440,7 +1477,7 @@
   border-radius: 6px;
   padding: 5px 10px;
   font-family: 'Courier Prime', monospace;
-  font-size: 0.68rem;
+  font-size: 0.66rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -1450,23 +1487,68 @@
   background: #22472a;
 }
 
-/* Tira horizontal con las 10 fotos del carrete en el sobre del laboratorio */
+.btn-reset-album-order {
+  background: #faf5ea;
+  color: #4a3525;
+  border: 1px solid #b59b7d;
+  border-radius: 6px;
+  padding: 5px 8px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.64rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-reset-album-order:hover {
+  background: #eee2ce;
+}
+
+/* Funda de plástico de los negativos + copias */
+.lab-negatives-plastic-sleeve {
+  background: rgba(28, 20, 15, 0.08);
+  border: 1px dashed #a88d6f;
+  border-radius: 8px;
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.sleeve-label-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.6rem;
+  color: #4e3623;
+  font-weight: 700;
+}
+
+.sleeve-label-bar small {
+  font-weight: 400;
+  color: #6b4f38;
+  font-size: 0.58rem;
+}
+
+/* Tira horizontal con las 12 fotos del carrete en el sobre del laboratorio */
 .album-lab-envelope-strip {
   display: grid;
-  grid-template-columns: repeat(10, minmax(56px, 1fr));
-  gap: 6px;
+  grid-template-columns: repeat(12, minmax(52px, 1fr));
+  gap: 5px;
   overflow-x: auto;
-  padding-bottom: 4px;
+  padding-bottom: 3px;
 }
 
 .envelope-thumb-slot {
-  background: #f5efe4;
+  background: #f8f2e7;
   border: 1.5px solid #bfa88d;
   border-radius: 6px;
-  padding: 4px;
+  padding: 3px;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
   cursor: pointer;
   transition: all 0.18s ease;
   text-align: center;
@@ -1480,7 +1562,7 @@
 .envelope-thumb-slot.active {
   background: #fff9ed;
   border-color: #c59b27;
-  box-shadow: 0 0 0 2px rgba(197, 155, 39, 0.35);
+  box-shadow: 0 0 0 2px rgba(197, 155, 39, 0.45);
 }
 
 .envelope-thumb-slot.is-mounted {
@@ -1492,16 +1574,43 @@
   justify-content: space-between;
   align-items: center;
   font-family: 'Courier Prime', monospace;
-  font-size: 0.54rem;
+  font-size: 0.5rem;
   font-weight: 700;
   color: #5c4332;
 }
 
+/* Mini tira de negativo en plástico con colores extraños arriba de cada copia */
+.env-mini-negative-strip {
+  width: 100%;
+  height: 16px;
+  background: #1a0f0a;
+  border-top: 2px dotted #593a28;
+  border-bottom: 2px dotted #593a28;
+  overflow: hidden;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.env-mini-negative-strip svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.env-mini-negative-strip.unexposed-neg span {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.42rem;
+  color: #8c6b52;
+}
+
 .env-slot-preview {
   width: 100%;
-  height: 36px;
+  height: 32px;
   background: #000000;
-  border-radius: 3px;
+  border-radius: 2px;
   overflow: hidden;
   position: relative;
   display: flex;
@@ -1520,13 +1629,9 @@
   background: repeating-linear-gradient(-45deg, #241915, #241915 4px, #17100d 4px, #17100d 8px);
 }
 
-.env-slot-preview.env-negative svg {
-  /* El filtro exacto de exposición o negro total lo aplica JS en el contenedor */
-}
-
 .env-slot-status {
   font-family: 'Courier Prime', monospace;
-  font-size: 0.48rem;
+  font-size: 0.45rem;
   font-weight: 700;
   color: #4a3525;
   white-space: nowrap;
@@ -1534,255 +1639,446 @@
   text-overflow: ellipsis;
 }
 
+/* 2. Barra de Portada del Álbum Familiar y Selector de Pliegos */
+.album-cover-title-bar {
+  background: linear-gradient(135deg, #3b2316 0%, #26160e 100%);
+  border: 2px solid #8c6b32;
+  border-radius: 10px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  color: #f7ebd4;
+  box-shadow: 0 4px 10px rgba(38, 22, 14, 0.25);
+}
+
+.album-leather-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 220px;
+}
+
+.album-gold-emblem {
+  font-size: 1.2rem;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.6));
+}
+
+.album-title-editable-wrap {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.album-title-editable-wrap label {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.52rem;
+  color: #e5c168;
+  letter-spacing: 0.8px;
+}
+
+.album-main-title-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px dashed rgba(229, 193, 104, 0.5);
+  color: #fff8e7;
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 1px 4px;
+  outline: none;
+  width: 100%;
+}
+
+.album-main-title-input:focus {
+  border-bottom-color: #ffd54f;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.album-spread-tabs {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.spread-tab {
+  background: rgba(255, 255, 255, 0.08);
+  color: #dfceb7;
+  border: 1px solid rgba(229, 193, 104, 0.35);
+  border-radius: 6px;
+  padding: 5px 9px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.spread-tab:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+}
+
+.spread-tab.active {
+  background: #e5a823;
+  color: #1f130b;
+  border-color: #ffe082;
+  box-shadow: 0 0 8px rgba(229, 168, 35, 0.5);
+}
+
+/* 3. LIBRO ABIERTO A DOBLE PÁGINA (2 PÁGINAS = 4 FOTOS POR PLIEGO) */
 .physical-album-container {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
 
-.album-page-wrapper {
-  perspective: 1000px;
-  width: 100%;
-}
-
-.album-page {
-  background: #faf5ea;
-  border: 1px solid #dcd1be;
-  border-radius: 8px;
-  padding: 20px;
-  min-height: 380px;
-  box-shadow: 4px 6px 16px rgba(66, 48, 33, 0.18), inset 0 0 20px rgba(214, 198, 175, 0.4);
+.album-open-book-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 18px 1fr;
+  background: #331f14;
+  border: 4px solid #4a2e1e;
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 10px 26px rgba(45, 28, 16, 0.32), inset 0 0 12px rgba(0, 0, 0, 0.6);
   position: relative;
+}
+
+.album-book-page {
+  background: #faf4e8;
+  background-image:
+    radial-gradient(rgba(160, 135, 100, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(215, 198, 170, 0.25) 0%, transparent 12%, transparent 88%, rgba(215, 198, 170, 0.25) 100%);
+  background-size: 14px 14px, 100% 100%;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 390px;
+}
+
+.album-book-page.page-left {
+  border-radius: 6px 2px 2px 6px;
+  box-shadow: inset -10px 0 18px rgba(80, 58, 38, 0.14);
+}
+
+.album-book-page.page-right {
+  border-radius: 2px 6px 6px 2px;
+  box-shadow: inset 10px 0 18px rgba(80, 58, 38, 0.14);
+}
+
+.album-book-center-spine {
+  background: linear-gradient(90deg, #2b1910 0%, #593a27 50%, #2b1910 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  transition: transform 0.25s ease;
+  justify-content: space-around;
+  padding: 20px 0;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.8);
 }
 
-.album-page-top-meta {
-  width: 100%;
+.spine-stitch {
+  width: 10px;
+  height: 3px;
+  background: #d7c09d;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.book-page-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  border-bottom: 1px dashed #d5c5b0;
-  padding-bottom: 6px;
-}
-
-.album-continuity-trace {
+  border-bottom: 1px dashed #cbb89d;
+  padding-bottom: 4px;
   font-family: 'Courier Prime', monospace;
-  font-size: 0.68rem;
+}
+
+.book-page-chapter {
+  font-size: 0.62rem;
   font-weight: 700;
-  color: #5c4332;
+  color: #6e533c;
 }
 
-.mounted-photo-frame {
-  position: relative;
-  padding: 14px;
-  background: #ffffff;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
-  border: 1px solid #e2dad0;
+.book-page-num {
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: #4a3525;
+  background: #ede1ce;
+  padding: 1px 6px;
   border-radius: 4px;
-  width: 100%;
-  max-width: 480px;
-  margin: 0 auto;
 }
 
-/* Esquineras interactivas del minijuego del álbum */
-.photo-corner {
-  position: absolute;
-  width: 26px;
-  height: 26px;
-  background: #2b2b2b;
-  border: none;
-  z-index: 12;
+.book-page-slots-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+/* Tarjeta individual de cada foto dentro de la página del álbum (4 por pliego) */
+.album-spread-slot {
+  background: rgba(255, 252, 245, 0.75);
+  border: 1.5px solid #dfd2be;
+  border-radius: 6px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   cursor: pointer;
-  transition: transform 0.18s ease, background-color 0.18s ease, opacity 0.18s ease;
+  transition: all 0.18s ease;
+  position: relative;
 }
 
-.photo-corner:hover {
-  transform: scale(1.15);
-  background: #c59b27;
+.album-spread-slot:hover {
+  border-color: #b59672;
+  background: #fffdf8;
 }
 
-.photo-corner.corner-pending {
-  background: rgba(197, 155, 39, 0.65);
-  animation: gentleStepBlink 1.5s infinite ease-in-out;
+.album-spread-slot.selected-slot {
+  border-color: #c59b27;
+  background: #fffdf7;
+  box-shadow: 0 0 0 2px rgba(197, 155, 39, 0.32), 0 4px 12px rgba(61, 40, 23, 0.12);
 }
 
-.photo-corner.corner-fixed {
-  background: #1f1b18;
+.slot-top-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.56rem;
 }
 
-.corner-tl {
-  top: -3px;
-  left: -3px;
-  clip-path: polygon(0 0, 100% 0, 0 100%);
+.slot-pos-label {
+  font-weight: 700;
+  color: #4a3525;
 }
 
-.corner-tr {
-  top: -3px;
-  right: -3px;
-  clip-path: polygon(0 0, 100% 0, 100% 100%);
-}
-
-.corner-bl {
-  bottom: -3px;
-  left: -3px;
-  clip-path: polygon(0 0, 0 100%, 100% 100%);
-}
-
-.corner-br {
-  bottom: -3px;
-  right: -3px;
-  clip-path: polygon(100% 0, 0 100%, 100% 100%);
-}
-
-/* Contenedor de la fotografía impresa: amplio, adaptable y sin solaparse en móvil */
-.physical-photo-print {
-  width: 100%;
-  aspect-ratio: 3 / 2;
-  min-height: 210px;
-  max-height: 310px;
+.slot-diag-pill {
+  background: #efe4d2;
+  color: #5c4332;
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-weight: 700;
+  white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 145px;
+}
+
+/* Marco de papel fotográfico con las 4 esquineras en cada hueco */
+.slot-frame-paper {
+  position: relative;
+  padding: 6px;
+  background: #ffffff;
+  border: 1px solid #dcd3c6;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.14);
+  border-radius: 3px;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  min-height: 112px;
+  max-height: 145px;
   display: flex;
   align-items: center;
   justify-content: center;
-  filter: sepia(0.28) contrast(0.98);
-  background: #000000;
-  position: relative;
-  border-radius: 2px;
+  overflow: hidden;
 }
 
-.physical-photo-print svg,
-.physical-photo-print img {
+.slot-photo-surface {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  overflow: hidden;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.slot-photo-surface svg,
+.slot-photo-surface img {
   width: 100%;
   height: 100%;
   display: block;
   object-fit: cover;
 }
 
-.physical-photo-print.unmounted-preview {
-  transform: rotate(-1.2deg) scale(0.97);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+.slot-photo-surface.loose-print-tilt {
+  transform: rotate(-1.6deg) scale(0.96);
 }
 
-/* Estado cuando un fotograma aún no se ha revelado en Fase 2 */
-.album-unrevealed-placeholder {
+.slot-unrevealed-box {
   width: 100%;
   height: 100%;
-  padding: 18px;
-  background: repeating-linear-gradient(-45deg, #211714, #211714 8px, #160f0d 8px, #160f0d 16px);
+  background: repeating-linear-gradient(-45deg, #241915, #241915 6px, #17100d 6px, #17100d 12px);
   color: #f3e5d0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: 8px;
+  padding: 6px;
+  gap: 3px;
 }
 
-.unrev-icon {
-  font-size: 1.8rem;
+.slot-unrev-icon {
+  font-size: 1.1rem;
 }
 
-.album-unrevealed-placeholder strong {
+.slot-unrevealed-box strong {
   font-family: 'Courier Prime', monospace;
-  font-size: 0.85rem;
+  font-size: 0.62rem;
   color: #ffd54f;
 }
 
-.album-unrevealed-placeholder p {
-  font-size: 0.74rem;
+.slot-unrevealed-box small {
+  font-size: 0.54rem;
   color: #d7c4b0;
-  max-width: 340px;
-  line-height: 1.35;
 }
 
-.btn-go-darkroom-inline {
-  margin-top: 4px;
-  background: #b71c1c;
-  color: #fff;
-  border: 1px solid #ff8a80;
-  padding: 7px 14px;
-  border-radius: 6px;
-  font-family: 'Courier Prime', monospace;
-  font-size: 0.72rem;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.btn-go-darkroom-inline:hover {
-  background: #d32f2f;
-}
-
-/* Overlay del minijuego de pegar la foto con esquineras */
-.album-mount-minigame-overlay {
+.slot-action-overlay {
   position: absolute;
-  inset: 14px;
-  background: rgba(20, 14, 10, 0.58);
-  backdrop-filter: blur(1.5px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 14px;
-  z-index: 8;
-}
-
-.mount-overlay-box {
-  background: rgba(250, 245, 234, 0.96);
-  border: 2px solid #c59b27;
-  border-radius: 8px;
-  padding: 12px 14px;
-  text-align: center;
-  max-width: 320px;
+  inset: 6px;
+  background: rgba(20, 14, 10, 0.56);
+  backdrop-filter: blur(1px);
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 6px;
+  text-align: center;
+  z-index: 6;
 }
 
-.mount-overlay-box strong {
-  font-size: 0.82rem;
-  color: #2b1b12;
+.slot-action-overlay span {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.56rem;
+  color: #fff3d1;
+  font-weight: 700;
 }
 
-.mount-overlay-box p {
-  font-size: 0.72rem;
-  color: #523b2b;
-  line-height: 1.35;
-}
-
-.btn-mount-this-photo {
+.btn-slot-action {
   background: #3d2817;
   color: #ffdf85;
   border: 1px solid #c59b27;
-  padding: 7px 12px;
-  border-radius: 6px;
+  border-radius: 5px;
+  padding: 4px 9px;
   font-family: 'Courier Prime', monospace;
-  font-size: 0.72rem;
+  font-size: 0.58rem;
   font-weight: 700;
   cursor: pointer;
-  margin-top: 2px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
-.btn-mount-this-photo:hover {
-  background: #543821;
-  color: #fff;
+.btn-slot-action:hover {
+  background: #593b22;
+  color: #ffffff;
 }
 
-/* Barra de diagnóstico debajo de la foto (no se superpone a la foto en móvil) */
-.album-meta-bar-below {
-  width: 100%;
-  max-width: 480px;
+/* Esquineras triangulares clásicas en cada una de las 4 fotos del pliego */
+.photo-corner {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: #2b2b2b;
+  border: none;
+  z-index: 10;
+  cursor: pointer;
+  transition: transform 0.16s ease, background-color 0.16s ease;
+}
+
+.photo-corner:hover {
+  transform: scale(1.18);
+  background: #c59b27;
+}
+
+.photo-corner.corner-pending {
+  background: rgba(197, 155, 39, 0.65);
+}
+
+.photo-corner.corner-fixed {
+  background: #1c1815;
+}
+
+.corner-tl {
+  top: 0;
+  left: 0;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.corner-tr {
+  top: 0;
+  right: 0;
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+
+.corner-bl {
+  bottom: 0;
+  left: 0;
+  clip-path: polygon(0 0, 0 100%, 100% 100%);
+}
+
+.corner-br {
+  bottom: 0;
+  right: 0;
+  clip-path: polygon(100% 0, 0 100%, 100% 100%);
+}
+
+/* Pie de foto manuscrito debajo de cada foto en la página */
+.slot-handwritten-caption {
   display: flex;
-  justify-content: space-between;
+  align-items: flex-start;
+  gap: 5px;
+  padding-top: 2px;
+  border-top: 1px dotted #d7c7b2;
+}
+
+.slot-caption-pen {
+  font-size: 0.65rem;
+  line-height: 1.2;
+}
+
+.slot-handwritten-caption p {
+  font-family: 'Special Elite', 'Courier Prime', cursive;
+  font-size: 0.68rem;
+  color: #3b2c21;
+  line-height: 1.28;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 4. Barra de Edición e Inspección del Hueco Seleccionado */
+.album-slot-inspector-bar {
+  background: #f5ecdc;
+  border: 1.5px solid #cbb598;
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.slot-inspector-top {
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 8px;
   flex-wrap: wrap;
+}
+
+.slot-selected-badge {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #3b2416;
 }
 
 .photo-exposure-badge {
@@ -1790,11 +2086,10 @@
   background: rgba(30, 22, 18, 0.92);
   color: #f5ede0;
   font-family: 'Courier Prime', monospace;
-  font-size: 0.68rem;
-  padding: 4px 10px;
+  font-size: 0.62rem;
+  padding: 3px 8px;
   border-radius: 4px;
   border-left: 3px solid #81c995;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .photo-exposure-badge.badge-over {
@@ -1817,56 +2112,52 @@
   color: #ffcdd2;
 }
 
-.corners-progress-tag {
-  font-family: 'Courier Prime', monospace;
-  font-size: 0.66rem;
-  font-weight: 700;
-  color: #5c4332;
-  background: #ede0cc;
+.slot-move-controls {
+  display: flex;
+  gap: 5px;
+}
+
+.btn-slot-swap {
+  background: #e6d6bf;
+  color: #3d2817;
+  border: 1px solid #bfa688;
+  border-radius: 5px;
   padding: 3px 8px;
-  border-radius: 4px;
-  border: 1px solid #cbb598;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  cursor: pointer;
 }
 
-.album-handwritten-note {
-  width: 100%;
-  max-width: 480px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 4px;
-  border-top: 1px dashed #d1c0aa;
-  padding-top: 10px;
-}
-
-.handwriting-display-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-}
-
-.handwriting-text {
-  font-family: 'Special Elite', 'Courier Prime', cursive;
-  font-size: 0.92rem;
-  color: #3b2c21;
-  line-height: 1.4;
+.btn-slot-swap:hover {
+  background: #d8c2a3;
 }
 
 .handwriting-edit-row {
   display: flex;
+  align-items: center;
   gap: 6px;
   width: 100%;
+  flex-wrap: wrap;
+}
+
+.pen-icon-label {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: #4a3525;
+  white-space: nowrap;
 }
 
 .album-note-input {
   flex: 1;
+  min-width: 180px;
   background: #fffcf5;
   border: 1px solid #c9b49b;
   border-radius: 6px;
   padding: 6px 10px;
   font-family: 'Special Elite', 'Courier Prime', monospace;
-  font-size: 0.75rem;
+  font-size: 0.74rem;
   color: #3b2c21;
   outline: none;
 }
@@ -1883,7 +2174,7 @@
   border-radius: 6px;
   padding: 6px 12px;
   font-family: 'Courier Prime', monospace;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
@@ -1891,13 +2182,6 @@
 
 .btn-save-album-note:hover {
   background: #3d2c20;
-}
-
-.album-page-number {
-  font-family: 'Courier Prime', monospace;
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: #786352;
 }
 
 .album-sequential-controls {
@@ -1911,10 +2195,10 @@
   background: #4a3628;
   color: #faf6ee;
   border: none;
-  padding: 10px 16px;
+  padding: 9px 14px;
   border-radius: 6px;
   font-family: 'Fraunces', Georgia, serif;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   cursor: pointer;
   transition: var(--transition-smooth);
   white-space: nowrap;
@@ -1927,7 +2211,7 @@
 
 .linear-warning {
   flex: 1;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   line-height: 1.35;
   color: #634b38;
   background: #e3d2be;

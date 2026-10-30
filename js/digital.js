@@ -116,7 +116,7 @@ function initDigitalCamera() {
   }
 }
 
-function filterDatabasePhotos(queryTerm) {
+function filterDatabasePhotos(queryTerm, customAlbumTitle = null, customAlbumSub = null) {
   const queryStatement = document.getElementById('db-query-statement');
   const execTimeEl = document.getElementById('query-exec-time');
   const resultsCountEl = document.getElementById('grid-results-count');
@@ -129,12 +129,14 @@ function filterDatabasePhotos(queryTerm) {
     filtered = photos.filter(p => {
       const matchTitle = p.title.toLowerCase().includes(queryTerm);
       const matchYear = p.year.toLowerCase().includes(queryTerm);
-      const matchTags = p.tags.some(t => t.toLowerCase().includes(queryTerm));
-      return matchTitle || matchYear || matchTags;
+      const matchTags = (p.tags || []).some(t => t.toLowerCase().includes(queryTerm));
+      const matchGps = (p.exif && p.exif.gps) ? p.exif.gps.toLowerCase().includes(queryTerm) : false;
+      const matchAi = (p.aiTags || []).some(ai => ai.label.toLowerCase().includes(queryTerm));
+      return matchTitle || matchYear || matchTags || matchGps || matchAi;
     });
 
     if (queryStatement) {
-      queryStatement.innerHTML = `<code>SELECT * FROM photos_library WHERE tags LIKE '%${queryTerm}%' OR title LIKE '%${queryTerm}%';</code>`;
+      queryStatement.innerHTML = `<code>SELECT * FROM photos_library WHERE (tags LIKE '%${queryTerm}%' OR gps_exif LIKE '%${queryTerm}%' OR face_cluster LIKE '%${queryTerm}%') ORDER BY timestamp ASC;</code>`;
     }
   } else {
     if (queryStatement) {
@@ -142,9 +144,17 @@ function filterDatabasePhotos(queryTerm) {
     }
   }
 
-  const duration = (performance.now() - startTime + Math.random() * 8 + 4).toFixed(1);
+  const duration = (performance.now() - startTime + Math.random() * 6 + 3).toFixed(1);
   if (execTimeEl) execTimeEl.textContent = `Consulta: ${duration} ms`;
-  if (resultsCountEl) resultsCountEl.textContent = `Mostrando ${filtered.length} recuerdos indexados en la nube (Sin límite • Total: ${photos.length})`;
+  if (resultsCountEl) {
+    resultsCountEl.textContent = queryTerm
+      ? `📖 Álbum estructurado al instante: ${filtered.length} recuerdos recopilados (de ${photos.length} en la nube)`
+      : `Mostrando ${filtered.length} recuerdos indexados en la nube (Sin límite • Total: ${photos.length})`;
+  }
+
+  if (typeof window.updateSmartAlbumHeroBanner === 'function') {
+    window.updateSmartAlbumHeroBanner(queryTerm, customAlbumTitle, customAlbumSub, filtered);
+  }
 
   AudioFX.playDatabasePing();
   renderGooglePhotosGrid(filtered);
@@ -164,8 +174,8 @@ function renderGooglePhotosGrid(items = null) {
 
   if (photos.length === 0) {
     grid.innerHTML = `
-      <div style="grid-column: span 3; padding: 24px; text-align: center; color: #5f6368; font-size: 0.85rem;">
-        🔍 <strong>Sin resultados:</strong> No hay registros en la base de datos con esa etiqueta semántica.
+      <div style="grid-column: 1 / -1; padding: 24px; text-align: center; color: #5f6368; font-size: 0.85rem;">
+        🔍 <strong>Sin resultados:</strong> No hay registros en la base de datos con ese metadato, rostro o coordenada GPS.
       </div>
     `;
     return;
@@ -175,11 +185,15 @@ function renderGooglePhotosGrid(items = null) {
     const card = document.createElement('div');
     card.className = 'gphoto-card';
     card.setAttribute('data-id', photo.id);
-    card.title = `${photo.title} (${photo.year})`;
+    const gpsShort = (photo.exif && photo.exif.gps)
+      ? (photo.exif.gps.includes('(') ? photo.exif.gps.split('(')[1].replace(')', '') : photo.exif.gps)
+      : '';
+    card.title = `${photo.title} (${photo.year})${gpsShort ? ' • 📍 ' + gpsShort : ''}`;
 
     const coverSvg = renderUniquePhotoSvg(photo.svg);
     card.innerHTML = `
       <div class="gphoto-card-img">${coverSvg}</div>
+      <div class="gphoto-card-top-gps">${gpsShort ? `📍 ${gpsShort.split(',')[0]}` : `📅 ${photo.year}`}</div>
       <div class="gphoto-card-badge">${photo.tags[0]} • ${photo.year}</div>
     `;
 
@@ -193,12 +207,16 @@ function openPhotoInspector(photo) {
   const imgPane = document.getElementById('inspector-image');
   const titleEl = document.getElementById('inspector-title');
   const dateEl = document.getElementById('inspector-date');
+  const gpsEl = document.getElementById('inspector-gps');
   const chipsEl = document.getElementById('inspector-chips');
 
   const coverSvg = renderUniquePhotoSvg(photo.svg);
   if (imgPane) imgPane.innerHTML = coverSvg;
   if (titleEl) titleEl.textContent = photo.title;
-  if (dateEl) dateEl.textContent = photo.date;
+  if (dateEl) dateEl.textContent = `📅 ${photo.date} • ${photo.exif ? photo.exif.camera : ''}`;
+  if (gpsEl) {
+    gpsEl.textContent = (photo.exif && photo.exif.gps) ? `📍 Geolocalización EXIF: ${photo.exif.gps}` : '';
+  }
 
   if (chipsEl) {
     chipsEl.innerHTML = '';
@@ -208,6 +226,14 @@ function openPhotoInspector(photo) {
       chip.textContent = `#${t}`;
       chipsEl.appendChild(chip);
     });
+    if (photo.aiTags && photo.aiTags.length > 0) {
+      photo.aiTags.slice(0, 2).forEach(ai => {
+        const aiChip = document.createElement('span');
+        aiChip.className = 'sem-tag ai-conf-chip';
+        aiChip.innerHTML = `🤖 ${ai.label} <span>(${ai.conf})</span>`;
+        chipsEl.appendChild(aiChip);
+      });
+    }
   }
 
   document.querySelectorAll('.v-filter-btn').forEach(b => b.classList.remove('active'));

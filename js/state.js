@@ -9,8 +9,8 @@
 window.AppState = {
   currentPhase: 1,
   soundEnabled: true,
-  analogPhotosLeft: 10,       // Carrete de 10 exposiciones
-  analogTotalPhotos: 10,
+  analogPhotosLeft: 12,       // Carrete de 12 exposiciones (formato real 135)
+  analogTotalPhotos: 12,
   analogShutterArmed: true,
   currentSceneIndex: 0,
   albumPageIndex: 0,
@@ -26,33 +26,37 @@ window.AppState = {
   userFocus: 20,              // Anillo de enfoque manual (0 a 100)
   isPeekingViewfinder: false, // Si mira por el visor óptico o la cámara exterior
 
-  // Carrete activo analógico de 10 fotos (aleatorias de las 24 + hasta 5 fotos reales para el carrete)
+  // Carrete activo analógico de 12 fotos (aleatorias de las 36 + hasta 5 fotos reales para el carrete)
   reelPhotos: [],
   userUploadedPhotos: [],     // Fotos reales subidas por el usuario (sin límite en la nube digital, hasta 5 entran en el carrete analógico)
   digitalExtraShots: [],      // Capturas adicionales infinitas tomadas con el smartphone digital
 
-  // Registro de disparos físicos en el carrete de 10 (en orden de toma: índice 0..9)
+  // Registro de disparos físicos en el carrete de 12 (en orden de toma: índice 0..11)
   shotsHistory: {},
   shotsOrder: [],             // Orden cronológico en que se dispararon
 
-  // Estado del Minijuego Fotoquímico por tiras de 5 en 5 fotos (2 tiras = 10 fotos)
+  // Estado del Minijuego Fotoquímico por tiras de 4 en 4 fotos (3 tiras = 12 fotos)
   // stage: 0 = Invisible (Latente), 1 = Colores Invertidos (Negativo), 2 = Imagen Revelada (Positivo con exposición)
   darkroomCurrentBatch: 0,
   darkroomSelectedSlot: 0,
   darkroomBatches: [
-    { stage: 0, progress: 0 }, // Tira 1: Fotos 1–5
-    { stage: 0, progress: 0 }  // Tira 2: Fotos 6–10
+    { stage: 0, progress: 0 }, // Tira 1: Fotos 1–4
+    { stage: 0, progress: 0 }, // Tira 2: Fotos 5–8
+    { stage: 0, progress: 0 }  // Tira 3: Fotos 9–12
   ],
 
-  // Estado del Minijuego de Montaje del Álbum Físico (Fase 3)
-  // Cada página (0..9) guarda si la foto revelada ya fue montada, sus 4 esquineras y su nota manuscrita
+  // Estado del Álbum Físico a Doble Página (Fase 3)
+  // 3 pliegos (spreads 0, 1, 2) x 4 huecos por pliego = 12 fotos del carrete
   albumMountedPages: {},
-  albumActivePageSlot: 0
+  albumActivePageSlot: 0,
+  albumSpreadIndex: 0,
+  albumSlotOrder: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+  albumCoverTitle: 'RECUERDOS Y VIAJES DE FAMILIA (1998–2024)'
 };
 
 /**
- * Construye o reconstruye el carrete de 10 exposiciones combinando las fotos reales
- * subidas por el usuario (hasta 5) y fotos seleccionadas al azar de la librería de 24.
+ * Construye o reconstruye el carrete de 12 exposiciones combinando las fotos reales
+ * subidas por el usuario (hasta 12, el total del carrete) y fotos seleccionadas al azar de la librería de 36.
  */
 function buildActiveReel(randomizeNewSelection = true) {
   const fullLib = window.PhotoLibrary || [];
@@ -61,25 +65,25 @@ function buildActiveReel(randomizeNewSelection = true) {
   let randomPool = [];
   if (randomizeNewSelection || !window.AppState._cachedRandomPool || window.AppState._cachedRandomPool.length === 0) {
     const shuffled = [...fullLib].sort(() => Math.random() - 0.5);
-    randomPool = shuffled.slice(0, 10);
+    randomPool = shuffled.slice(0, 12);
     window.AppState._cachedRandomPool = randomPool;
   } else {
     randomPool = window.AppState._cachedRandomPool;
   }
 
-  // Las primeras posiciones del carrete analógico son hasta 5 fotos reales subidas por el usuario y el resto aleatorias hasta completar 10
-  // Seleccionamos un 30% de fotos (3 de las 10) que coinciden con la luz/enfoque actual de la cámara, incluyendo siempre la segunda foto (índice 1)
-  const otherIndices = [0, 2, 3, 4, 5, 6, 7, 8, 9].sort(() => Math.random() - 0.5);
-  const presetOptimalSet = new Set([1, otherIndices[0], otherIndices[1]]);
+  // Las primeras posiciones del carrete analógico son hasta 12 fotos reales subidas por el usuario y el resto aleatorias hasta completar 12
+  // Seleccionamos ~30% de fotos (4 de las 12) que coinciden con la luz/enfoque actual de la cámara, incluyendo siempre la segunda foto (índice 1)
+  const otherIndices = [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].sort(() => Math.random() - 0.5);
+  const presetOptimalSet = new Set([1, otherIndices[0], otherIndices[1], otherIndices[2]]);
   window.AppState.presetOptimalIndices = Array.from(presetOptimalSet);
 
-  const analogUserUploads = uploaded.slice(0, 5);
-  const combined = [...analogUserUploads, ...randomPool].slice(0, 10).map((item, idx) => ({
+  const analogUserUploads = uploaded.slice(0, 12);
+  const combined = [...analogUserUploads, ...randomPool].slice(0, 12).map((item, idx) => ({
     ...item,
     reelSlot: idx,
     frameNumber: idx + 1,
     isPresetOptimal: presetOptimalSet.has(idx),
-    pageNumber: `Fotograma ${String(idx + 1).padStart(2, '0')} de 10`
+    pageNumber: `Fotograma ${String(idx + 1).padStart(2, '0')} de 12`
   }));
 
   window.AppState.reelPhotos = combined;
@@ -137,8 +141,8 @@ function resetAndRandomizeReel(clearUserUploads = false) {
     window.AppState.digitalExtraShots = [];
   }
   buildActiveReel(true);
-  window.AppState.analogTotalPhotos = 10;
-  window.AppState.analogPhotosLeft = 10;
+  window.AppState.analogTotalPhotos = 12;
+  window.AppState.analogPhotosLeft = 12;
   window.AppState.analogShutterArmed = true;
   window.AppState.currentSceneIndex = 0;
   window.AppState.albumPageIndex = 0;
@@ -148,9 +152,13 @@ function resetAndRandomizeReel(clearUserUploads = false) {
   window.AppState.darkroomSelectedSlot = 0;
   window.AppState.darkroomBatches = [
     { stage: 0, progress: 0 },
+    { stage: 0, progress: 0 },
     { stage: 0, progress: 0 }
   ];
   window.AppState.albumMountedPages = {};
+  window.AppState.albumActivePageSlot = 0;
+  window.AppState.albumSpreadIndex = 0;
+  window.AppState.albumSlotOrder = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 }
 
 /**
@@ -197,10 +205,10 @@ function renderUniquePhotoSvg(svgStr) {
 window.renderUniquePhotoSvg = renderUniquePhotoSvg;
 
 /**
- * Devuelve si un fotograma del carrete (0..9) ya ha sido revelado en el cuarto oscuro (Fase 2)
+ * Devuelve si un fotograma del carrete (0..11) ya ha sido revelado en el cuarto oscuro (Fase 2)
  */
 function getFrameDevelopmentStage(photoIndex) {
-  const batchIdx = Math.floor(photoIndex / 5);
+  const batchIdx = Math.floor(photoIndex / 4);
   const batch = window.AppState.darkroomBatches[batchIdx];
   return batch ? batch.stage : 0;
 }

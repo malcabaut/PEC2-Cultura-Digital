@@ -64,14 +64,27 @@ function refreshEntireSimulationUI() {
   const countSpan = document.getElementById('user-photos-count');
   const compBadge = document.getElementById('reel-composition-badge');
   const clearBtn = document.getElementById('btn-clear-uploads');
+  const uploadLbl = document.getElementById('lbl-upload-photos');
+  const fileInputEl = document.getElementById('input-user-photos');
+  const maxReelSlots = AppState.analogTotalPhotos || 12;
   const uCount = (AppState.userUploadedPhotos || []).length;
-  const randCount = Math.max(0, 10 - uCount);
+  const randCount = Math.max(0, maxReelSlots - uCount);
+  const isFullUserReel = uCount >= maxReelSlots;
 
   if (countSpan) countSpan.textContent = String(uCount);
   if (compBadge) {
     compBadge.textContent = uCount > 0
-      ? `🎞️ Carrete de 10: ${uCount} foto(s) tuya(s) + ${randCount} aleatoria(s)`
-      : `🎲 Carrete activo: 10 fotos aleatorias (0/5 tuyas)`;
+      ? `🎞️ Carrete de ${maxReelSlots} exp.: ${uCount} escena(s) tuya(s) + ${randCount} por fotografiar`
+      : `🎞️ Carrete virgen (${maxReelSlots} exp.): ${maxReelSlots} escenas por fotografiar (0/${maxReelSlots} tuyas)`;
+  }
+  if (uploadLbl) {
+    uploadLbl.classList.toggle('is-disabled', isFullUserReel);
+    uploadLbl.innerHTML = isFullUserReel
+      ? `✅ Carrete lleno (<span id="user-photos-count">${uCount}</span>/${maxReelSlots})`
+      : `📤 Subir tus fotos (<span id="user-photos-count">${uCount}</span>/${maxReelSlots})`;
+  }
+  if (fileInputEl) {
+    fileInputEl.disabled = isFullUserReel;
   }
   if (clearBtn) {
     clearBtn.style.display = uCount > 0 ? 'inline-flex' : 'none';
@@ -79,8 +92,8 @@ function refreshEntireSimulationUI() {
 }
 
 /**
- * Inicializa la barra de herramientas para subir hasta 5 fotos reales del usuario
- * y sortear el carrete de 10 exposiciones.
+ * Inicializa la barra de herramientas para subir hasta 12 fotos reales del usuario (el máximo del carrete)
+ * y meter un carrete nuevo de 12 exposiciones.
  */
 function initUserPhotosAndReelControls() {
   const fileInput = document.getElementById('input-user-photos');
@@ -93,11 +106,12 @@ function initUserPhotosAndReelControls() {
       const files = Array.from(e.target.files || []);
       if (files.length === 0) return;
 
+      const maxReelSlots = AppState.analogTotalPhotos || 12;
       const currentUploaded = AppState.userUploadedPhotos || [];
-      const availableSlots = 5 - currentUploaded.length;
+      const availableSlots = maxReelSlots - currentUploaded.length;
       if (availableSlots <= 0) {
         if (statusMsg) {
-          statusMsg.innerHTML = '<strong>⚠️ Límite de 5 fotos propias alcanzado:</strong> Ya has subido 5 imágenes reales a tu carrete de 10. Pulsa "Limpiar" si quieres subir otras distintas.';
+          statusMsg.innerHTML = `<strong>⚠️ Carrete completo con tus ${maxReelSlots} fotos:</strong> Ya has llenado las ${maxReelSlots} exposiciones del carrete con tus propias imágenes. Pulsa "🗑️ Limpiar" si quieres quitar algunas y subir otras.`;
         }
         fileInput.value = '';
         return;
@@ -149,7 +163,7 @@ function initUserPhotosAndReelControls() {
           loadedCount++;
 
           if (loadedCount === filesToProcess.length) {
-            // Reconstruir el carrete de 10 manteniendo las fotos aleatorias y situando al usuario en su foto recién subida
+            // Reconstruir el carrete de 12 manteniendo las fotos aleatorias y situando al usuario en su foto recién subida
             buildActiveReel(false);
             AppState.currentSceneIndex = AppState.userUploadedPhotos.length - filesToProcess.length;
             AppState.albumPageIndex = AppState.currentSceneIndex;
@@ -157,7 +171,7 @@ function initUserPhotosAndReelControls() {
             refreshEntireSimulationUI();
 
             if (statusMsg) {
-              statusMsg.innerHTML = `<strong>📤 ¡${AppState.userUploadedPhotos.length}/5 fotos reales cargadas en el carrete de 10!</strong> Ahora mismo estás viendo tu foto <em>"${customPhotoObj.title}"</em> en el visor. Enfocala, ajusta diafragma/velocidad, dispárala, revélala en Fase 2 y móntala en el Álbum de Fase 3.`;
+              statusMsg.innerHTML = `<strong>📤 ¡${AppState.userUploadedPhotos.length}/${maxReelSlots} fotos reales cargadas en el carrete!</strong> Ahora mismo estás viendo tu foto <em>"${customPhotoObj.title}"</em> en el visor. Enfocala, ajusta diafragma/velocidad, dispárala, revélala en Fase 2 y móntala en el Álbum de Fase 3.`;
             }
           }
         };
@@ -175,7 +189,7 @@ function initUserPhotosAndReelControls() {
       refreshEntireSimulationUI();
       if (statusMsg) {
         const uCount = (AppState.userUploadedPhotos || []).length;
-        statusMsg.innerHTML = `<strong>🎲 ¡Nuevo carrete de 10 sorteado!</strong> Se han seleccionado ${10 - uCount} fotos aleatorias nuevas${uCount > 0 ? ` junto con tus ${uCount} foto(s) subida(s)` : ''}. Contador reiniciado a 10 exposiciones.`;
+        statusMsg.innerHTML = `<strong>🎞️ ¡Carrete virgen de 12 exposiciones cargado!</strong> Se ha reiniciado el rollo sin exponer (12/12 restantes), el cuarto oscuro y el álbum con nuevas escenas para fotografiar${uCount > 0 ? ` (conservando tus ${uCount} foto(s) subida(s))` : ''}.`;
       }
     });
   }
@@ -186,7 +200,7 @@ function initUserPhotosAndReelControls() {
       AudioFX.playDialClick();
       refreshEntireSimulationUI();
       if (statusMsg) {
-        statusMsg.innerHTML = '<strong>🗑️ Fotos subidas eliminadas:</strong> El carrete vuelve a tener 10 fotografías aleatorias de la colección.';
+        statusMsg.innerHTML = '<strong>🗑️ Fotos subidas eliminadas:</strong> El carrete vuelve a tener 12 fotografías aleatorias de la colección.';
       }
     });
   }
@@ -359,7 +373,7 @@ function updateGuidedStepsUI(applySubtleGlow = false) {
       if (g3) g3.classList.add('done');
       if (g4) g4.classList.add('active');
       if (liveHint) {
-        liveHint.innerHTML = '🎉 <strong>¡Carrete de 10 completado!</strong> Haz clic arriba en <strong>02 El Revelado</strong> para revelar tus fotos en el cuarto oscuro.';
+        liveHint.innerHTML = '🎉 <strong>¡Carrete de 12 completado!</strong> Haz clic arriba en <strong>02 El Revelado</strong> para revelar tus fotos en el cuarto oscuro.';
       }
       if (applySubtleGlow) {
         const nav2 = document.getElementById('nav-phase-2');
@@ -379,7 +393,7 @@ function updateGuidedStepsUI(applySubtleGlow = false) {
     } else if (!isFocusOk || !isExposureOk) {
       if (g1) g1.classList.add('active');
       const presetNote = currentPhoto && currentPhoto.isPresetOptimal
-        ? ' <em>(Esta foto venía pre-ajustada)</em>'
+        ? ' <em>(La luz y distancia de esta escena coincidían de entrada con los parámetros de la cámara)</em>'
         : '';
       if (liveHint) {
         const missingParts = [];
@@ -409,9 +423,10 @@ function updateGuidedStepsUI(applySubtleGlow = false) {
       // Está enfocada y bien expuesta, y el obturador está armado -> Listo para disparar
       if (g1) g1.classList.add('done');
       if (g2) g2.classList.add('active');
+      const frameNumStr = String(AppState.currentSceneIndex + 1).padStart(2, '0');
       const presetTag = currentPhoto && currentPhoto.isPresetOptimal
-        ? '✨ <strong>¡Esta foto (#0' + (AppState.currentSceneIndex + 1) + ') ya viene perfecta de fábrica!</strong> '
-        : '✅ <strong>¡Enfoque y luz clavados a 0.0 EV!</strong> ';
+        ? `✨ <strong>¡Parámetros para toma perfecta en la escena #${frameNumStr}!</strong> `
+        : '✅ <strong>¡Parámetros óptimos de enfoque y luz (0.0 EV)!</strong> ';
       if (liveHint) {
         liveHint.innerHTML = `${presetTag}<strong>Siguiente paso (Paso 2):</strong> Pulsa el <strong>botón disparador cromado</strong> arriba a la derecha para tomar la foto.${shotsTakenCount > 0 ? ' <em>(O pasa a Fase 2 cuando quieras revelar).</em>' : ''}`;
       }
@@ -423,9 +438,8 @@ function updateGuidedStepsUI(applySubtleGlow = false) {
   } else if (AppState.currentPhase === 2) {
     if (applySubtleGlow) {
       const btnDev = document.getElementById('btn-start-develop');
-      const b0 = AppState.darkroomBatches[0];
-      const b1 = AppState.darkroomBatches[1];
-      if (b0 && b0.stage === 2 && b1 && b1.stage === 2) {
+      const allBatchesDone = AppState.darkroomBatches.every(b => b && b.stage === 2);
+      if (allBatchesDone) {
         const nav3 = document.getElementById('nav-phase-3');
         if (nav3) nav3.classList.add('subtle-next-step-glow');
       }
@@ -433,12 +447,10 @@ function updateGuidedStepsUI(applySubtleGlow = false) {
     }
   } else if (AppState.currentPhase === 3) {
     if (applySubtleGlow) {
-      const pageIdx = AppState.albumPageIndex;
-      const mountState = AppState.albumMountedPages[pageIdx];
-      if (!mountState || !mountState.mounted) {
-        const btnMount = document.getElementById('btn-mount-current-photo');
+      const photos = getPhotos();
+      const allMounted = photos.every((_, idx) => AppState.albumMountedPages[idx] && AppState.albumMountedPages[idx].mounted);
+      if (!allMounted) {
         const btnQuickAll = document.getElementById('btn-quick-mount-all');
-        if (btnMount) btnMount.classList.add('subtle-next-step-glow');
         if (btnQuickAll) btnQuickAll.classList.add('subtle-next-step-glow');
       } else {
         const btnNext = document.getElementById('btn-album-next');

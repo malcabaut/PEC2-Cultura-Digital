@@ -215,29 +215,25 @@
     overflow-x: auto;
   }
 
-  /* Álbum físico y sobre de 10 fotos en móvil sin superponerse nunca */
+  /* Álbum físico a doble página y sobre de 12 fotos en móvil */
   .album-lab-envelope-strip {
-    grid-template-columns: repeat(5, minmax(54px, 1fr));
-    gap: 6px;
+    grid-template-columns: repeat(6, minmax(52px, 1fr));
+    gap: 5px;
   }
-  .album-page {
-    padding: 14px 10px;
+  .album-open-book-wrapper {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .album-book-center-spine {
+    display: none;
+  }
+  .album-book-page {
     min-height: auto;
-  }
-  .mounted-photo-frame {
     padding: 10px;
-    max-width: 100%;
   }
-  .physical-photo-print {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 3 / 2;
-    min-height: 175px;
-  }
-  .album-meta-bar-below {
+  .slot-inspector-top {
     flex-direction: column;
     align-items: stretch;
-    text-align: center;
   }
   .album-sequential-controls {
     flex-direction: column;
@@ -245,6 +241,20 @@
   }
   .handwriting-edit-row {
     flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* Hub inteligente y portada instantánea de Google Photos en móvil */
+  .gphotos-smart-hub {
+    grid-template-columns: 1fr;
+  }
+  .gphotos-instant-album-hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    justify-items: center;
+  }
+  .btn-close-instant-album {
+    align-self: center;
   }
 
   /* Álbum móvil de Google Photos (Fase 3): evita que las imágenes se superpongan */

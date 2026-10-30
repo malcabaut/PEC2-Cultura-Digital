@@ -140,28 +140,28 @@
           <div class="film-canister-indicator">
             <div class="canister-body">
               <span class="canister-brand">KODAK GOLD 400</span>
-              <span class="canister-type">35mm / 10 EXP • Carrete Aleatorio + Tus Fotos</span>
+              <span class="canister-type">35mm / 12 EXP • Película Virgen + Tus Fotos</span>
             </div>
             <div class="canister-counter">
               <span class="counter-label">EXP. RESTANTES</span>
-              <span class="counter-number" id="analog-counter">10</span>
-              <span class="counter-max">/ 10</span>
+              <span class="counter-number" id="analog-counter">12</span>
+              <span class="counter-max">/ 12</span>
             </div>
           </div>
 
-          <!-- Módulo para cargar hasta 5 fotos reales propias y sortear el carrete de 10 -->
+          <!-- Módulo para cargar hasta 12 fotos reales propias (el carrete completo) y meter un carrete nuevo de 12 -->
           <div class="custom-reel-toolbar" id="custom-reel-toolbar">
             <div class="reel-toolbar-info">
-              <span class="reel-badge-pill" id="reel-composition-badge">🎲 Carrete activo: 10 fotos aleatorias (0/5 tuyas)</span>
-              <small>Sube hasta 5 fotos reales de tu dispositivo para simular con tus propios recuerdos en el visor, cuarto oscuro, álbum y Google Photos.</small>
+              <span class="reel-badge-pill" id="reel-composition-badge">🎞️ Carrete virgen (12 exp.): 12 escenas por fotografiar (0/12 tuyas)</span>
+              <small>Sube tus propias fotos reales (hasta las 12 del carrete) para simular con tus recuerdos en el visor, cuarto oscuro, álbum y Google Photos.</small>
             </div>
             <div class="reel-toolbar-actions">
-              <label for="input-user-photos" class="btn-upload-photos" id="lbl-upload-photos" title="Subir hasta 5 fotos reales desde tu dispositivo">
-                📤 Subir tus fotos (<span id="user-photos-count">0</span>/5)
+              <label for="input-user-photos" class="btn-upload-photos" id="lbl-upload-photos" title="Subir hasta 12 fotos reales desde tu dispositivo (máximo el tamaño del carrete)">
+                📤 Subir tus fotos (<span id="user-photos-count">0</span>/12)
               </label>
               <input type="file" id="input-user-photos" accept="image/*" multiple style="display: none;">
-              <button type="button" class="btn-shuffle-reel" id="btn-shuffle-reel" title="Sortear otras fotos aleatorias para el carrete de 10">
-                🎲 Sortear Carrete
+              <button type="button" class="btn-shuffle-reel" id="btn-shuffle-reel" title="Meter un carrete virgen nuevo de 12 exposiciones y reiniciar el revelado y el álbum">
+                🎞️ Meter Carrete Nuevo
               </button>
               <button type="button" class="btn-clear-uploads" id="btn-clear-uploads" style="display: none;" title="Quitar tus fotos subidas">
                 🗑️ Limpiar
@@ -287,7 +287,7 @@
                   <div class="shutter-cluster-top">
                     <div class="frame-counter-window" title="Exposiciones restantes en el carrete">
                       <span class="counter-s-dot">S•</span>
-                      <span id="analog-top-counter">10</span>
+                      <span id="analog-top-counter">12</span>
                     </div>
                     <button class="chrome-shutter-release" id="btn-analog-shoot" title="Pulsar botón disparador mecánico">
                       <span class="shutter-chrome-collar">
@@ -397,7 +397,7 @@
                     </div>
                     <div class="memo-card-sub">
                       <span>PROFESSIONAL FILM</span>
-                      <strong>10 EXP • 35mm</strong>
+                      <strong>12 EXP • 35mm</strong>
                     </div>
                     <div class="memo-card-footer" id="lens-display-spec">50mm ƒ/8.0 • 1/500s</div>
                   </div>
@@ -437,32 +437,33 @@
               <strong>Condición Analógica: Incertidumbre, Enfoque y Exposímetro Manual</strong>
             </div>
             <p id="analog-status-msg">
-              <strong>Pasa el ratón por encima del visor ocular</strong> para agrandarlo y alinear el minijuego del prisma de enfoque. Gira las <strong>ruedas circulares de Velocidad y Diafragma</strong> arriba a la derecha, pulsa el botón disparador cromado y luego <strong>da 3 vueltas completas a la manivela izquierda</strong> con el ratón para bobinar el carrete de 10 fotos al siguiente fotograma.
+              <strong>Pasa el ratón por encima del visor ocular</strong> para agrandarlo y alinear el minijuego del prisma de enfoque. Gira las <strong>ruedas circulares de Velocidad y Diafragma</strong> arriba a la derecha, pulsa el botón disparador cromado y luego <strong>da 3 vueltas completas a la manivela izquierda</strong> con el ratón para bobinar el carrete de 12 fotos al siguiente fotograma.
             </p>
             <div class="status-metric">
               <span id="meter-diagnosis-pill">Exposímetro: <strong>Equilibrado (0.0 EV)</strong></span>
               <span id="focus-diagnosis-pill">Enfoque: <strong>🔴 Desenfocado</strong></span>
-              <span>Carrete: <strong id="carrete-stat">Foto 01 de 10</strong></span>
+              <span>Carrete: <strong id="carrete-stat">Foto 01 de 12</strong></span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ==================== FASE 2: ANALÓGICO (El Revelado: Minijuego de 5 en 5 Fotos) ==================== -->
+      <!-- ==================== FASE 2: ANALÓGICO (El Revelado: Minijuego de 4 en 4 Fotos) ==================== -->
       <div class="stage-phase" id="analog-phase-2">
         <div class="card-interface analog-card darkroom-card">
           <div class="darkroom-header">
             <span class="darkroom-lamp-status">💡 Luz inactínica roja • Cuarto Oscuro</span>
-            <h4>Minijuego Fotoquímico: Revelado de 2 Tiras (10 Fotos en Total)</h4>
+            <h4>Minijuego Fotoquímico: Revelado de 3 Tiras (12 Fotos en Total)</h4>
           </div>
 
           <div class="darkroom-interactive-area">
-            <!-- Selector de Lotes / Tiras de 5 en 5 fotos en el orden en que se tomaron -->
+            <!-- Selector de Lotes / Tiras de 4 en 4 fotos en el orden en que se tomaron -->
             <div class="darkroom-batch-bar">
-              <span class="batch-bar-label">🎞️ Tiras del carrete de 10 (en orden de toma):</span>
+              <span class="batch-bar-label">🎞️ Tiras del carrete de 12 (en orden de toma):</span>
               <div class="batch-tabs" id="darkroom-batch-tabs">
-                <button type="button" class="batch-tab active" data-batch="0">Fotos 1–5</button>
-                <button type="button" class="batch-tab" data-batch="1">Fotos 6–10</button>
+                <button type="button" class="batch-tab active" data-batch="0">Fotos 1–4</button>
+                <button type="button" class="batch-tab" data-batch="1">Fotos 5–8</button>
+                <button type="button" class="batch-tab" data-batch="2">Fotos 9–12</button>
               </div>
             </div>
 
@@ -518,7 +519,7 @@
             <!-- Controles de acción del minijuego de revelado -->
             <div class="darkroom-timer-module">
               <div class="timer-display">
-                <span class="timer-label">Estado de las 5 fotos de la tira:</span>
+                <span class="timer-label">Estado de las 4 fotos de la tira:</span>
                 <span class="timer-time" id="analog-time-elapsed">1️⃣ Imagen Latente (No se ven las fotos aún)</span>
               </div>
               <button class="darkroom-action-btn" id="btn-start-develop">
@@ -528,99 +529,130 @@
 
             <!-- Nota de diagnóstico de exposición y enfoque -->
             <div class="darkroom-friction-note" id="darkroom-exposure-summary">
-              <strong>Proceso Fotoquímico en 3 pasos (de 5 en 5 fotos):</strong> Al principio la emulsión es opaca y no se ve nada. En el <strong>Paso 1</strong> emergen las 5 fotos con los <strong>colores invertidos (negativo)</strong>. En el <strong>Paso 2</strong> se positivan mostrando la imagen final según la <strong>exposición (diafragma/velocidad) y el enfoque</strong> con que las tomaste.
+              <strong>Proceso Fotoquímico en 3 pasos (de 4 en 4 fotos):</strong> Al principio la emulsión es opaca y no se ve nada. En el <strong>Paso 1</strong> emergen las 4 fotos con los <strong>colores invertidos (negativo)</strong>. En el <strong>Paso 2</strong> se positivan mostrando la imagen final según la <strong>exposición (diafragma/velocidad) y el enfoque</strong> con que las tomaste.
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ==================== FASE 3: ANALÓGICO (El Álbum Físico y Minijuego de Montaje Artesanal) ==================== -->
+      <!-- ==================== FASE 3: ANALÓGICO (El Álbum Familiar Clásico a Doble Página + Sobre y Negativos) ==================== -->
       <div class="stage-phase" id="analog-phase-3">
         <div class="card-interface analog-card album-card">
           <div class="album-spine-decor">
-            <span>ÁLBUM FAMILIAR • CONTINUIDAD TOMA ➔ REVELADO ➔ MONTAJE (10 FOTOS)</span>
+            <span>ÁLBUM FAMILIAR ENCUADERNADO • REVELADO DEL LABORATORIO + MONTAJE MANUAL (12 COPIAS)</span>
           </div>
 
-          <!-- Minijuego Amplio del Álbum: Bandeja de Copias del Laboratorio y Progreso de Continuidad -->
+          <!-- 1. EL SOBRE DEL LABORATORIO Y LA TIRA DE NEGATIVOS (Devolver copias + negativos de plástico) -->
           <div class="album-continuity-bar" id="album-continuity-bar">
             <div class="continuity-summary-row">
-              <span class="continuity-title">📐 Taller de Montaje en el Álbum:</span>
-              <div class="continuity-stats-pills">
-                <span class="c-pill" id="album-stat-shot">📸 Tomadas: 0/10</span>
-                <span class="c-pill" id="album-stat-rev">🧪 Reveladas: 0/10</span>
-                <span class="c-pill" id="album-stat-mounted">📒 Montadas: 0/10</span>
+              <div class="lab-envelope-header-left">
+                <span class="lab-brand-seal">FOTOPRIX • KODA-LAB</span>
+                <span class="continuity-title">✉️ Sobre del Laboratorio y Tira de Negativos:</span>
               </div>
-              <button type="button" class="btn-quick-mount-all" id="btn-quick-mount-all" title="Pegar e instalar automáticamente las fotos ya reveladas">
-                ✨ Montar Reveladas
-              </button>
+              <div class="continuity-stats-pills">
+                <span class="c-pill" id="album-stat-shot">📸 Tomadas: 0/12</span>
+                <span class="c-pill" id="album-stat-rev">🧪 Reveladas: 0/12</span>
+                <span class="c-pill" id="album-stat-mounted">📒 En Álbum: 0/12</span>
+              </div>
+              <div class="album-quick-actions">
+                <button type="button" class="btn-quick-mount-all" id="btn-quick-mount-all" title="Revelar y colocar automáticamente las 12 copias en las páginas del álbum">
+                  ✨ Colocar Todo el Carrete
+                </button>
+                <button type="button" class="btn-reset-album-order" id="btn-reset-album-order" title="Restaurar el orden original de las páginas del álbum">
+                  ↺ Orden Original
+                </button>
+              </div>
             </div>
-            <div class="album-lab-envelope-strip" id="album-envelope-strip">
-              <!-- Se generan los 10 huecos del sobre del laboratorio mostrando qué fotos están tomadas, reveladas o pegadas -->
+
+            <!-- Tira de plástico celuloide con los negativos (colores extraños/invertidos) que daban junto a las copias -->
+            <div class="lab-negatives-plastic-sleeve">
+              <div class="sleeve-label-bar">
+                <span>🎞️ TIRA DE NEGATIVOS EN FUNDA DE PLÁSTICO (COLORES INVERTIDOS) + COPIAS EN PAPEL 10×15</span>
+                <small>Haz clic en una copia revelada para colocarla en el hueco seleccionado o cambiar su orden</small>
+              </div>
+              <div class="album-lab-envelope-strip" id="album-envelope-strip">
+                <!-- Se generan las 12 copias del sobre del laboratorio con su tira de negativo superior -->
+              </div>
             </div>
           </div>
 
-          <!-- Visor Amplio del Álbum con esquinas autoadhesivas interactivas -->
+          <!-- 2. CABECERA DE PORTADA Y TÍTULO DEL ÁLBUM FÍSICO -->
+          <div class="album-cover-title-bar" id="album-cover-title-bar">
+            <div class="album-leather-badge">
+              <span class="album-gold-emblem">⚜️</span>
+              <div class="album-title-editable-wrap">
+                <label for="album-main-title-input">TÍTULO EN PORTADA DEL ÁLBUM:</label>
+                <input type="text" id="album-main-title-input" class="album-main-title-input" value="RECUERDOS Y VIAJES DE FAMILIA (1998–2024)" aria-label="Título de portada del álbum físico">
+              </div>
+            </div>
+            <div class="album-spread-tabs" id="album-spread-tabs">
+              <button type="button" class="spread-tab active" data-spread="0">📖 Pliego 1 (Págs. 1–2 • Fotos 1–4)</button>
+              <button type="button" class="spread-tab" data-spread="1">📖 Pliego 2 (Págs. 3–4 • Fotos 5–8)</button>
+              <button type="button" class="spread-tab" data-spread="2">📖 Pliego 3 (Págs. 5–6 • Fotos 9–12)</button>
+            </div>
+          </div>
+
+          <!-- 3. LIBRO ABIERTO A DOBLE PÁGINA (2 PÁGINAS VISIBLES = 4 FOTOS POR PLIEGO CON ESQUINEROS Y NOTAS) -->
           <div class="physical-album-container">
-            <div class="album-page-wrapper">
-              <!-- Página de cartulina texturizada amplia con pergamino de protección -->
-              <div class="album-page" id="album-current-page">
-                <div class="album-page-top-meta">
-                  <span class="album-continuity-trace" id="album-continuity-trace">Continuidad: Fase 1 ➔ Fase 2 ➔ Fase 3</span>
-                  <span class="album-page-number" id="album-page-indicator">Página 01 de 10</span>
+            <div class="album-open-book-wrapper" id="album-open-book">
+              <!-- PÁGINA IZQUIERDA (2 fotos) -->
+              <div class="album-book-page page-left" id="album-spread-left-page">
+                <div class="book-page-header">
+                  <span class="book-page-chapter" id="left-page-chapter">Archivo Manual en Papel</span>
+                  <span class="book-page-num" id="left-page-num">Pág. 01</span>
                 </div>
-
-                <!-- Marco de foto amplio con 4 esquineras interactivas de montaje fotográfico -->
-                <div class="mounted-photo-frame" id="album-mounted-frame">
-                  <button type="button" class="photo-corner corner-tl" data-corner="tl" title="Pulsa para fijar esquinera superior izquierda"></button>
-                  <button type="button" class="photo-corner corner-tr" data-corner="tr" title="Pulsa para fijar esquinera superior derecha"></button>
-                  <button type="button" class="photo-corner corner-bl" data-corner="bl" title="Pulsa para fijar esquinera inferior izquierda"></button>
-                  <button type="button" class="photo-corner corner-br" data-corner="br" title="Pulsa para fijar esquinera inferior derecha"></button>
-                  
-                  <div class="physical-photo-print" id="album-photo-display">
-                    <!-- Foto física impresa en papel baritado o aviso de continuidad si falta tomar/revelar -->
-                  </div>
-
-                  <!-- Overlay del minijuego de montaje (cuando la foto está revelada pero aún no pegada con esquineras) -->
-                  <div class="album-mount-minigame-overlay" id="album-mount-overlay" style="display: none;">
-                    <div class="mount-overlay-box">
-                      <strong id="mount-overlay-title">📐 Minijuego de Montaje Físico</strong>
-                      <p id="mount-overlay-desc">Haz clic en las 4 esquineras negras del marco (o pulsa el botón inferior) para pegar esta copia revelada en la cartulina del álbum.</p>
-                      <button type="button" class="btn-mount-this-photo" id="btn-mount-current-photo">📌 Pegar copia y fijar 4 esquineras</button>
-                    </div>
-                  </div>
+                <div class="book-page-slots-grid" id="album-left-slots">
+                  <!-- 2 huecos de foto en la página izquierda -->
                 </div>
+              </div>
 
-                <!-- Insignia del resultado físico del revelado según el exposímetro (debajo del marco para no superponerse en móvil) -->
-                <div class="album-meta-bar-below">
-                  <div class="photo-exposure-badge" id="album-exposure-badge">
-                    Exposición Óptima (ƒ/8.0 • 1/500s)
-                  </div>
-                  <div class="corners-progress-tag" id="corners-progress-tag">Esquineras fijadas: 4/4</div>
+              <!-- LOMO CENTRAL ENCUADERNADO CON COSIDO Y HOJA DE PERGAMINO (GLASSINE) -->
+              <div class="album-book-center-spine" aria-hidden="true">
+                <div class="spine-stitch"></div>
+                <div class="spine-stitch"></div>
+                <div class="spine-stitch"></div>
+                <div class="spine-stitch"></div>
+              </div>
+
+              <!-- PÁGINA DERECHA (2 fotos) -->
+              <div class="album-book-page page-right" id="album-spread-right-page">
+                <div class="book-page-header">
+                  <span class="book-page-chapter" id="right-page-chapter">Hoja de Cartulina con Papel Seda</span>
+                  <span class="book-page-num" id="right-page-num">Pág. 02</span>
                 </div>
-
-                <!-- Anotación manuscrita editable a mano con pluma estilográfica -->
-                <div class="album-handwritten-note">
-                  <div class="handwriting-display-row">
-                    <p class="handwriting-text" id="album-caption">Vacaciones familiares en la playa. Julio de 1998.</p>
-                  </div>
-                  <div class="handwriting-edit-row">
-                    <input type="text" id="album-custom-note-input" class="album-note-input" placeholder="✍️ Escribe aquí tu propia dedicatoria o pie de foto manuscrito en el álbum...">
-                    <button type="button" class="btn-save-album-note" id="btn-save-album-note">Guardar nota</button>
-                  </div>
+                <div class="book-page-slots-grid" id="album-right-slots">
+                  <!-- 2 huecos de foto en la página derecha -->
                 </div>
               </div>
             </div>
 
-            <!-- Controles de navegación secuencial lineal -->
+            <!-- 4. BARRA DE EDICIÓN DE LA FOTO SELECCIONADA EN EL PLIEGO (Pie de foto manuscrito, intercambio e inspección) -->
+            <div class="album-slot-inspector-bar" id="album-slot-inspector-bar">
+              <div class="slot-inspector-top">
+                <span class="slot-selected-badge" id="album-selected-slot-badge">📌 Hueco Seleccionado: #01</span>
+                <span class="slot-exposure-summary" id="album-exposure-badge">Exposición Óptima (ƒ/8.0 • 1/500s)</span>
+                <div class="slot-move-controls">
+                  <button type="button" class="btn-slot-swap" id="btn-swap-prev" title="Intercambiar posición con la foto anterior del álbum">⬅ Mover Antes</button>
+                  <button type="button" class="btn-slot-swap" id="btn-swap-next" title="Intercambiar posición con la foto siguiente del álbum">Mover Después ➡</button>
+                </div>
+              </div>
+              <div class="handwriting-edit-row">
+                <span class="pen-icon-label">✒️ Pie de foto manuscrito:</span>
+                <input type="text" id="album-custom-note-input" class="album-note-input" placeholder="Escribe a mano la fecha, el lugar o quiénes salen detrás o debajo de la foto...">
+                <button type="button" class="btn-save-album-note" id="btn-save-album-note">Escribir en Álbum</button>
+              </div>
+            </div>
+
+            <!-- Controles de navegación secuencial por pliegos del libro -->
             <div class="album-sequential-controls">
-              <button class="album-nav-btn" id="btn-album-prev" title="Página anterior">
-                ◀ Hoja Anterior
+              <button class="album-nav-btn" id="btn-album-prev" title="Pasar al pliego anterior del álbum">
+                ◀ Pasar Hoja Anterior
               </button>
               <div class="linear-warning">
-                <span>📚 <strong>Continuidad Lineal (Carrete de 10):</strong> El álbum conserva exactamente las fotos que disparaste en Fase 1 y revelaste en Fase 2 con su exposición, enfoque y tus anotaciones.</span>
+                <span>📚 <strong>Orden Fijo y Manual (Sintagma Físico):</strong> Organizar las copias en papel exige pegarlas una a una y rotularlas a mano. Para buscar un recuerdo viejo hay que pasar las hojas físicamente.</span>
               </div>
-              <button class="album-nav-btn" id="btn-album-next" title="Página siguiente">
-                Hoja Siguiente ▶
+              <button class="album-nav-btn" id="btn-album-next" title="Pasar al siguiente pliego del álbum">
+                Pasar Hoja Siguiente ▶
               </button>
             </div>
           </div>
@@ -834,7 +866,7 @@
         </div>
       </div>
 
-      <!-- ==================== FASE 3: DIGITAL (Google Photos: Base de Datos) ==================== -->
+      <!-- ==================== FASE 3: DIGITAL (Google Photos: Álbumes Estructurados al Instante + IA Facial + Mapa GPS) ==================== -->
       <div class="stage-phase" id="digital-phase-3">
         <div class="card-interface digital-card gphotos-database-card">
           <!-- Barra de búsqueda inteligente de Google Photos -->
@@ -844,7 +876,7 @@
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
-              <input type="text" id="gphotos-search-input" placeholder="Buscar 'París', 'Mascotas', 'Familia', 'Playa'..." aria-label="Buscar en la base de datos de fotos">
+              <input type="text" id="gphotos-search-input" placeholder="Prueba a buscar 'fotos del viaje a París', 'Abuelo', 'Toby', 'Playa'..." aria-label="Buscar en la base de datos de fotos">
               <button class="clear-search-btn" id="btn-clear-search" title="Limpiar búsqueda" style="display: none;">✕</button>
             </div>
             <div class="gphotos-user-avatar" title="Cuenta de Google de Usuario">
@@ -852,18 +884,77 @@
             </div>
           </div>
 
-          <!-- Chips de sugerencias de búsqueda en la Base de Datos -->
+          <!-- 1. RECONOCIMIENTO FACIAL IA ("Personas y Mascotas") Y 2. GEOLOCALIZACIÓN INSTANTÁNEA ("Lugares") -->
+          <div class="gphotos-smart-hub">
+            <!-- Carrusel de Rostros / Reconocimiento Facial por IA -->
+            <div class="smart-hub-col faces-col">
+              <div class="hub-col-title">
+                <span>👤 Personas y Mascotas (Clusters Faciales IA)</span>
+                <small>Agrupación biométrica</small>
+              </div>
+              <div class="faces-avatars-row" id="gphotos-faces-row">
+                <button type="button" class="face-avatar-btn" data-smart-query="Familia" data-album-title="Recuerdos en Familia" data-album-sub="Reconocimiento facial IA • Rostros agrupados">
+                  <span class="face-ring face-abuelo">👴</span>
+                  <span class="face-name">Abuelo</span>
+                </button>
+                <button type="button" class="face-avatar-btn" data-smart-query="Retrato" data-album-title="Retratos y Amigos" data-album-sub="Cluster biométrico • 512-d FaceNet">
+                  <span class="face-ring face-elena">👩</span>
+                  <span class="face-name">Elena</span>
+                </button>
+                <button type="button" class="face-avatar-btn" data-smart-query="Mascotas" data-album-title="Toby y Mascotas" data-album-sub="Detección de mascotas IA • 99.8% conf.">
+                  <span class="face-ring face-toby">🐕</span>
+                  <span class="face-name">Toby</span>
+                </button>
+                <button type="button" class="face-avatar-btn" data-smart-query="Personal" data-album-title="Tus Fotos Subidas" data-album-sub="Sincronización automática en la nube">
+                  <span class="face-ring face-user">📤</span>
+                  <span class="face-name">Tú</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Tarjetas de Geolocalización / Lugares EXIF -->
+            <div class="smart-hub-col places-col">
+              <div class="hub-col-title">
+                <span>📍 Geolocalización Instantánea (Mapa EXIF)</span>
+                <small>Búsqueda espacial GPS</small>
+              </div>
+              <div class="places-pills-row" id="gphotos-places-row">
+                <button type="button" class="place-map-pill" data-smart-query="París" data-album-title="Viaje a París 🇫🇷" data-album-sub="📍 48.8584° N, 2.2945° E • Francia • Álbum geolocalizado">
+                  <span class="place-pin">🗼</span>
+                  <div class="place-txt">
+                    <strong>París, Francia</strong>
+                    <small>48.85° N, 2.29° E</small>
+                  </div>
+                </button>
+                <button type="button" class="place-map-pill" data-smart-query="Playa" data-album-title="Escapadas a la Costa 🏖️" data-album-sub="📍 36.1342° N, 5.8456° W • Costa y Mar • GPS EXIF">
+                  <span class="place-pin">🏖️</span>
+                  <div class="place-txt">
+                    <strong>Costa y Playa</strong>
+                    <small>36.13° N, 5.84° W</small>
+                  </div>
+                </button>
+                <button type="button" class="place-map-pill" data-smart-query="Naturaleza" data-album-title="Rutas de Montaña y Naturaleza 🏔️" data-album-sub="📍 Pirineos y Picos • Altitud y Coordenadas GPS">
+                  <span class="place-pin">🏔️</span>
+                  <div class="place-txt">
+                    <strong>Montaña</strong>
+                    <small>42.67° N, 0.05° E</small>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. TOQUES DE BÚSQUEDA Y GENERACIÓN INSTANTÁNEA DE ÁLBUMES ESTRUCTURADOS -->
           <div class="search-chips-container">
-            <span class="chips-label">Consultas rápidas (Queries):</span>
+            <span class="chips-label">✨ Un toque para estructurar tu Álbum Inteligente al momento (Remediación + Transcodificación):</span>
             <div class="chips-scroll">
-              <button class="filter-chip active" data-filter="all">Todas (∞ Nube)</button>
-              <button class="filter-chip" data-filter="Personal">📤 Tus Fotos</button>
-              <button class="filter-chip" data-filter="París">🗼 París</button>
-              <button class="filter-chip" data-filter="Familia">👨‍👩‍👧 Familia</button>
-              <button class="filter-chip" data-filter="Mascotas">🐕 Mascotas</button>
-              <button class="filter-chip" data-filter="Playa">🏖️ Playa</button>
-              <button class="filter-chip" data-filter="Comida">🍕 Comida</button>
-              <button class="filter-chip" data-filter="2024">📅 Año 2024</button>
+              <button class="filter-chip active" data-filter="all">📚 Biblioteca Completa (∞)</button>
+              <button class="filter-chip smart-album-chip" data-filter="París" data-album-title="Fotos del viaje a París 🗼" data-album-sub="Álbum estructurado al instante • GPS: París, Francia • Orden cronológico">✨ "Fotos del viaje a París"</button>
+              <button class="filter-chip smart-album-chip" data-filter="Familia" data-album-title="Celebraciones en Familia 👨‍👩‍👧" data-album-sub="Álbum automático por reconocimiento facial y eventos">✨ "Álbum Familiar"</button>
+              <button class="filter-chip smart-album-chip" data-filter="Mascotas" data-album-title="Aventuras de nuestras Mascotas 🐕" data-album-sub="Recopilación automática IA • Perros y gatos">✨ "Recuerdos de Mascotas"</button>
+              <button class="filter-chip smart-album-chip" data-filter="Playa" data-album-title="Veranos en la Playa 🏖️" data-album-sub="Geolocalización costera + Visión por computador">✨ "Veranos en la Playa"</button>
+              <button class="filter-chip smart-album-chip" data-filter="Comida" data-album-title="Ruta Gastronómica y Cenas 🍕" data-album-sub="Clasificación semántica de platos y reuniones">✨ "Cenas y Gastronomía"</button>
+              <button class="filter-chip smart-album-chip" data-filter="2024" data-album-title="Lo Mejor del Año 2024 📅" data-album-sub="Resumen anual automatizado por metadatos de fecha">✨ "Resumen Año 2024"</button>
             </div>
           </div>
 
@@ -871,19 +962,40 @@
           <div class="database-query-monitor">
             <div class="db-monitor-header">
               <span class="db-led"></span>
-              <span class="db-title">Motor Relacional SQL / Vector Search</span>
+              <span class="db-title">Motor Relacional SQL + Reconocimiento Facial + Geo-Index</span>
               <span class="db-time" id="query-exec-time">Consulta: 14 ms</span>
             </div>
             <div class="db-query-text" id="db-query-statement">
-              <code>SELECT * FROM photos_library WHERE tags LIKE '%todos%' ORDER BY timestamp DESC;</code>
+              <code>SELECT * FROM photos_library ORDER BY timestamp DESC;</code>
             </div>
+          </div>
+
+          <!-- 4. PORTADA DE ÁLBUM INTELIGENTE REMEDIADO (Aparece al instante al buscar o tocar un álbum/persona/lugar) -->
+          <div class="gphotos-instant-album-hero" id="gphotos-instant-album-hero" style="display: none;">
+            <div class="instant-album-cover-visual" id="instant-album-cover-svg">
+              <!-- Foto de portada generada automáticamente -->
+            </div>
+            <div class="instant-album-cover-info">
+              <div class="instant-album-badges">
+                <span class="ia-badge-remed">📖 PORTADA DE ÁLBUM REMEDIADA</span>
+                <span class="ia-badge-ai" id="instant-album-count-badge">4 recuerdos</span>
+              </div>
+              <h4 id="instant-album-title">Fotos del viaje a París</h4>
+              <p id="instant-album-subtitle">Álbum estructurado al momento • Orden cronológico, mapa de ruta y rostros etiquetados</p>
+              <div class="instant-album-meta-tags" id="instant-album-meta-pills">
+                <span>📍 Mapa GPS activo</span>
+                <span>👤 Reconocimiento facial</span>
+                <span>⚡ Creado en 12 ms</span>
+              </div>
+            </div>
+            <button type="button" class="btn-close-instant-album" id="btn-close-instant-album" title="Volver a toda la biblioteca">✕ Ver todo</button>
           </div>
 
           <!-- Cuadrícula fluida de Google Photos -->
           <div class="gphotos-grid-area">
             <div class="grid-section-header">
               <span class="grid-date-label" id="grid-results-count">Mostrando todos los recuerdos indexados en la nube (Sin límite de fotos)</span>
-              <span class="grid-layout-toggle">Cuadrícula inteligente</span>
+              <span class="grid-layout-toggle" id="grid-mode-indicator">Orden cronológico automático</span>
             </div>
 
             <div class="gphotos-thumbnail-grid" id="gphotos-grid">
@@ -900,6 +1012,7 @@
                 <div class="inspector-meta-pane">
                   <h4 id="inspector-title">Título de Foto</h4>
                   <p class="inspector-date" id="inspector-date">24 jul 2023, 19:42</p>
+                  <p class="inspector-gps-line" id="inspector-gps">📍 48.8584° N, 2.2945° E</p>
                   
                   <div class="inspector-chips" id="inspector-chips"></div>
 
@@ -1081,7 +1194,7 @@
               </tr>
               <tr>
                 <td><strong>Construcción del Sentido</strong></td>
-                <td>Biografía íntima encuadernada. Narración con principio, nudo y final ("Esto ha sido").</td>
+                <td>Biografía íntima encuadernada. Narración con principio, nudo y final (noema barthesiano: "Esto ha sido").</td>
                 <td>Recombinación algorítmica constante: "Creaciones automáticas", collages generados por IA y sociabilidad digital ("Yo estaba allí").</td>
               </tr>
               <tr>
@@ -1102,9 +1215,9 @@
 
           <div class="concept-boxes-grid">
             <div class="concept-box">
-              <h5>A. Del "Esto ha sido" al "Yo estaba allí"</h5>
+              <h5>A. Del "Esto ha sido" (Barthes) al "Yo estaba allí"</h5>
               <p>
-                Frente a la fotografía tradicional como guardiana del pasado y la memoria, la postfotografía habita un <em>"presente en suspensión, eternizado"</em>. En la era <em>selfie</em>, la imagen actúa como mensaje instantáneo (<em>"imago, ergo sum"</em>): no buscamos tanto mostrar el mundo como señalar nuestro estar en él. No obstante, como matiza <strong>Paula Velasco Padial</strong>, la fotografía siempre fue <em>escritura y lenguaje</em>, <em>arte y documento</em>, y todo "esto ha sido" contuvo siempre una subjetividad implícita (un <em>"para mí"</em>) y una vocación social desde su democratización en el siglo XIX.
+                Frente a la fotografía tradicional como guardiana del pasado y la memoria —cuyo noema formuló <strong>Roland Barthes</strong> en <em>La cámara lúcida</em> (1980) como <em>"Esto ha sido"</em> (<em>Ça a été</em>)—, la postfotografía habita un <em>"presente en suspensión, eternizado"</em>. En la era <em>selfie</em>, la imagen actúa como mensaje instantáneo (<em>"imago, ergo sum"</em>): no buscamos tanto mostrar el mundo como señalar nuestro estar en él. No obstante, como matiza <strong>Paula Velasco Padial</strong>, la fotografía siempre fue <em>escritura y lenguaje</em>, <em>arte y documento</em>, y todo "esto ha sido" contuvo siempre una subjetividad implícita (un <em>"para mí"</em>) y una vocación social desde su democratización en el siglo XIX.
               </p>
             </div>
             <div class="concept-box">

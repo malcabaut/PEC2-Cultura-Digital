@@ -63,6 +63,9 @@ function getPhotoChemicalFilterStyles(shotData, stage = 'positive') {
     blurPx = 2.8;
   }
   const blurPart = blurPx > 0 ? ` blur(${blurPx.toFixed(1)}px)` : '';
+  const focusNote = (shotData && shotData.isUnfocused) ? ' • 🔴 DESENFOCADA' : '';
+  const shakyNote = (shotData && shotData.isShaky) ? ' • 👋 TREPIDADA' : '';
+  const extraDefectNote = `${focusNote}${shakyNote}`;
 
   if (stage === 'negative') {
     if (shotData && !shotData.wasShotByUser) {
@@ -75,14 +78,14 @@ function getPhotoChemicalFilterStyles(shotData, stage = 'positive') {
       return {
         filterCss: `brightness(0) contrast(1) saturate(0)`,
         percent: 100,
-        negDescription: `⬛ Subexpuesta al 100% (-3.0 EV al mínimo del exposímetro)`
+        negDescription: `⬛ Subexpuesta al 100% (-3.0 EV al mínimo del exposímetro)${extraDefectNote}`
       };
     } else if (clamped >= 2.85) {
       // Tope +3 EV en negativo: emulsión totalmente ennegrecida por exceso de plata
       return {
         filterCss: `invert(1) hue-rotate(180deg) brightness(0.06) contrast(2.4)${blurPart}`,
         percent: 100,
-        negDescription: `Negativo Denso 100% (Ennegrecido por +3.0 EV al máximo del exposímetro)`
+        negDescription: `Negativo Denso 100% (Ennegrecido por +3.0 EV al máximo del exposímetro)${extraDefectNote}`
       };
     } else if (clamped > 0.4) {
       // Sobreexpuesto en negativo (+1 a +2.8 EV): se oscurece proporcionalmente (ej. en +2 EV está ~67% denso/oscuro)
@@ -91,7 +94,7 @@ function getPhotoChemicalFilterStyles(shotData, stage = 'positive') {
       return {
         filterCss: `invert(1) hue-rotate(180deg) saturate(1.25) brightness(${negBright}) contrast(${negContrast})${blurPart}`,
         percent: pct,
-        negDescription: `Negativo Denso/Oscuro (${pct}% sobreexpuesto • +${clamped.toFixed(1)} EV)`
+        negDescription: `Negativo Denso/Oscuro (${pct}% sobreexpuesto • +${clamped.toFixed(1)} EV)${extraDefectNote}`
       };
     } else if (clamped < -0.4) {
       // Subexpuesto en negativo (-1 a -2.8 EV): se vuelve lavado/claro proporcionalmente (ej. en -2 EV está ~67% lavado)
@@ -100,13 +103,13 @@ function getPhotoChemicalFilterStyles(shotData, stage = 'positive') {
       return {
         filterCss: `invert(1) hue-rotate(180deg) saturate(0.8) brightness(${negBright}) contrast(${negContrast})${blurPart}`,
         percent: pct,
-        negDescription: `Negativo Lavado/Claro (${pct}% subexpuesto • ${clamped.toFixed(1)} EV)`
+        negDescription: `Negativo Lavado/Claro (${pct}% subexpuesto • ${clamped.toFixed(1)} EV)${extraDefectNote}`
       };
     }
     return {
       filterCss: `invert(1) hue-rotate(180deg) saturate(1.35) contrast(1.15)${blurPart}`,
       percent: pct,
-      negDescription: `Negativo Equilibrado (${clamped >= 0 ? '+' : ''}${clamped.toFixed(1)} EV • Densidad de plata óptima)`
+      negDescription: `Negativo Equilibrado (${clamped >= 0 ? '+' : ''}${clamped.toFixed(1)} EV • Densidad de plata óptima)${extraDefectNote}`
     };
   }
 
@@ -120,13 +123,13 @@ function getPhotoChemicalFilterStyles(shotData, stage = 'positive') {
     return {
       filterCss: `brightness(0) contrast(1) saturate(0)`,
       percent: 100,
-      posDescription: `⬛ NEGRA / SUBEXPUESTA AL 100% (${clamped.toFixed(1)} EV al mínimo del exposímetro)`
+      posDescription: `⬛ NEGRA / SUBEXPUESTA AL 100% (${clamped.toFixed(1)} EV al mínimo del exposímetro)${extraDefectNote}`
     };
   } else if (clamped >= 2.85) {
     return {
       filterCss: `brightness(5.5) contrast(0.12) saturate(0.05)${blurPart}`,
       percent: 100,
-      posDescription: `⬜ BLANCA / QUEMADA AL 100% (+${clamped.toFixed(1)} EV al tope del exposímetro)`
+      posDescription: `⬜ BLANCA / QUEMADA AL 100% (+${clamped.toFixed(1)} EV al tope del exposímetro)${extraDefectNote}`
     };
   } else if (clamped > 0.5) {
     // Escala continua entre +0.5 EV y +2.85 EV (ej. +2.0 EV = 67% sobreexpuesta)
@@ -136,7 +139,7 @@ function getPhotoChemicalFilterStyles(shotData, stage = 'positive') {
     return {
       filterCss: `brightness(${posBright}) contrast(${posContrast}) sepia(${posSepia})${blurPart}`,
       percent: pct,
-      posDescription: `☀️ Sobreexpuesta al ${pct}% (+${clamped.toFixed(1)} EV de +3.0 EV)`
+      posDescription: `☀️ Sobreexpuesta al ${pct}% (+${clamped.toFixed(1)} EV de +3.0 EV)${extraDefectNote}`
     };
   } else if (clamped < -0.5) {
     // Escala continua entre -0.5 EV y -2.85 EV (ej. -2.0 EV = 67% subexpuesta)
@@ -146,14 +149,14 @@ function getPhotoChemicalFilterStyles(shotData, stage = 'positive') {
     return {
       filterCss: `brightness(${posBright}) contrast(${posContrast}) sepia(${posSepia})${blurPart}`,
       percent: pct,
-      posDescription: `🌑 Subexpuesta al ${pct}% (${clamped.toFixed(1)} EV de -3.0 EV)`
+      posDescription: `🌑 Subexpuesta al ${pct}% (${clamped.toFixed(1)} EV de -3.0 EV)${extraDefectNote}`
     };
   }
 
   return {
     filterCss: `sepia(0.18) contrast(1.04)${blurPart}`,
     percent: pct,
-    posDescription: `✓ Exposición Óptima (${clamped >= 0 ? '+' : ''}${clamped.toFixed(1)} EV • Desviación ${pct}%)`
+    posDescription: `✓ Exposición Óptima (${clamped >= 0 ? '+' : ''}${clamped.toFixed(1)} EV • Desviación ${pct}%)${extraDefectNote}`
   };
 }
 window.getPhotoChemicalFilterStyles = getPhotoChemicalFilterStyles;
@@ -472,7 +475,7 @@ function initAnalogCamera() {
     if (presetBadge) {
       if (currentPhoto.isPresetOptimal) {
         presetBadge.style.display = 'inline-flex';
-        presetBadge.textContent = `✨ Luz de la escena #${String(AppState.currentSceneIndex + 1).padStart(2, '0')} coincide con tu cámara`;
+        presetBadge.textContent = `✨ Escena #${String(AppState.currentSceneIndex + 1).padStart(2, '0')}: Parámetros para toma perfecta`;
       } else {
         presetBadge.style.display = 'none';
       }
@@ -612,7 +615,7 @@ function initAnalogCamera() {
       if (typeof window.updateGuidedStepsUI === 'function') window.updateGuidedStepsUI(false);
       if (statusMsg) {
         if (AppState.analogPhotosLeft <= 0) {
-          statusMsg.innerHTML = '<strong>🔒 ¡Carrete de 10 totalmente rebobinado y bloqueado!</strong> La película ha vuelto al chasis metálico. Pasa a la <strong>Fase 2 (El Revelado)</strong> para revelar tus 10 fotos en el cuarto oscuro.';
+          statusMsg.innerHTML = '<strong>🔒 ¡Carrete de 12 totalmente rebobinado y bloqueado!</strong> La película ha vuelto al chasis metálico. Pasa a la <strong>Fase 2 (El Revelado)</strong> para revelar tus 12 fotos en el cuarto oscuro.';
         } else {
           statusMsg.innerHTML = '<strong>🔒 ¡Tope mecánico alcanzado (3/3 vueltas)!</strong> El carrete ha terminado de bobinarse y la manivela ha quedado bloqueada. Ya puedes disparar el siguiente fotograma.';
         }
@@ -752,12 +755,12 @@ function initAnalogCamera() {
   }
 
   // =========================================================================
-  // 4. BOTÓN DISPARADOR MECÁNICO CROMADO (CARRETE DE 10 EXPOSICIONES)
+  // 4. BOTÓN DISPARADOR MECÁNICO CROMADO (CARRETE DE 12 EXPOSICIONES)
   // =========================================================================
   if (btnAnalogShoot) {
     btnAnalogShoot.addEventListener('click', () => {
       if (AppState.analogPhotosLeft <= 0) {
-        statusMsg.innerHTML = '<strong>❌ Carrete de 10 agotado:</strong> Ya has impresionado los 10 fotogramas del carrete. Pasa a la <strong>Fase 2 (El Revelado)</strong> para revelarlos y luego montarlos en el Álbum.';
+        statusMsg.innerHTML = '<strong>❌ Carrete de 12 agotado:</strong> Ya has impresionado los 12 fotogramas del carrete. Pasa a la <strong>Fase 2 (El Revelado)</strong> para revelarlos en tiras de 4 y luego montarlos en el Álbum.';
         return;
       }
 
