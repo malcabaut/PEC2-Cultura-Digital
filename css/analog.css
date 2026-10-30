@@ -1,0 +1,2955 @@
+/* ========================================================
+   ESTILOS ESPECÍFICOS DEL MUNDO ANALÓGICO
+   Cámara 35mm, Ocular, Exposímetro, Cuarto Oscuro y Álbum
+   ======================================================== */
+
+.analog-column {
+  background-color: var(--analog-bg);
+  background-image: radial-gradient(rgba(122, 102, 88, 0.12) 1px, transparent 1px);
+  background-size: 16px 16px;
+  border-right: 2px solid #3b281c;
+  color: var(--analog-ink);
+  font-family: 'Fraunces', Georgia, serif;
+}
+
+.analog-header {
+  border-bottom: 2px dashed var(--analog-border);
+}
+
+.analog-brand h3 {
+  font-size: 1.15rem;
+  letter-spacing: 0.5px;
+  color: #2b1b17;
+  font-weight: 700;
+}
+
+.analog-brand small {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.72rem;
+  color: var(--analog-subtle);
+  display: block;
+}
+
+.film-icon {
+  font-size: 1.6rem;
+}
+
+.analog-card {
+  background: var(--analog-paper);
+  border: 1px solid var(--analog-border);
+  border-radius: var(--border-radius-md);
+  padding: 24px;
+  box-shadow: 0 10px 24px var(--analog-shadow), 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Chasis de película 35mm (Canister) */
+.film-canister-indicator {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1f1b18;
+  color: #e5d5be;
+  padding: 10px 18px;
+  border-radius: 10px;
+  border-left: 6px solid #e5a823;
+  font-family: 'Courier Prime', monospace;
+}
+
+.canister-brand {
+  font-weight: 700;
+  color: #e5a823;
+  margin-right: 8px;
+}
+
+.canister-type {
+  font-size: 0.8rem;
+  color: #bbb;
+}
+
+.canister-counter {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.counter-label {
+  font-size: 0.7rem;
+  color: #8c827a;
+  margin-right: 6px;
+}
+
+.counter-number {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ff5252;
+}
+
+.counter-max {
+  font-size: 0.8rem;
+  color: #8c827a;
+}
+
+/* Barra para subir hasta 5 fotos reales y sortear el carrete de 10 */
+.custom-reel-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  background: #efe3d0;
+  border: 1px solid #cdb89d;
+  border-left: 4px solid #c59b27;
+  border-radius: 10px;
+  padding: 10px 14px;
+  flex-wrap: wrap;
+}
+
+.reel-toolbar-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 210px;
+}
+
+.reel-badge-pill {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #3d2817;
+}
+
+.reel-toolbar-info small {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.68rem;
+  color: #634e3e;
+  line-height: 1.3;
+}
+
+.reel-toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.btn-upload-photos,
+.btn-shuffle-reel,
+.btn-clear-uploads {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 7px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-upload-photos {
+  background: #2b1d14;
+  color: #ffdf85;
+  border: 1px solid #593e2b;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn-upload-photos:hover {
+  background: #3e2a1d;
+  color: #fff;
+}
+
+.btn-shuffle-reel {
+  background: #fff8eb;
+  color: #3b281c;
+  border: 1px solid #bda589;
+}
+
+.btn-shuffle-reel:hover {
+  background: #f3e5cd;
+}
+
+.btn-clear-uploads {
+  background: #fbe9e7;
+  color: #b71c1c;
+  border: 1px solid #ef9a9a;
+}
+
+.btn-clear-uploads:hover {
+  background: #ffccbc;
+}
+
+/* Cámara réflex */
+.slr-camera-container {
+  background: #2b2623;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.6), 0 6px 14px rgba(0, 0, 0, 0.25);
+  border: 2px solid #1a1715;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.camera-top-plate {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(180deg, #e4e4e4 0%, #b0b0b0 100%);
+  padding: 8px 14px;
+  border-radius: 8px 8px 0 0;
+  border-bottom: 2px solid #555;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.9);
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.rewind-crank {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #777;
+  border: 2px solid #444;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+  flex-shrink: 0;
+}
+
+.exposure-control-wrap {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #2b221c;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid #5a463a;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.dial-caption {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #e5a823;
+  letter-spacing: 0.5px;
+}
+
+.camera-dial-select {
+  background: #191411;
+  color: #fff9ed;
+  border: 1px solid #7a6050;
+  border-radius: 4px;
+  padding: 3px 6px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+}
+
+.camera-dial-select:focus {
+  border-color: #fbbc05;
+}
+
+.winder-lever {
+  width: 32px;
+  height: 12px;
+  background: #444;
+  border-radius: 4px;
+  border: 1px solid #222;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.winder-lever.cocked {
+  transform: rotate(-35deg);
+}
+
+/* Cuerpo Frontal de la Cámara */
+.camera-body-realistic {
+  background: #181412;
+  border-radius: 12px;
+  border: 3px solid #2f2520;
+  box-shadow: inset 0 2px 14px rgba(0, 0, 0, 0.85), 0 8px 18px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.camera-body-realistic.hidden {
+  display: none !important;
+}
+
+.camera-pentaprism-header {
+  background: linear-gradient(180deg, #3d312a 0%, #221b17 100%);
+  padding: 10px 16px;
+  border-bottom: 2px solid #4a382e;
+  display: flex;
+  justify-content: center;
+}
+
+.pentaprism-housing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.camera-brand-stamp {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #d4b58e;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.eyepiece-peek-trigger {
+  background: #110e0c;
+  border: 2px solid #c59b27;
+  border-radius: 28px;
+  padding: 6px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(197, 155, 39, 0.3), inset 0 0 6px rgba(0, 0, 0, 0.9);
+  transition: all 0.25s ease;
+  width: 100%;
+  max-width: 320px;
+  justify-content: center;
+}
+
+.eyepiece-peek-trigger:hover {
+  background: #201a16;
+  border-color: #ffd54f;
+  transform: translateY(-1px);
+  box-shadow: 0 0 16px rgba(255, 213, 79, 0.5);
+}
+
+.eyepiece-rubber-ring {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #261f1b;
+  border: 3px solid #42352e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.8);
+  flex-shrink: 0;
+}
+
+.eyepiece-glass-optic {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #4fc3f7 0%, #01579b 70%, #002f6c 100%);
+  box-shadow: 0 0 4px #0288d1;
+}
+
+.eyepiece-cta-text {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #fff4d4;
+  letter-spacing: 0.5px;
+}
+
+.camera-front-panel {
+  padding: 16px;
+  background-color: #171210;
+  background-image: radial-gradient(#2b221d 1px, transparent 1px);
+  background-size: 4px 4px;
+  display: flex;
+  justify-content: center;
+}
+
+.camera-leatherette-face {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.lens-barrel-assembly {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.lens-distance-scale {
+  display: flex;
+  justify-content: space-between;
+  width: 180px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.65rem;
+  color: #e5a823;
+  padding: 2px 8px;
+  background: #0d0a09;
+  border-radius: 10px;
+  border: 1px solid #3d2f26;
+}
+
+.lens-front-element {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #091a26 0%, #15181b 45%, #2a2522 75%, #423832 100%);
+  border: 8px solid #57483f;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7), inset 0 0 16px #034b75;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.lens-iris-aperture {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #000000;
+  border: 4px solid #1a2730;
+  box-shadow: inset 0 0 10px rgba(0, 229, 255, 0.2);
+}
+
+.lens-glass-reflection {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  width: 32px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+  transform: rotate(-35deg);
+  pointer-events: none;
+}
+
+.lens-front-engraving {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.58rem;
+  color: #ffd54f;
+  margin-top: 6px;
+  letter-spacing: 0.5px;
+}
+
+.lens-focus-ring-knurled {
+  width: 100%;
+  max-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  background: #241d18;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #4a392e;
+}
+
+.focus-label {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #d4b58e;
+}
+
+.focus-slider-knurled,
+.focus-slider-internal {
+  width: 100%;
+  accent-color: #e5a823;
+  cursor: pointer;
+}
+
+/* Vista a través del visor óptico réflex */
+.viewfinder-through-the-lens {
+  background: #0a0807;
+  border-radius: 12px;
+  border: 2px solid #57463b;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: fadeInStage 0.25s ease forwards;
+}
+
+.viewfinder-modal-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #332720;
+  padding-bottom: 6px;
+}
+
+.vf-badge {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #ffca28;
+}
+
+.btn-exit-viewfinder {
+  background: #3a2c24;
+  color: #f7eedf;
+  border: 1px solid #634b3d;
+  border-radius: 4px;
+  padding: 3px 8px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.68rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-exit-viewfinder:hover {
+  background: #523e33;
+}
+
+.viewfinder-round-eyepiece {
+  border: 8px solid #140f0c;
+  border-radius: 12px;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.95), 0 4px 14px rgba(0, 0, 0, 0.6);
+  background: #000;
+  overflow: hidden;
+  height: 230px;
+  position: relative;
+}
+
+.viewfinder-glass-view {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scene-optical-projection {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter 0.1s ease;
+}
+
+/* Minijuego de prisma de imagen partida */
+.split-prism-rangefinder {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  z-index: 12;
+}
+
+.prism-circle-frame {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 235, 59, 0.85);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8), inset 0 0 8px rgba(255, 215, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.prism-half {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 48px;
+  overflow: hidden;
+}
+
+.prism-top {
+  top: 0;
+}
+
+.prism-bottom {
+  bottom: 0;
+}
+
+.prism-split-line {
+  position: absolute;
+  top: 47px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(255, 235, 59, 0.9);
+  z-index: 5;
+}
+
+.prism-inner-image {
+  width: 96px;
+  height: 96px;
+  position: absolute;
+  left: 0;
+  transition: transform 0.08s ease;
+}
+
+.prism-inner-image svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.prism-top .prism-inner-image {
+  top: 0;
+}
+
+.prism-bottom .prism-inner-image {
+  top: -48px;
+}
+
+.prism-status-tag {
+  margin-top: 6px;
+  background: rgba(0, 0, 0, 0.8);
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.6rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  color: #ff5252;
+  white-space: nowrap;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.prism-status-tag.aligned {
+  color: #69f0ae;
+  border-color: #69f0ae;
+}
+
+.viewfinder-focus-subcontrols {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #17120f;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #382921;
+}
+
+.subcontrol-label {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.65rem;
+  color: #d4b58e;
+  white-space: nowrap;
+}
+
+.focus-step-btn {
+  background: #2b201a;
+  color: #f7eedf;
+  border: 1px solid #4d382d;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.62rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.focus-step-btn:hover {
+  background: #423228;
+}
+
+/* Exposímetro TTL en el visor */
+.analog-light-meter {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  bottom: 10px;
+  width: 44px;
+  background: rgba(15, 12, 10, 0.88);
+  border: 1px solid rgba(229, 168, 35, 0.4);
+  border-radius: 6px;
+  padding: 6px 3px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 15;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
+  font-family: 'Courier Prime', monospace;
+  pointer-events: none;
+}
+
+.meter-scale {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: #bbb;
+  text-align: right;
+  line-height: 1;
+}
+
+.scale-mark.zero {
+  color: #81c995;
+  font-weight: 800;
+}
+
+.scale-mark.pos3 {
+  color: #ff1744;
+  font-weight: 900;
+}
+
+.scale-mark.pos2,
+.scale-mark.pos1 {
+  color: #ff8a80;
+}
+
+.scale-mark.neg1,
+.scale-mark.neg2 {
+  color: #90caf9;
+}
+
+.scale-mark.neg3 {
+  color: #2979ff;
+  font-weight: 900;
+}
+
+.meter-track {
+  width: 4px;
+  height: 100%;
+  background: #332720;
+  border-radius: 2px;
+  position: relative;
+  margin: 0 2px;
+}
+
+.galvanometer-needle {
+  position: absolute;
+  left: -8px;
+  width: 20px;
+  height: 2px;
+  background: #ffeb3b;
+  box-shadow: 0 0 5px #ffd700;
+  border-radius: 1px;
+  transition: top 0.25s cubic-bezier(0.2, 0.8, 0.4, 1.2);
+  transform: translateY(-50%);
+}
+
+.meter-leds {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  align-items: center;
+  font-size: 0.55rem;
+}
+
+.led-dot {
+  opacity: 0.25;
+  transition: opacity 0.2s ease, text-shadow 0.2s ease;
+}
+
+.led-over {
+  color: #ff5252;
+}
+
+.led-ok {
+  color: #69f0ae;
+}
+
+.led-under {
+  color: #448aff;
+}
+
+.led-dot.active {
+  opacity: 1;
+  text-shadow: 0 0 8px currentColor;
+}
+
+.grain-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(#3a2e22 1px, transparent 1px);
+  background-size: 3px 3px;
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.shutter-curtain {
+  position: absolute;
+  inset: 0;
+  background: #000000;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 20;
+  transition: opacity 0.05s ease;
+}
+
+.shutter-curtain.blackout {
+  opacity: 1;
+}
+
+/* Controles de Disparo */
+.camera-controls-bottom {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.analog-shutter-button {
+  flex: 2;
+  background: linear-gradient(180deg, #d8d8d8 0%, #9e9e9e 100%);
+  border: 2px solid #555;
+  border-radius: 8px;
+  padding: 12px 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4), inset 0 1px 2px #fff;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+.analog-shutter-button:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.shutter-inner-btn {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ff3333;
+  border: 2px solid #990000;
+  display: inline-block;
+}
+
+.btn-caption {
+  font-family: 'Courier Prime', monospace;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #111;
+  letter-spacing: 0.5px;
+}
+
+.analog-lever-btn,
+.analog-view-toggle-btn {
+  flex: 1;
+  background: #3a322c;
+  color: #dfcfbd;
+  border: 1px solid #574c43;
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: var(--transition-smooth);
+}
+
+.analog-lever-btn:hover,
+.analog-view-toggle-btn:hover {
+  background: #473e37;
+  color: #fff;
+}
+
+.analog-view-toggle-btn {
+  color: #ffca28;
+}
+
+.analog-status-box {
+  background: #f0e6d6;
+  border: 1px solid #dbcbb7;
+  border-left: 4px solid #c59b27;
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.status-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #523724;
+}
+
+.status-metric {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  padding-top: 8px;
+  border-top: 1px dashed #d1c0aa;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.75rem;
+  color: #614f43;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* ==================== FASE 2: LABORATORIO QUÍMICO ==================== */
+.darkroom-card {
+  background: #190f0f;
+  color: #f7dcd6;
+  border-color: #4a1515;
+  box-shadow: 0 10px 24px rgba(183, 28, 28, 0.2);
+}
+
+.darkroom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #4a1515;
+  padding-bottom: 10px;
+}
+
+.darkroom-lamp-status {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.75rem;
+  color: #ff5252;
+  text-shadow: 0 0 6px rgba(255, 82, 82, 0.6);
+}
+
+.darkroom-header h4 {
+  font-size: 1rem;
+  color: #fce4ec;
+}
+
+.darkroom-interactive-area {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Selector de Lotes de 5 en 5 fotos */
+.darkroom-batch-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: #221010;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #4a1c1c;
+}
+
+.batch-bar-label {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.68rem;
+  color: #ff8a80;
+  font-weight: 700;
+}
+
+.batch-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.batch-tab {
+  flex: 1;
+  min-width: 78px;
+  background: #140808;
+  color: #d7b1b1;
+  border: 1px solid #4d2222;
+  border-radius: 6px;
+  padding: 5px 6px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.64rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.batch-tab:hover {
+  background: #2f1414;
+  color: #fff;
+}
+
+.batch-tab.active {
+  background: #b71c1c;
+  color: #fff;
+  border-color: #ff8a80;
+  box-shadow: 0 0 8px rgba(255, 82, 82, 0.45);
+}
+
+/* Indicador de las 3 Etapas Químicas */
+.chemical-stage-steps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  background: #130808;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #3d1818;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.62rem;
+}
+
+.chem-step {
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: #8c6262;
+  background: #1b0c0c;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  text-align: center;
+  flex: 1;
+}
+
+.chem-step.active {
+  color: #fff;
+  background: #7f1d1d;
+  border-color: #ff5252;
+  font-weight: 700;
+}
+
+.chem-step.done {
+  color: #a5d6a7;
+  border-color: #2e7d32;
+  cursor: pointer;
+}
+
+.chem-step.next-step-blink {
+  color: #ffe082;
+  background: #3e1b1b;
+  border-color: #ffca28;
+  cursor: pointer;
+  animation: gentleStepBlink 1.8s infinite ease-in-out;
+}
+
+.chem-arrow {
+  color: #7a3e3e;
+  font-size: 0.7rem;
+}
+
+/* Tira de Película de 35mm con 5 Fotos en Orden */
+.film-strip-viewer {
+  background: #080505;
+  border: 2px solid #3b1717;
+  border-radius: 8px;
+  padding: 6px 8px;
+}
+
+.film-perforations-top,
+.film-perforations-bottom {
+  display: flex;
+  justify-content: space-around;
+  color: #4a2020;
+  font-size: 0.55rem;
+  letter-spacing: 3px;
+}
+
+.film-strip-5-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  margin: 6px 0;
+}
+
+.strip-5-frame {
+  background: #140a0a;
+  border: 1.5px solid #451c1c;
+  border-radius: 5px;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.strip-5-frame:hover {
+  border-color: #ff8a80;
+  transform: translateY(-1px);
+}
+
+.strip-5-frame.selected {
+  border-color: #ffca28;
+  box-shadow: 0 0 10px rgba(255, 202, 40, 0.45);
+  background: #241010;
+}
+
+.strip-frame-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.52rem;
+  color: #e5a823;
+}
+
+.strip-frame-shot {
+  font-size: 0.46rem;
+  color: #bcaaa4;
+}
+
+.strip-frame-optic {
+  height: 62px;
+  background: #090404;
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #2b1212;
+}
+
+.strip-svg-holder {
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.4s ease, filter 0.4s ease;
+}
+
+.strip-svg-holder svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.strip-latent-veil {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    #1a0d0d,
+    #1a0d0d 6px,
+    #120808 6px,
+    #120808 12px
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Courier Prime', monospace;
+  color: #8c5858;
+  text-align: center;
+  transition: opacity 0.35s ease;
+}
+
+.strip-latent-veil span {
+  font-size: 0.46rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+.strip-latent-veil small {
+  font-size: 0.42rem;
+  opacity: 0.8;
+}
+
+/* ETAPA 0: Al principio no se ven las fotos (Imagen Latente Oculta) */
+.strip-frame-optic.stage-latent-hidden .strip-svg-holder {
+  opacity: 0;
+}
+.strip-frame-optic.stage-latent-hidden .strip-latent-veil {
+  opacity: 1;
+}
+
+/* ETAPA 1: Colores Invertidos (Negativo Químico con densidad calculada por JS) */
+.strip-frame-optic.stage-negative-inverted .strip-svg-holder {
+  opacity: 1;
+  filter: invert(1) hue-rotate(180deg) saturate(1.35) contrast(1.15);
+}
+.strip-frame-optic.stage-negative-inverted .strip-latent-veil {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ETAPA 2: Imagen Revelada Positiva (Con porcentaje de Exposición y Enfoque calculados por JS) */
+.strip-frame-optic.stage-positive-revealed .strip-svg-holder {
+  opacity: 1;
+  filter: sepia(0.18) contrast(1.05);
+}
+.strip-frame-optic.stage-positive-revealed .strip-latent-veil {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.strip-frame-footer {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.46rem;
+  font-weight: 700;
+  color: #f5d6d6;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Cubeta Química de Inspección y Baño */
+.chemical-tray-area {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tray-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.tray-label {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.66rem;
+  color: #ef9a9a;
+}
+
+.tray-progress-pill {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: #ffca28;
+  background: #2b1212;
+  padding: 2px 8px;
+  border-radius: 10px;
+  border: 1px solid #5c2828;
+  white-space: nowrap;
+}
+
+.tray-fluid {
+  height: 165px;
+  background: radial-gradient(circle, #3e1b1b 0%, #1c0808 100%);
+  border: 4px solid #632626;
+  border-radius: 12px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+.paper-in-tray {
+  width: 240px;
+  height: 138px;
+  background: #140909;
+  border: 2px solid #5a2d2d;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.75);
+  position: relative;
+  overflow: hidden;
+  transform: rotate(-1deg);
+}
+
+.latent-image-emerging {
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.45s ease, filter 0.45s ease;
+}
+
+.latent-image-emerging svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Etapa 0 en Cubeta: Oculta */
+.latent-image-emerging.stage-latent-hidden {
+  opacity: 0;
+}
+
+/* Etapa 1 en Cubeta: Colores Invertidos (Negativo con densidad graduada por JS) */
+.latent-image-emerging.stage-negative-inverted {
+  opacity: 1;
+}
+
+/* Etapa 2 en Cubeta: Imagen Revelada Positiva con su Exposición graduada por JS */
+.latent-image-emerging.stage-positive-revealed {
+  opacity: 1;
+}
+
+.tray-frame-overlay-tag {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 6, 6, 0.88);
+  color: #ffe082;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.56rem;
+  font-weight: 700;
+  padding: 4px 6px;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.chemical-progress-track {
+  width: 100%;
+  height: 8px;
+  background: #140707;
+  border-radius: 4px;
+  border: 1px solid #4a1c1c;
+  overflow: hidden;
+}
+
+.chemical-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #d32f2f 0%, #ffca28 100%);
+  transition: width 0.1s linear;
+}
+
+.darkroom-timer-module {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #241111;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #4a1f1f;
+}
+
+.timer-display {
+  display: flex;
+  flex-direction: column;
+}
+
+.timer-label {
+  font-size: 0.68rem;
+  color: #b07d7d;
+}
+
+.timer-time {
+  font-family: 'Courier Prime', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ff8a80;
+}
+
+.darkroom-action-btn {
+  background: #b71c1c;
+  color: #ffffff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.8rem;
+  font-family: inherit;
+  transition: var(--transition-smooth);
+}
+
+.darkroom-action-btn:hover {
+  background: #d32f2f;
+  box-shadow: 0 0 10px rgba(229, 57, 53, 0.5);
+}
+
+.darkroom-action-btn.btn-gentle-blink {
+  border: 1.5px solid #ffd54f;
+  animation: gentleStepBlink 1.8s infinite ease-in-out;
+}
+
+@keyframes gentleStepBlink {
+  0%, 100% {
+    box-shadow: 0 0 4px rgba(255, 202, 40, 0.25);
+    filter: brightness(1);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(255, 202, 40, 0.8), 0 0 6px rgba(255, 82, 82, 0.6);
+    filter: brightness(1.18);
+  }
+}
+
+.darkroom-friction-note {
+  font-size: 0.78rem;
+  color: #d1b4b4;
+  line-height: 1.45;
+  background: rgba(255, 82, 82, 0.08);
+  padding: 10px 12px;
+  border-radius: 6px;
+  border-left: 3px solid #ff5252;
+}
+
+/* ==================== FASE 3: ÁLBUM FÍSICO AMPLIADO Y MINIJUEGO DE MONTAJE ==================== */
+.album-card {
+  background: #eadecc;
+  border-color: #c9b49b;
+}
+
+.album-spine-decor {
+  text-align: center;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #634b35;
+  letter-spacing: 1.5px;
+  border-bottom: 2px solid #b89f84;
+  padding-bottom: 8px;
+}
+
+/* Barra superior del minijuego del álbum: Sobre del laboratorio y continuidad */
+.album-continuity-bar {
+  background: #dfceb7;
+  border: 1px solid #bfa688;
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.continuity-summary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.continuity-title {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #3d2817;
+}
+
+.continuity-stats-pills {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.c-pill {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  background: #faf5ea;
+  color: #4a3525;
+  border: 1px solid #c5b095;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.btn-quick-mount-all {
+  background: #2e5c38;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-quick-mount-all:hover {
+  background: #22472a;
+}
+
+/* Tira horizontal con las 10 fotos del carrete en el sobre del laboratorio */
+.album-lab-envelope-strip {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(56px, 1fr));
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.envelope-thumb-slot {
+  background: #f5efe4;
+  border: 1.5px solid #bfa88d;
+  border-radius: 6px;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  text-align: center;
+}
+
+.envelope-thumb-slot:hover {
+  border-color: #6d4c3d;
+  transform: translateY(-1px);
+}
+
+.envelope-thumb-slot.active {
+  background: #fff9ed;
+  border-color: #c59b27;
+  box-shadow: 0 0 0 2px rgba(197, 155, 39, 0.35);
+}
+
+.envelope-thumb-slot.is-mounted {
+  border-color: #2e7d32;
+}
+
+.env-slot-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.54rem;
+  font-weight: 700;
+  color: #5c4332;
+}
+
+.env-slot-preview {
+  width: 100%;
+  height: 36px;
+  background: #1a1412;
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.env-slot-preview svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.env-slot-preview.env-latent {
+  background: repeating-linear-gradient(-45deg, #241915, #241915 4px, #17100d 4px, #17100d 8px);
+}
+
+.env-slot-preview.env-negative svg {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+.env-slot-status {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.48rem;
+  font-weight: 700;
+  color: #4a3525;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.physical-album-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.album-page-wrapper {
+  perspective: 1000px;
+  width: 100%;
+}
+
+.album-page {
+  background: #faf5ea;
+  border: 1px solid #dcd1be;
+  border-radius: 8px;
+  padding: 20px;
+  min-height: 380px;
+  box-shadow: 4px 6px 16px rgba(66, 48, 33, 0.18), inset 0 0 20px rgba(214, 198, 175, 0.4);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  transition: transform 0.25s ease;
+}
+
+.album-page-top-meta {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  border-bottom: 1px dashed #d5c5b0;
+  padding-bottom: 6px;
+}
+
+.album-continuity-trace {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #5c4332;
+}
+
+.mounted-photo-frame {
+  position: relative;
+  padding: 14px;
+  background: #ffffff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
+  border: 1px solid #e2dad0;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* Esquineras interactivas del minijuego del álbum */
+.photo-corner {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  background: #2b2b2b;
+  border: none;
+  z-index: 12;
+  cursor: pointer;
+  transition: transform 0.18s ease, background-color 0.18s ease, opacity 0.18s ease;
+}
+
+.photo-corner:hover {
+  transform: scale(1.15);
+  background: #c59b27;
+}
+
+.photo-corner.corner-pending {
+  background: rgba(197, 155, 39, 0.65);
+  animation: gentleStepBlink 1.5s infinite ease-in-out;
+}
+
+.photo-corner.corner-fixed {
+  background: #1f1b18;
+}
+
+.corner-tl {
+  top: -3px;
+  left: -3px;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.corner-tr {
+  top: -3px;
+  right: -3px;
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+
+.corner-bl {
+  bottom: -3px;
+  left: -3px;
+  clip-path: polygon(0 0, 0 100%, 100% 100%);
+}
+
+.corner-br {
+  bottom: -3px;
+  right: -3px;
+  clip-path: polygon(100% 0, 0 100%, 100% 100%);
+}
+
+/* Contenedor de la fotografía impresa: amplio, adaptable y sin solaparse en móvil */
+.physical-photo-print {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  min-height: 210px;
+  max-height: 310px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: sepia(0.28) contrast(0.98);
+  background: #1c1613;
+  position: relative;
+  border-radius: 2px;
+}
+
+.physical-photo-print svg,
+.physical-photo-print img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.physical-photo-print.unmounted-preview {
+  transform: rotate(-1.2deg) scale(0.97);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Estado cuando un fotograma aún no se ha revelado en Fase 2 */
+.album-unrevealed-placeholder {
+  width: 100%;
+  height: 100%;
+  padding: 18px;
+  background: repeating-linear-gradient(-45deg, #211714, #211714 8px, #160f0d 8px, #160f0d 16px);
+  color: #f3e5d0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.unrev-icon {
+  font-size: 1.8rem;
+}
+
+.album-unrevealed-placeholder strong {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.85rem;
+  color: #ffd54f;
+}
+
+.album-unrevealed-placeholder p {
+  font-size: 0.74rem;
+  color: #d7c4b0;
+  max-width: 340px;
+  line-height: 1.35;
+}
+
+.btn-go-darkroom-inline {
+  margin-top: 4px;
+  background: #b71c1c;
+  color: #fff;
+  border: 1px solid #ff8a80;
+  padding: 7px 14px;
+  border-radius: 6px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-go-darkroom-inline:hover {
+  background: #d32f2f;
+}
+
+/* Overlay del minijuego de pegar la foto con esquineras */
+.album-mount-minigame-overlay {
+  position: absolute;
+  inset: 14px;
+  background: rgba(20, 14, 10, 0.58);
+  backdrop-filter: blur(1.5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+  z-index: 8;
+}
+
+.mount-overlay-box {
+  background: rgba(250, 245, 234, 0.96);
+  border: 2px solid #c59b27;
+  border-radius: 8px;
+  padding: 12px 14px;
+  text-align: center;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.mount-overlay-box strong {
+  font-size: 0.82rem;
+  color: #2b1b12;
+}
+
+.mount-overlay-box p {
+  font-size: 0.72rem;
+  color: #523b2b;
+  line-height: 1.35;
+}
+
+.btn-mount-this-photo {
+  background: #3d2817;
+  color: #ffdf85;
+  border: 1px solid #c59b27;
+  padding: 7px 12px;
+  border-radius: 6px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 2px;
+}
+
+.btn-mount-this-photo:hover {
+  background: #543821;
+  color: #fff;
+}
+
+/* Barra de diagnóstico debajo de la foto (no se superpone a la foto en móvil) */
+.album-meta-bar-below {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.photo-exposure-badge {
+  position: static;
+  background: rgba(30, 22, 18, 0.92);
+  color: #f5ede0;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.68rem;
+  padding: 4px 10px;
+  border-radius: 4px;
+  border-left: 3px solid #81c995;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.photo-exposure-badge.badge-over {
+  border-left-color: #ff5252;
+  color: #ffcdd2;
+}
+
+.photo-exposure-badge.badge-under {
+  border-left-color: #448aff;
+  color: #bbdefb;
+}
+
+.photo-exposure-badge.badge-shaky {
+  border-left-color: #ff9800;
+  color: #ffe0b2;
+}
+
+.photo-exposure-badge.badge-unfocused {
+  border-left-color: #ff5252;
+  color: #ffcdd2;
+}
+
+.corners-progress-tag {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: #5c4332;
+  background: #ede0cc;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid #cbb598;
+}
+
+.album-handwritten-note {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+  border-top: 1px dashed #d1c0aa;
+  padding-top: 10px;
+}
+
+.handwriting-display-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.handwriting-text {
+  font-family: 'Special Elite', 'Courier Prime', cursive;
+  font-size: 0.92rem;
+  color: #3b2c21;
+  line-height: 1.4;
+}
+
+.handwriting-edit-row {
+  display: flex;
+  gap: 6px;
+  width: 100%;
+}
+
+.album-note-input {
+  flex: 1;
+  background: #fffcf5;
+  border: 1px solid #c9b49b;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-family: 'Special Elite', 'Courier Prime', monospace;
+  font-size: 0.75rem;
+  color: #3b2c21;
+  outline: none;
+}
+
+.album-note-input:focus {
+  border-color: #8c6b32;
+  box-shadow: 0 0 0 2px rgba(197, 155, 39, 0.25);
+}
+
+.btn-save-album-note {
+  background: #5c4332;
+  color: #fff8eb;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-save-album-note:hover {
+  background: #3d2c20;
+}
+
+.album-page-number {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #786352;
+}
+
+.album-sequential-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.album-nav-btn {
+  background: #4a3628;
+  color: #faf6ee;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  white-space: nowrap;
+}
+
+.album-nav-btn:hover {
+  background: #36261c;
+  transform: translateY(-1px);
+}
+
+.linear-warning {
+  flex: 1;
+  font-size: 0.72rem;
+  line-height: 1.35;
+  color: #634b38;
+  background: #e3d2be;
+  padding: 6px 10px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+
+/* ============================================================
+   DISEÑO REALISTA DE CÁMARA ANALÓGICA SLR EN 2 PARTES
+   1) Parte Superior Cenital (Diales Circulares Giratorios + Manivela de 3 Vueltas)
+   2) Parte Trasera (Visor con Foto Pequeña que se Agranda en Hover + Porta-Carrete)
+   ============================================================ */
+
+.slr-camera-container {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 4px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ============================================================
+   PARTE 1: VISTA SUPERIOR CENITAL (TOP DECK)
+   ============================================================ */
+.slr-top-deck {
+  position: relative;
+  padding-top: 14px;
+  user-select: none;
+}
+
+.top-deck-chassis {
+  position: relative;
+  background: linear-gradient(180deg, #ececec 0%, #d5d5d5 35%, #b8b8b8 85%, #999999 100%);
+  border: 2.5px solid #2b2b2b;
+  border-radius: 22px 22px 14px 14px;
+  min-height: 118px;
+  padding: 10px 18px;
+  display: grid;
+  grid-template-columns: 1fr 140px 1.65fr;
+  align-items: center;
+  gap: 8px;
+  box-shadow:
+    0 10px 22px rgba(0, 0, 0, 0.35),
+    inset 0 2px 3px rgba(255, 255, 255, 0.9),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* Argollas laterales de la correa */
+.strap-eyelets {
+  position: absolute;
+  top: 18px;
+  width: 10px;
+  height: 18px;
+  background: linear-gradient(90deg, #888, #ddd, #666);
+  border: 1.5px solid #333;
+  border-radius: 3px;
+  z-index: 1;
+}
+
+.left-eyelet {
+  left: -9px;
+  transform: rotate(-20deg);
+}
+
+.right-eyelet {
+  right: -9px;
+  transform: rotate(20deg);
+}
+
+/* --- IZQUIERDA: MANIVELA DE REBOBINADO / ARRASTRE (MÚLTIPLES VUELTAS) --- */
+.top-left-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  gap: 3px;
+}
+
+.rewind-crank-assembly {
+  position: relative;
+  width: 82px;
+  height: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  touch-action: none;
+}
+
+.rewind-crank-assembly:active {
+  cursor: grabbing;
+}
+
+.rewind-crank-assembly.is-locked,
+.rewind-crank-assembly.is-locked:active {
+  cursor: not-allowed;
+}
+
+.crank-progress-ring {
+  position: absolute;
+  inset: 0;
+  width: 82px;
+  height: 82px;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+
+.crank-ring-bg {
+  fill: none;
+  stroke: rgba(0, 0, 0, 0.2);
+  stroke-width: 5;
+}
+
+.crank-ring-fill {
+  fill: none;
+  stroke: #2e7d32;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 245;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.08s linear, stroke 0.2s ease;
+}
+
+.rewind-crank-assembly.needs-winding .crank-ring-fill {
+  stroke: #e65100;
+}
+
+.rewind-crank-assembly.needs-winding {
+  animation: pulseCrankAlert 1.4s infinite ease-in-out;
+}
+
+@keyframes pulseCrankAlert {
+
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0px rgba(230, 81, 0, 0));
+  }
+
+  50% {
+    filter: drop-shadow(0 0 8px rgba(255, 111, 0, 0.85));
+  }
+}
+
+.rewind-outer-bezel {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #2b2b2b 0%, #111 75%, #000 100%);
+  border: 3px solid #1a1a1a;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rewind-rotor {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #e0e0e0, #9e9e9e, #f5f5f5, #888, #e0e0e0);
+  border: 2px solid #222;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.8);
+}
+
+.rewind-curved-arrow {
+  position: absolute;
+  top: 4px;
+  left: 10px;
+  font-size: 0.85rem;
+  font-weight: 900;
+  color: #555;
+  pointer-events: none;
+}
+
+.rewind-fold-arm {
+  width: 44px;
+  height: 14px;
+  background: linear-gradient(180deg, #f5f5f5 0%, #b0b0b0 100%);
+  border: 1.5px solid #333;
+  border-radius: 4px;
+  transform: rotate(-28deg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  padding-left: 3px;
+}
+
+.rewind-arm-tip {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #333;
+}
+
+.crank-turns-badge {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #1b5e20;
+  background: rgba(255, 255, 255, 0.75);
+  padding: 1px 7px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+}
+
+.crank-turns-badge.pending {
+  color: #fff;
+  background: #d84315;
+  border-color: #bf360c;
+}
+
+.film-plane-mark {
+  position: absolute;
+  right: 2px;
+  bottom: -4px;
+  font-size: 0.75rem;
+  color: #333;
+  font-weight: 700;
+}
+
+/* --- CENTRO: PENTAPRISMA CENTRAL Y ZAPATA DE FLASH (HOT SHOE) --- */
+.top-center-prism {
+  position: relative;
+  height: 124px;
+  margin-top: -22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 3;
+}
+
+.prism-front-nose {
+  width: 86px;
+  height: 16px;
+  background: linear-gradient(90deg, #999 0%, #e5e5e5 50%, #999 100%);
+  clip-path: polygon(12% 0%, 88% 0%, 100% 100%, 0% 100%);
+  border-top: 2px solid #444;
+}
+
+.prism-black-body {
+  width: 128px;
+  flex: 1;
+  background-color: #181818;
+  background-image: radial-gradient(#2d2d2d 1px, transparent 1px);
+  background-size: 4px 4px;
+  border-left: 4px solid #c8c8c8;
+  border-right: 4px solid #b0b0b0;
+  border-bottom: 3px solid #888;
+  border-radius: 4px 4px 6px 6px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  position: relative;
+}
+
+.prism-silver-V {
+  width: 74px;
+  height: 36px;
+  background: linear-gradient(180deg, #d8d8d8 0%, #9e9e9e 100%);
+  clip-path: polygon(0 0, 100% 0, 72% 100%, 28% 100%);
+  border-bottom: 2px solid #444;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+.hot-shoe-mount {
+  width: 50px;
+  height: 44px;
+  background: linear-gradient(90deg, #b5b5b5 0%, #f0f0f0 50%, #a8a8a8 100%);
+  border: 2px solid #333;
+  border-radius: 4px;
+  padding: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hot-shoe-rails {
+  width: 100%;
+  height: 100%;
+  background: #1c1c1c;
+  border-left: 5px solid #d0d0d0;
+  border-right: 5px solid #d0d0d0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.hot-shoe-pin {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 0%, #bbb 70%, #555 100%);
+  border: 1.5px solid #111;
+}
+
+.hot-shoe-aux-pin {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #ccc;
+}
+
+/* --- DERECHA: RUEDAS CIRCULARES GIRATORIAS (VELOCIDAD + DIAFRAGMA) Y DISPARADOR --- */
+.top-right-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 6px;
+}
+
+.rotary-dial-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.dial-index-marker {
+  font-size: 0.65rem;
+  line-height: 1;
+  color: #d32f2f;
+  font-weight: 900;
+  margin-bottom: 1px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.aperture-marker {
+  color: #e65100;
+}
+
+.rotary-wheel {
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #252525 0%, #141414 70%, #050505 100%);
+  border: 3.5px dashed #444;
+  outline: 2px solid #1a1a1a;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.55), inset 0 0 6px rgba(255, 255, 255, 0.12);
+  position: relative;
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
+  transition: box-shadow 0.2s ease;
+}
+
+.rotary-wheel:hover {
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.7), 0 0 0 2px #e5a823;
+}
+
+.rotary-wheel:active {
+  cursor: grabbing;
+}
+
+.wheel-rotor {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  transition: transform 0.22s cubic-bezier(0.2, 0.85, 0.35, 1.15);
+}
+
+.wheel-num {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 26px;
+  height: 12px;
+  margin-left: -13px;
+  margin-top: -6px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.5rem;
+  font-weight: 700;
+  color: #f0f0f0;
+  text-align: center;
+  line-height: 12px;
+  transform: rotate(var(--angle)) translateY(-27px);
+  pointer-events: none;
+}
+
+.wheel-num.red-sync {
+  color: #ff5252;
+  font-weight: 900;
+}
+
+.wheel-center-cap {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #555 0%, #222 65%, #111 100%);
+  border: 1.5px solid #777;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+.aperture-cap {
+  background: radial-gradient(circle at 30% 30%, #3e2723 0%, #1b0f0d 75%, #0d0706 100%);
+  border-color: #ffab40;
+}
+
+.asa-window {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.36rem;
+  color: #ffca28;
+  letter-spacing: 0.2px;
+  line-height: 1;
+}
+
+.wheel-center-cap strong {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.56rem;
+  color: #fff;
+  line-height: 1.1;
+}
+
+.wheel-sub-label {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.52rem;
+  font-weight: 700;
+  color: #222;
+  margin-top: 3px;
+  letter-spacing: 0.4px;
+}
+
+/* Botón disparador cromado y contador en la esquina superior derecha */
+.shutter-cluster-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.frame-counter-window {
+  background: #141414;
+  border: 1.5px solid #555;
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #ffeb3b;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.counter-s-dot {
+  color: #ff5252;
+  font-size: 0.5rem;
+}
+
+.chrome-shutter-release {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #cccccc 50%, #777777 85%, #333333 100%);
+  border: 3px solid #222;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), inset 0 2px 3px rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+.chrome-shutter-release:hover {
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.65), 0 0 0 2px #d32f2f;
+}
+
+.chrome-shutter-release:active {
+  transform: scale(0.92) translateY(2px);
+}
+
+.shutter-chrome-collar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: conic-gradient(#e0e0e0, #999, #fff, #888, #e0e0e0);
+  border: 1.5px solid #444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shutter-thread-hole {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #1a1a1a;
+  border: 1px solid #666;
+}
+
+
+/* ============================================================
+   PARTE 2: VISTA TRASERA DE LA CÁMARA (REAR BODY + VISOR HOVER)
+   ============================================================ */
+.slr-rear-body {
+  position: relative;
+  background: #141414;
+  border-radius: 14px 14px 10px 10px;
+  border: 2.5px solid #222;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+}
+
+/* Hombros metálicos superiores traseros */
+.rear-metal-shoulder {
+  background: linear-gradient(180deg, #dcd6cc 0%, #c4bdb2 60%, #9e978d 100%);
+  min-height: 62px;
+  border-radius: 12px 12px 0 0;
+  border-bottom: 3px solid #1a1a1a;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  padding: 0 18px;
+  position: relative;
+  z-index: 25;
+}
+
+.rear-shoulder-left,
+.rear-shoulder-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.rear-shoulder-left {
+  justify-content: flex-end;
+  padding-right: 14px;
+}
+
+.rear-shoulder-right {
+  justify-content: flex-start;
+  padding-left: 14px;
+}
+
+.rear-screw {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #eee 0%, #777 100%);
+  border: 1px solid #444;
+  position: relative;
+}
+
+.rear-screw::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 1px;
+  right: 1px;
+  height: 1px;
+  background: #333;
+  transform: rotate(-30deg);
+}
+
+.pc-sync-port {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #111;
+  border: 3px solid #b0a99f;
+  box-shadow: inset 0 1px 2px #000;
+}
+
+/* Torreta central del Visor Ocular (como la Pentax de la foto 2) */
+.rear-viewfinder-turret {
+  width: 170px;
+  margin-top: -12px;
+  background: #181818;
+  border-left: 3px solid #333;
+  border-right: 3px solid #333;
+  border-top: 3px solid #333;
+  border-radius: 10px 10px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 30;
+  padding: 6px 8px 4px;
+}
+
+/* Contenedor interactivo del Visor: Pequeño por defecto, SE AGRANDA EN HOVER */
+.viewfinder-eyepiece-housing {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #141414;
+  border: 2px solid #3a3a3a;
+  border-radius: 12px;
+  padding: 4px 6px;
+  transition: all 0.32s cubic-bezier(0.2, 0.85, 0.3, 1.08);
+  cursor: zoom-in;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+.eyepiece-header-bar {
+  margin-bottom: 3px;
+}
+
+.vf-mini-hint {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.5rem;
+  color: #ffd54f;
+  letter-spacing: 0.2px;
+  display: block;
+  text-align: center;
+}
+
+/* El cristal del visor: pequeño por defecto mostrando la foto en miniatura */
+.viewfinder-eyepiece-housing .viewfinder-round-eyepiece {
+  width: 118px;
+  height: 74px;
+  border: 4px solid #262626;
+  border-radius: 10px;
+  background: #000;
+  overflow: hidden;
+  position: relative;
+  transition: width 0.32s cubic-bezier(0.2, 0.85, 0.3, 1.08),
+    height 0.32s cubic-bezier(0.2, 0.85, 0.3, 1.08),
+    border-color 0.25s ease;
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.9);
+}
+
+/* En modo pequeño, escalamos el prisma y el exposímetro para que se adivinen sin estorbar */
+.viewfinder-eyepiece-housing .split-prism-rangefinder {
+  transform: translate(-50%, -50%) scale(0.45);
+  transition: transform 0.32s ease;
+}
+
+.viewfinder-eyepiece-housing .prism-status-tag {
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.viewfinder-eyepiece-housing .analog-light-meter {
+  transform: scale(0.55);
+  transform-origin: top right;
+  opacity: 0.75;
+  transition: transform 0.32s ease, opacity 0.25s ease;
+}
+
+/* Controles de enfoque ocultos cuando el visor es pequeño */
+.viewfinder-eyepiece-housing .viewfinder-focus-subcontrols {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0 6px;
+  margin-top: 0;
+  border: none;
+  pointer-events: none;
+  transition: all 0.28s ease;
+  width: 100%;
+}
+
+.turret-brand-name {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.56rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #d0d0d0;
+  margin-top: 3px;
+}
+
+/* ============================================================
+   ESTADO AGRANDADO AL PASAR EL RATÓN POR ENCIMA DEL VISOR (:hover)
+   ============================================================ */
+.viewfinder-eyepiece-housing:hover,
+.viewfinder-eyepiece-housing:focus-within,
+.viewfinder-eyepiece-housing.is-expanded {
+  z-index: 60;
+  background: #0f0d0c;
+  border-color: #e5a823;
+  padding: 10px 12px;
+  transform: translateY(6px);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.88), 0 0 0 2px rgba(229, 168, 35, 0.45);
+  cursor: default;
+}
+
+.viewfinder-eyepiece-housing:hover .viewfinder-round-eyepiece,
+.viewfinder-eyepiece-housing:focus-within .viewfinder-round-eyepiece,
+.viewfinder-eyepiece-housing.is-expanded .viewfinder-round-eyepiece {
+  width: 340px;
+  height: 215px;
+  border-color: #3d3028;
+}
+
+.viewfinder-eyepiece-housing:hover .split-prism-rangefinder,
+.viewfinder-eyepiece-housing:focus-within .split-prism-rangefinder,
+.viewfinder-eyepiece-housing.is-expanded .split-prism-rangefinder {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.viewfinder-eyepiece-housing:hover .prism-status-tag,
+.viewfinder-eyepiece-housing:focus-within .prism-status-tag,
+.viewfinder-eyepiece-housing.is-expanded .prism-status-tag {
+  opacity: 1;
+}
+
+.viewfinder-eyepiece-housing:hover .analog-light-meter,
+.viewfinder-eyepiece-housing:focus-within .analog-light-meter,
+.viewfinder-eyepiece-housing.is-expanded .analog-light-meter {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.viewfinder-eyepiece-housing:hover .viewfinder-focus-subcontrols,
+.viewfinder-eyepiece-housing:focus-within .viewfinder-focus-subcontrols,
+.viewfinder-eyepiece-housing.is-expanded .viewfinder-focus-subcontrols {
+  max-height: 44px;
+  opacity: 1;
+  padding: 6px 8px;
+  margin-top: 8px;
+  border: 1px solid #382921;
+  pointer-events: auto;
+}
+
+/* --- PUERTA TRASERA CON TEXTURA DIAMANTADA Y PORTA-CARRETE CENTRAL --- */
+.rear-door-leather {
+  display: grid;
+  grid-template-columns: 1fr 156px 1fr;
+  align-items: center;
+  min-height: 162px;
+  background-color: #161616;
+  padding: 12px 14px;
+  gap: 12px;
+  position: relative;
+  z-index: 5;
+}
+
+.leather-grip-panel {
+  height: 100%;
+  min-height: 134px;
+  border-radius: 4px;
+  border: 1.5px solid #0b0b0b;
+  background-color: #1c1c1c;
+  background-image:
+    linear-gradient(45deg, #111 25%, transparent 25%),
+    linear-gradient(-45deg, #111 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #111 75%),
+    linear-gradient(-45deg, transparent 75%, #111 75%);
+  background-size: 8px 8px;
+  background-position: 0 0, 0 4px, 4px -4px, -4px 0;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.85);
+}
+
+/* Porta-memorándum cuadrado en el centro de la puerta trasera (Foto 2) */
+.film-memo-holder-box {
+  background: #1c1c1c;
+  border: 4px solid #2b2b2b;
+  border-radius: 10px;
+  padding: 8px;
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.7),
+    inset 0 2px 5px rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.memo-card-tab {
+  width: 100%;
+  background: #f8f6f0;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.12);
+}
+
+.memo-card-stripes {
+  background: repeating-linear-gradient(180deg,
+      #0288d1 0px,
+      #0288d1 3px,
+      #e1f5fe 3px,
+      #e1f5fe 5px);
+  padding: 6px 4px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.memo-brand-title {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.65rem;
+  font-weight: 900;
+  color: #01579b;
+  background: rgba(255, 255, 255, 0.88);
+  padding: 0 5px;
+  border-radius: 2px;
+  letter-spacing: 0.8px;
+}
+
+.memo-iso-big {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #111;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0 6px;
+  line-height: 1.05;
+  margin-top: 1px;
+  border-radius: 2px;
+}
+
+.memo-card-sub {
+  padding: 4px 4px;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.5rem;
+  color: #333;
+  line-height: 1.25;
+}
+
+.memo-card-sub strong {
+  font-size: 0.58rem;
+  color: #000;
+}
+
+.memo-card-footer {
+  background: #211c19;
+  color: #ffca28;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.5rem;
+  font-weight: 700;
+  padding: 3px 4px;
+  letter-spacing: 0.3px;
+}
+
+.rear-bottom-baseplate {
+  height: 12px;
+  background: linear-gradient(180deg, #bdb6ac 0%, #8c857b 100%);
+  border-top: 2px solid #111;
+  border-radius: 0 0 8px 8px;
+}
+
+/* ============================================================
+   GUÍA PASO A PASO Y BARRA DE ASISTENTES AUTOMÁTICOS
+   ============================================================ */
+.interactive-guide-bar {
+  background: linear-gradient(135deg, #2b1d14 0%, #3d2a1d 100%);
+  border: 1.5px solid #c59b27;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 14px;
+  color: #f9f1e1;
+  box-shadow: 0 4px 14px rgba(43, 29, 20, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.guide-steps-pills {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.72rem;
+}
+
+.g-step {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #cbb89d;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 700;
+  transition: all 0.25s ease;
+}
+
+.g-step.active {
+  background: #fbbc05;
+  color: #1c130c;
+  border-color: #ffe082;
+  box-shadow: 0 0 12px rgba(251, 188, 5, 0.55);
+  transform: scale(1.03);
+}
+
+.g-step.done {
+  background: rgba(105, 240, 174, 0.16);
+  border-color: #69f0ae;
+  color: #81c995;
+}
+
+.g-sep {
+  color: #8c7662;
+  font-size: 0.75rem;
+}
+
+.guide-current-hint {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.78rem;
+  color: #ffefd5;
+  line-height: 1.4;
+  background: rgba(0, 0, 0, 0.28);
+  padding: 7px 11px;
+  border-radius: 8px;
+  border-left: 3px solid #fbbc05;
+}
+
+/* Barra de botones de enfoque automático y balance automático */
+.camera-assist-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  background: #1d1714;
+  border: 1px solid #4a3a2f;
+  border-radius: 10px;
+  padding: 8px 12px;
+  margin-top: 2px;
+}
+
+.assist-toolbar-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #e2cfb8;
+}
+
+.preset-ready-badge {
+  background: rgba(105, 240, 174, 0.18);
+  color: #69f0ae;
+  border: 1px solid rgba(105, 240, 174, 0.5);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.assist-buttons-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.btn-camera-assist {
+  background: linear-gradient(180deg, #3b2d24 0%, #261c16 100%);
+  color: #ffdf85;
+  border: 1px solid #735742;
+  border-radius: 7px;
+  padding: 6px 11px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
+}
+
+.btn-camera-assist:hover {
+  background: linear-gradient(180deg, #4e3b2f 0%, #33251d 100%);
+  border-color: #fbbc05;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.btn-camera-assist:active {
+  transform: translateY(0);
+}
+
+.btn-camera-assist.btn-assist-both {
+  background: linear-gradient(180deg, #c59b27 0%, #9a7413 100%);
+  color: #19120c;
+  border-color: #ffe082;
+}
+
+.btn-camera-assist.btn-assist-both:hover {
+  background: linear-gradient(180deg, #d8ad32 0%, #b08718 100%);
+  color: #000000;
+}
+
+/* Brillo sutil y progresivo cuando el usuario se queda atascado */
+@keyframes subtleNextStepGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 213, 79, 0), 0 0 0px rgba(255, 193, 7, 0);
+    filter: brightness(1);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(255, 213, 79, 0.42), 0 0 18px rgba(255, 193, 7, 0.85);
+    filter: brightness(1.14);
+  }
+}
+
+.subtle-next-step-glow {
+  animation: subtleNextStepGlow 2.4s ease-in-out infinite !important;
+  position: relative;
+  z-index: 40;
+}

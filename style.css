@@ -1,0 +1,9 @@
+/* ========================================================
+   CULTURA DIGITAL PEC2 - HOJA DE ESTILOS MODULAR
+   Importa los módulos ordenados de forma legible y mantenible
+   ======================================================== */
+
+@import url('css/base.css');
+@import url('css/analog.css');
+@import url('css/digital.css');
+@import url('css/modals.css');

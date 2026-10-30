@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>De la Emulsión al Algoritmo | Cultura Digital PEC2</title>
+  <meta name="description" content="Recurso educativo interactivo para Cultura Digital: Remediación (Bolter & Grusin), Transcodificación (Manovich) y Postfotografía (Joan Fontcuberta) a través del paso de la fotografía analógica a Google Photos.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Fuentes web con fallbacks seguros del sistema -->
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Fraunces:opsz,wght@9..144,400;9..144,700&family=Google+Sans:wght@400;500;700&family=Inter:wght@300;400;500;600;700&family=Special+Elite&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ========================================================
+       BARRA SUPERIOR GLOBAL: Título, Navegación de Fases y Herramientas
+       ======================================================== -->
+  <header class="main-header">
+    <div class="header-branding">
+      <div class="badge-pec">PEC2 • CULTURA DIGITAL</div>
+      <h1 class="header-title">De la Emulsión al Algoritmo</h1>
+      <p class="header-subtitle">Remediación (Bolter & Grusin), Transcodificación (Manovich) y Postfotografía (Fontcuberta): del Álbum Químico a Google Photos</p>
+    </div>
+
+    <!-- Navegación central por etapas del ciclo fotográfico -->
+    <nav class="phase-navigator" aria-label="Fases del ciclo fotográfico">
+      <button class="phase-btn active" data-phase="1" id="nav-phase-1">
+        <span class="phase-step">01</span>
+        <span class="phase-text">
+          <strong>La Toma</strong>
+          <small>Soporte Físico vs. Píxel</small>
+        </span>
+      </button>
+
+      <div class="phase-arrow">➔</div>
+
+      <button class="phase-btn" data-phase="2" id="nav-phase-2">
+        <span class="phase-step">02</span>
+        <span class="phase-text">
+          <strong>El Revelado</strong>
+          <small>Cuarto Oscuro vs. Algoritmo Nube</small>
+        </span>
+      </button>
+
+      <div class="phase-arrow">➔</div>
+
+      <button class="phase-btn" data-phase="3" id="nav-phase-3">
+        <span class="phase-step">03</span>
+        <span class="phase-text">
+          <strong>La Memoria</strong>
+          <small>Álbum Lineal vs. Base de Datos</small>
+        </span>
+      </button>
+    </nav>
+
+    <!-- Controles auxiliares: Sonido, Modo comparativa y Teoría General -->
+    <div class="header-controls">
+      <button class="control-btn" id="btn-sound-toggle" title="Activar/Desactivar efectos de audio sintetizados" aria-label="Alternar sonido">
+        <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" id="audio-waves"></path>
+        </svg>
+        <span id="sound-label">Sonido: ON</span>
+      </button>
+
+      <button class="control-btn highlight-btn" id="btn-theory-master" title="Ver dossier teórico y glosario conceptual">
+        <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        <span>Dossier Teórico</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ========================================================
+       BARRA DE CONTRASTE CONCEPTUAL RÁPIDO (Indicadores superiores)
+       ======================================================== -->
+  <div class="contrast-bar">
+    <div class="contrast-half analog-half">
+      <div class="pill-badge vintage-pill">
+        <span class="dot vintage-dot"></span> MUNDO ANALÓGICO: Materialidad, Química Continua y Huella Física
+      </div>
+    </div>
+    <div class="contrast-divider">VS</div>
+    <div class="contrast-half digital-half">
+      <div class="pill-badge google-pill">
+        <span class="dot google-dot"></span> MUNDO DIGITAL (GOOGLE PHOTOS): Software, Matriz Numérica y Base de Datos
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       CONTENEDOR PRINCIPAL: SPLIT SCREEN (Pantalla Dividida)
+       ======================================================== -->
+  <main class="split-screen-container" id="main-stage">
+
+    <!-- ====================================================
+         LADO IZQUIERDO: MUNDO ANALÓGICO (Retro, Vintage, Papel)
+         ==================================================== -->
+    <section class="screen-column analog-column" id="analog-side">
+      <!-- Decoración de textura de papel y encabezado de marca analógica -->
+      <div class="column-header analog-header">
+        <div class="brand-tag analog-brand">
+          <span class="film-icon">🎞️</span>
+          <div>
+            <h3>SOPORTE FOTOQUÍMICO</h3>
+            <small>Película de Haluro de Plata • Formato 35mm</small>
+          </div>
+        </div>
+
+        <!-- Botón para ver con las gafas teóricas en esta fase -->
+        <button class="btn-manovich-glasses analog-glasses" data-target-modal="modal-theory-analog">
+          <span class="glasses-icon">👓</span>
+          <span>Gafas de Manovich</span>
+        </button>
+      </div>
+
+      <!-- ==================== FASE 1: ANALÓGICO (La Toma) ==================== -->
+      <div class="stage-phase active" id="analog-phase-1">
+        <!-- Barra de Guía Paso a Paso Interactiva -->
+        <div class="interactive-guide-bar" id="analog-step-guide" aria-live="polite">
+          <div class="guide-steps-pills">
+            <span class="g-step active" id="g-step-1" title="1. Enfoca el prisma y ajusta luz (o usa los botones AUTO)">1️⃣ Enfocar y Medir Luz</span>
+            <span class="g-sep">➔</span>
+            <span class="g-step" id="g-step-2" title="2. Pulsa el disparador cromado para exponer la película">2️⃣ Disparar Foto</span>
+            <span class="g-sep">➔</span>
+            <span class="g-step" id="g-step-3" title="3. Gira la manivela 3 vueltas para avanzar al siguiente fotograma">3️⃣ Bobinar Manivela (3 vueltas)</span>
+            <span class="g-sep">➔</span>
+            <span class="g-step" id="g-step-4" title="4. Pasa al Cuarto Oscuro (Fase 2) y luego al Álbum (Fase 3)">4️⃣ Revelar (Fase 2) y Montar (Fase 3)</span>
+          </div>
+          <div class="guide-current-hint" id="guide-live-hint">
+            💡 <strong>Qué hacer ahora:</strong> Pasa el ratón por el visor (o pulsa <em>🎯 Auto-Enfoque</em> y <em>⚖️ Auto-Balance EV</em>) y dispara con el botón cromado. <em>(¡El 30% del carrete, incluida la 2ª foto, ya viene pre-ajustado!)</em>
+          </div>
+        </div>
+
+        <div class="card-interface analog-card">
+          <div class="film-canister-indicator">
+            <div class="canister-body">
+              <span class="canister-brand">KODAK GOLD 400</span>
+              <span class="canister-type">35mm / 10 EXP • Carrete Aleatorio + Tus Fotos</span>
+            </div>
+            <div class="canister-counter">
+              <span class="counter-label">EXP. RESTANTES</span>
+              <span class="counter-number" id="analog-counter">10</span>
+              <span class="counter-max">/ 10</span>
+            </div>
+          </div>
+
+          <!-- Módulo para cargar hasta 5 fotos reales propias y sortear el carrete de 10 -->
+          <div class="custom-reel-toolbar" id="custom-reel-toolbar">
+            <div class="reel-toolbar-info">
+              <span class="reel-badge-pill" id="reel-composition-badge">🎲 Carrete activo: 10 fotos aleatorias (0/5 tuyas)</span>
+              <small>Sube hasta 5 fotos reales de tu dispositivo para simular con tus propios recuerdos en el visor, cuarto oscuro, álbum y Google Photos.</small>
+            </div>
+            <div class="reel-toolbar-actions">
+              <label for="input-user-photos" class="btn-upload-photos" id="lbl-upload-photos" title="Subir hasta 5 fotos reales desde tu dispositivo">
+                📤 Subir tus fotos (<span id="user-photos-count">0</span>/5)
+              </label>
+              <input type="file" id="input-user-photos" accept="image/*" multiple style="display: none;">
+              <button type="button" class="btn-shuffle-reel" id="btn-shuffle-reel" title="Sortear otras fotos aleatorias para el carrete de 10">
+                🎲 Sortear Carrete
+              </button>
+              <button type="button" class="btn-clear-uploads" id="btn-clear-uploads" style="display: none;" title="Quitar tus fotos subidas">
+                🗑️ Limpiar
+              </button>
+            </div>
+          </div>
+
+          <!-- Cámara Réflex Analógica de 35mm en 2 Partes Fieles a las Fotos de Referencia -->
+          <div class="slr-camera-container" id="slr-camera-box">
+            <!-- Selects ocultos para compatibilidad de estado -->
+            <select id="analog-speed-select" style="display:none;">
+              <option value="1000">1000</option>
+              <option value="500" selected>500</option>
+              <option value="250">250</option>
+              <option value="125">125</option>
+              <option value="60">60</option>
+              <option value="30">30</option>
+              <option value="15">15</option>
+              <option value="4">4</option>
+              <option value="1">1</option>
+            </select>
+            <select id="analog-aperture-select" style="display:none;">
+              <option value="1.4">1.4</option>
+              <option value="2.0">2.0</option>
+              <option value="2.8">2.8</option>
+              <option value="4.0">4.0</option>
+              <option value="5.6">5.6</option>
+              <option value="8.0" selected>8.0</option>
+              <option value="11.0">11.0</option>
+              <option value="16.0">16.0</option>
+            </select>
+
+            <!-- ==========================================================
+                 PARTE 1: VISTA SUPERIOR CENITAL (Diales Circulares, Rebobinado y Disparo)
+                 ========================================================== -->
+            <div class="slr-top-deck" id="camera-top-deck">
+              <div class="top-deck-chassis">
+                <div class="strap-eyelets left-eyelet"></div>
+                <div class="strap-eyelets right-eyelet"></div>
+
+                <!-- IZQUIERDA: Manivela de Rebobinado/Arrastre (Girar varias vueltas con el ratón) -->
+                <div class="top-left-section">
+                  <div class="rewind-crank-assembly" id="rewind-crank-wheel" title="Arrastra en círculos con el ratón dando 3 vueltas para bobinar el carrete">
+                    <svg class="crank-progress-ring" viewBox="0 0 88 88">
+                      <circle class="crank-ring-bg" cx="44" cy="44" r="39"></circle>
+                      <circle class="crank-ring-fill" id="crank-progress-circle" cx="44" cy="44" r="39"></circle>
+                    </svg>
+                    <div class="rewind-outer-bezel">
+                      <div class="rewind-rotor" id="rewind-rotor-disc">
+                        <span class="rewind-curved-arrow">↷</span>
+                        <div class="rewind-fold-arm">
+                          <div class="rewind-arm-tip"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="crank-turns-badge" id="crank-turns-badge">Listo (3/3 vueltas)</div>
+                  <span class="film-plane-mark">⌽</span>
+                </div>
+
+                <!-- CENTRO: Pentaprisma Superior con Zapata de Flash (Hot Shoe) -->
+                <div class="top-center-prism">
+                  <div class="prism-front-nose"></div>
+                  <div class="prism-black-body">
+                    <div class="prism-silver-V"></div>
+                    <div class="hot-shoe-mount" title="Zapata central de flash">
+                      <div class="hot-shoe-rails">
+                        <div class="hot-shoe-pin"></div>
+                        <div class="hot-shoe-aux-pin"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- DERECHA: Círculo de Velocidad + Círculo de Diafragma Movible + Disparador -->
+                <div class="top-right-section">
+                  <!-- CÍRCULO 1: Dial de Velocidad de Obturación Giratorio -->
+                  <div class="rotary-dial-unit">
+                    <div class="dial-index-marker">▼</div>
+                    <div class="rotary-wheel speed-wheel" id="wheel-shutter-speed" title="Arrastra o gira para cambiar la Velocidad de Obturación">
+                      <div class="wheel-rotor" id="speed-wheel-rotor">
+                        <span class="wheel-num" style="--angle: 0deg;">1000</span>
+                        <span class="wheel-num" style="--angle: 40deg;">500</span>
+                        <span class="wheel-num" style="--angle: 80deg;">250</span>
+                        <span class="wheel-num red-sync" style="--angle: 120deg;">125</span>
+                        <span class="wheel-num" style="--angle: 160deg;">60</span>
+                        <span class="wheel-num" style="--angle: 200deg;">30</span>
+                        <span class="wheel-num" style="--angle: 240deg;">15</span>
+                        <span class="wheel-num" style="--angle: 280deg;">4</span>
+                        <span class="wheel-num" style="--angle: 320deg;">1</span>
+                      </div>
+                      <div class="wheel-center-cap">
+                        <span class="asa-window">ISO 400</span>
+                        <strong id="top-speed-display">1/500</strong>
+                      </div>
+                    </div>
+                    <span class="wheel-sub-label">VELOCIDAD</span>
+                  </div>
+
+                  <!-- CÍRCULO 2: Dial de Diafragma Movible (ƒ/) -->
+                  <div class="rotary-dial-unit">
+                    <div class="dial-index-marker aperture-marker">▼</div>
+                    <div class="rotary-wheel aperture-wheel" id="wheel-aperture" title="Arrastra o gira para mover el Diafragma (ƒ/)">
+                      <div class="wheel-rotor" id="aperture-wheel-rotor">
+                        <span class="wheel-num" style="--angle: 0deg;">1.4</span>
+                        <span class="wheel-num" style="--angle: 45deg;">2</span>
+                        <span class="wheel-num" style="--angle: 90deg;">2.8</span>
+                        <span class="wheel-num" style="--angle: 135deg;">4</span>
+                        <span class="wheel-num" style="--angle: 180deg;">5.6</span>
+                        <span class="wheel-num" style="--angle: 225deg;">8</span>
+                        <span class="wheel-num" style="--angle: 270deg;">11</span>
+                        <span class="wheel-num" style="--angle: 315deg;">16</span>
+                      </div>
+                      <div class="wheel-center-cap aperture-cap">
+                        <span class="asa-window">DIAFRAGMA</span>
+                        <strong id="top-aperture-display">ƒ/8.0</strong>
+                      </div>
+                    </div>
+                    <span class="wheel-sub-label">DIAFRAGMA</span>
+                  </div>
+
+                  <!-- Botón Disparador Metálico y Contador de Exposiciones -->
+                  <div class="shutter-cluster-top">
+                    <div class="frame-counter-window" title="Exposiciones restantes en el carrete">
+                      <span class="counter-s-dot">S•</span>
+                      <span id="analog-top-counter">10</span>
+                    </div>
+                    <button class="chrome-shutter-release" id="btn-analog-shoot" title="Pulsar botón disparador mecánico">
+                      <span class="shutter-chrome-collar">
+                        <span class="shutter-thread-hole"></span>
+                      </span>
+                    </button>
+                    <span class="wheel-sub-label">DISPARAR</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ==========================================================
+                 PARTE 2: VISTA TRASERA (Visor con Foto Pequeña que se Agranda al Pasar el Ratón + Porta-Carrete)
+                 ========================================================== -->
+            <div class="slr-rear-body" id="camera-exterior-view">
+              <!-- Cubierta superior trasera metálica con el Visor Ocular en el centro -->
+              <div class="rear-metal-shoulder">
+                <div class="rear-shoulder-left">
+                  <span class="rear-screw"></span>
+                </div>
+
+                <!-- BLOQUE DEL VISOR OCULAR: Muestra la foto pequeña y se AGRANDA al pasar el ratón -->
+                <div class="rear-viewfinder-turret" id="rear-viewfinder-turret">
+                  <div class="viewfinder-eyepiece-housing" id="viewfinder-hover-zone">
+                    <div class="eyepiece-header-bar">
+                      <span class="vf-mini-hint">👁️ Pasa el ratón para mirar y enfocar</span>
+                    </div>
+
+                    <div class="viewfinder-round-eyepiece" id="viewfinder-optic-box">
+                      <div class="viewfinder-glass-view" id="analog-viewfinder-glass">
+                        <!-- Escena visible (pequeña en reposo, grande en hover) -->
+                        <div class="scene-optical-projection" id="analog-current-scene">
+                          <!-- SVG de la foto actual -->
+                        </div>
+
+                        <!-- MINIJUEGO DE ENFOQUE: PRISMA DE IMAGEN PARTIDA -->
+                        <div class="split-prism-rangefinder" id="split-prism-rangefinder">
+                          <div class="prism-circle-frame">
+                            <div class="prism-half prism-top">
+                              <div class="prism-inner-image" id="prism-top-image"></div>
+                            </div>
+                            <div class="prism-split-line"></div>
+                            <div class="prism-half prism-bottom">
+                              <div class="prism-inner-image" id="prism-bottom-image"></div>
+                            </div>
+                          </div>
+                          <span class="prism-status-tag" id="prism-status-tag">🔴 Imagen Partida</span>
+                        </div>
+
+                        <!-- Grano y retícula del cristal esmerilado -->
+                        <div class="grain-overlay"></div>
+
+                        <!-- Exposímetro Analógico Integrado (Aguja galvanométrica de +3 a -3 EV y LEDs) -->
+                        <div class="analog-light-meter" id="analog-light-meter">
+                          <div class="meter-scale">
+                            <span class="scale-mark pos3">+3</span>
+                            <span class="scale-mark pos2">+2</span>
+                            <span class="scale-mark pos1">+1</span>
+                            <span class="scale-mark zero">▶0◀</span>
+                            <span class="scale-mark neg1">-1</span>
+                            <span class="scale-mark neg2">-2</span>
+                            <span class="scale-mark neg3">-3</span>
+                          </div>
+                          <div class="meter-track">
+                            <div class="galvanometer-needle" id="meter-needle" style="top: 50%;"></div>
+                          </div>
+                          <div class="meter-leds">
+                            <span class="led-dot led-over" id="led-over">▲</span>
+                            <span class="led-dot led-ok active" id="led-ok">●</span>
+                            <span class="led-dot led-under" id="led-under">▼</span>
+                          </div>
+                        </div>
+
+                        <!-- Persiana de obturador que se cierra en el disparo (blackout) -->
+                        <div class="shutter-curtain" id="analog-shutter-curtain"></div>
+                      </div>
+                    </div>
+
+                    <!-- Controles del minijuego de enfoque (visibles cuando el visor se agranda) -->
+                    <div class="viewfinder-focus-subcontrols">
+                      <button type="button" class="focus-step-btn" id="btn-focus-near" title="Enfocar más cerca">◀ 0.7m</button>
+                      <input type="range" id="viewfinder-focus-slider" min="0" max="100" value="20" class="focus-slider-internal" title="Desliza para alinear el prisma de imagen partida">
+                      <button type="button" class="focus-step-btn" id="btn-focus-far" title="Enfocar hacia infinito">∞ ▶</button>
+                    </div>
+
+                    <span class="turret-brand-name">PENTAX • 35mm</span>
+                  </div>
+                </div>
+
+                <div class="rear-shoulder-right">
+                  <span class="rear-screw"></span>
+                  <span class="pc-sync-port"></span>
+                </div>
+              </div>
+
+              <!-- Puerta Trasera de Cuero Texturizado con Porta-Etiqueta del Carrete en el Centro -->
+              <div class="rear-door-leather">
+                <div class="leather-grip-panel"></div>
+
+                <!-- Porta-memorándum central (como en la foto de referencia 2) -->
+                <div class="film-memo-holder-box">
+                  <div class="memo-card-tab">
+                    <div class="memo-card-stripes">
+                      <span class="memo-brand-title">KODAK GOLD</span>
+                      <span class="memo-iso-big">400</span>
+                    </div>
+                    <div class="memo-card-sub">
+                      <span>PROFESSIONAL FILM</span>
+                      <strong>10 EXP • 35mm</strong>
+                    </div>
+                    <div class="memo-card-footer" id="lens-display-spec">50mm ƒ/8.0 • 1/500s</div>
+                  </div>
+                </div>
+
+                <div class="leather-grip-panel"></div>
+              </div>
+
+              <!-- Base metálica inferior de la cámara -->
+              <div class="rear-bottom-baseplate"></div>
+            </div>
+
+            <!-- Barra de Asistentes Rápidos: Enfoque Automático, Balance Automático de Exposición y Bobinado Rápido -->
+            <div class="camera-assist-toolbar" id="camera-assist-toolbar">
+              <div class="assist-toolbar-label">
+                <span>🛠️ Asistentes rápidos:</span>
+                <small id="preset-photo-badge" class="preset-ready-badge" style="display: none;">✨ ¡Foto pre-calibrada lista!</small>
+              </div>
+              <div class="assist-buttons-group">
+                <button type="button" class="btn-camera-assist" id="btn-auto-focus" title="Alinear automáticamente el prisma de imagen partida para enfocar con nitidez">
+                  🎯 Enfoque Automático
+                </button>
+                <button type="button" class="btn-camera-assist" id="btn-auto-exposure" title="Ajustar automáticamente el Diafragma y la Velocidad para clavar el exposímetro en 0.0 EV">
+                  ⚖️ Balance Auto (0.0 EV)
+                </button>
+                <button type="button" class="btn-camera-assist btn-assist-both" id="btn-auto-all" title="Enfocar y equilibrar la luz a la vez con un solo clic">
+                  ✨ Todo Óptimo
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cuadro de estado fenomenológico del disparo analógico -->
+          <div class="analog-status-box" id="analog-status-box">
+            <div class="status-header">
+              <span class="status-icon">⚠️</span>
+              <strong>Condición Analógica: Incertidumbre, Enfoque y Exposímetro Manual</strong>
+            </div>
+            <p id="analog-status-msg">
+              <strong>Pasa el ratón por encima del visor ocular</strong> para agrandarlo y alinear el minijuego del prisma de enfoque. Gira las <strong>ruedas circulares de Velocidad y Diafragma</strong> arriba a la derecha, pulsa el botón disparador cromado y luego <strong>da 3 vueltas completas a la manivela izquierda</strong> con el ratón para bobinar el carrete de 10 fotos al siguiente fotograma.
+            </p>
+            <div class="status-metric">
+              <span id="meter-diagnosis-pill">Exposímetro: <strong>Equilibrado (0.0 EV)</strong></span>
+              <span id="focus-diagnosis-pill">Enfoque: <strong>🔴 Desenfocado</strong></span>
+              <span>Carrete: <strong id="carrete-stat">Foto 01 de 10</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== FASE 2: ANALÓGICO (El Revelado: Minijuego de 5 en 5 Fotos) ==================== -->
+      <div class="stage-phase" id="analog-phase-2">
+        <div class="card-interface analog-card darkroom-card">
+          <div class="darkroom-header">
+            <span class="darkroom-lamp-status">💡 Luz inactínica roja • Cuarto Oscuro</span>
+            <h4>Minijuego Fotoquímico: Revelado de 2 Tiras (10 Fotos en Total)</h4>
+          </div>
+
+          <div class="darkroom-interactive-area">
+            <!-- Selector de Lotes / Tiras de 5 en 5 fotos en el orden en que se tomaron -->
+            <div class="darkroom-batch-bar">
+              <span class="batch-bar-label">🎞️ Tiras del carrete de 10 (en orden de toma):</span>
+              <div class="batch-tabs" id="darkroom-batch-tabs">
+                <button type="button" class="batch-tab active" data-batch="0">Fotos 1–5</button>
+                <button type="button" class="batch-tab" data-batch="1">Fotos 6–10</button>
+              </div>
+            </div>
+
+            <!-- Indicador de las 3 Etapas Químicas de la Tira Actual -->
+            <div class="chemical-stage-steps" id="chemical-stage-steps">
+              <div class="chem-step active" id="chem-step-0">1. Emulsión Latente (Oculta)</div>
+              <span class="chem-arrow">➔</span>
+              <div class="chem-step" id="chem-step-1">2. Negativo (Colores Invertidos)</div>
+              <span class="chem-arrow">➔</span>
+              <div class="chem-step" id="chem-step-2">3. Positivado (Imagen + Exposición)</div>
+            </div>
+
+            <!-- TIRA DE PELÍCULA 35MM DE 5 FOTOS EN ORDEN -->
+            <div class="film-strip-viewer">
+              <div class="film-perforations-top">
+                <span>■</span><span>■</span><span>■</span><span>■</span><span>■</span><span>■</span><span>■</span><span>■</span><span>■</span><span>■</span><span>■</span><span>■</span><span>■</span><span>■</span><span>■</span>
+              </div>
+
+              <div class="film-strip-5-grid" id="darkroom-strip-5">
+                <!-- Se generan dinámicamente los 5 fotogramas en el orden en que se tomaron -->
+              </div>
+
+              <div class="film-perforations-bottom">
+                <span>■</span><span>■</span><span>■</span><span>■</span><span>■</span><span>■</span><span>■</span><span>■</span><span>■</span><span>■</span><span>■</span><span>■</span><span>■</span><span>■</span><span>■</span>
+              </div>
+            </div>
+
+            <!-- CUBETA QUÍMICA INTERACTIVA (Agitar con el ratón o botón para pasar de Oculto -> Invertido -> Revelado) -->
+            <div class="chemical-tray-area">
+              <div class="tray-header-row">
+                <span class="tray-label" id="darkroom-tray-title">Cubeta Química: Mueve el ratón en el líquido para agitar los químicos</span>
+                <span class="tray-progress-pill" id="darkroom-progress-pill">Progreso baño: 0%</span>
+              </div>
+
+              <div class="tray-fluid" id="darkroom-tray" title="Mueve el ratón de lado a lado dentro de la cubeta para agitar el líquido revelador">
+                <div class="paper-in-tray" id="darkroom-paper">
+                  <div class="latent-image-emerging" id="latent-image">
+                    <!-- Vista ampliada del fotograma seleccionado en su estado actual (Oculto / Invertido / Revelado) -->
+                  </div>
+                  <div class="tray-frame-overlay-tag" id="tray-frame-diagnosis">
+                    Fotograma #01 • Emulsión sin revelar (Imagen invisible)
+                  </div>
+                </div>
+                <div class="liquid-reflection"></div>
+              </div>
+
+              <!-- Barra de progreso del baño químico actual -->
+              <div class="chemical-progress-track">
+                <div class="chemical-progress-fill" id="chemical-progress-fill" style="width: 0%;"></div>
+              </div>
+            </div>
+
+            <!-- Controles de acción del minijuego de revelado -->
+            <div class="darkroom-timer-module">
+              <div class="timer-display">
+                <span class="timer-label">Estado de las 5 fotos de la tira:</span>
+                <span class="timer-time" id="analog-time-elapsed">1️⃣ Imagen Latente (No se ven las fotos aún)</span>
+              </div>
+              <button class="darkroom-action-btn" id="btn-start-develop">
+                🧪 Paso 1: Revelar a Negativo (Colores Invertidos)
+              </button>
+            </div>
+
+            <!-- Nota de diagnóstico de exposición y enfoque -->
+            <div class="darkroom-friction-note" id="darkroom-exposure-summary">
+              <strong>Proceso Fotoquímico en 3 pasos (de 5 en 5 fotos):</strong> Al principio la emulsión es opaca y no se ve nada. En el <strong>Paso 1</strong> emergen las 5 fotos con los <strong>colores invertidos (negativo)</strong>. En el <strong>Paso 2</strong> se positivan mostrando la imagen final según la <strong>exposición (diafragma/velocidad) y el enfoque</strong> con que las tomaste.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== FASE 3: ANALÓGICO (El Álbum Físico y Minijuego de Montaje Artesanal) ==================== -->
+      <div class="stage-phase" id="analog-phase-3">
+        <div class="card-interface analog-card album-card">
+          <div class="album-spine-decor">
+            <span>ÁLBUM FAMILIAR • CONTINUIDAD TOMA ➔ REVELADO ➔ MONTAJE (10 FOTOS)</span>
+          </div>
+
+          <!-- Minijuego Amplio del Álbum: Bandeja de Copias del Laboratorio y Progreso de Continuidad -->
+          <div class="album-continuity-bar" id="album-continuity-bar">
+            <div class="continuity-summary-row">
+              <span class="continuity-title">📐 Taller de Montaje en el Álbum:</span>
+              <div class="continuity-stats-pills">
+                <span class="c-pill" id="album-stat-shot">📸 Tomadas: 0/10</span>
+                <span class="c-pill" id="album-stat-rev">🧪 Reveladas: 0/10</span>
+                <span class="c-pill" id="album-stat-mounted">📒 Montadas: 0/10</span>
+              </div>
+              <button type="button" class="btn-quick-mount-all" id="btn-quick-mount-all" title="Pegar e instalar automáticamente las fotos ya reveladas">
+                ✨ Montar Reveladas
+              </button>
+            </div>
+            <div class="album-lab-envelope-strip" id="album-envelope-strip">
+              <!-- Se generan los 10 huecos del sobre del laboratorio mostrando qué fotos están tomadas, reveladas o pegadas -->
+            </div>
+          </div>
+
+          <!-- Visor Amplio del Álbum con esquinas autoadhesivas interactivas -->
+          <div class="physical-album-container">
+            <div class="album-page-wrapper">
+              <!-- Página de cartulina texturizada amplia con pergamino de protección -->
+              <div class="album-page" id="album-current-page">
+                <div class="album-page-top-meta">
+                  <span class="album-continuity-trace" id="album-continuity-trace">Continuidad: Fase 1 ➔ Fase 2 ➔ Fase 3</span>
+                  <span class="album-page-number" id="album-page-indicator">Página 01 de 10</span>
+                </div>
+
+                <!-- Marco de foto amplio con 4 esquineras interactivas de montaje fotográfico -->
+                <div class="mounted-photo-frame" id="album-mounted-frame">
+                  <button type="button" class="photo-corner corner-tl" data-corner="tl" title="Pulsa para fijar esquinera superior izquierda"></button>
+                  <button type="button" class="photo-corner corner-tr" data-corner="tr" title="Pulsa para fijar esquinera superior derecha"></button>
+                  <button type="button" class="photo-corner corner-bl" data-corner="bl" title="Pulsa para fijar esquinera inferior izquierda"></button>
+                  <button type="button" class="photo-corner corner-br" data-corner="br" title="Pulsa para fijar esquinera inferior derecha"></button>
+                  
+                  <div class="physical-photo-print" id="album-photo-display">
+                    <!-- Foto física impresa en papel baritado o aviso de continuidad si falta tomar/revelar -->
+                  </div>
+
+                  <!-- Overlay del minijuego de montaje (cuando la foto está revelada pero aún no pegada con esquineras) -->
+                  <div class="album-mount-minigame-overlay" id="album-mount-overlay" style="display: none;">
+                    <div class="mount-overlay-box">
+                      <strong id="mount-overlay-title">📐 Minijuego de Montaje Físico</strong>
+                      <p id="mount-overlay-desc">Haz clic en las 4 esquineras negras del marco (o pulsa el botón inferior) para pegar esta copia revelada en la cartulina del álbum.</p>
+                      <button type="button" class="btn-mount-this-photo" id="btn-mount-current-photo">📌 Pegar copia y fijar 4 esquineras</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Insignia del resultado físico del revelado según el exposímetro (debajo del marco para no superponerse en móvil) -->
+                <div class="album-meta-bar-below">
+                  <div class="photo-exposure-badge" id="album-exposure-badge">
+                    Exposición Óptima (ƒ/8.0 • 1/500s)
+                  </div>
+                  <div class="corners-progress-tag" id="corners-progress-tag">Esquineras fijadas: 4/4</div>
+                </div>
+
+                <!-- Anotación manuscrita editable a mano con pluma estilográfica -->
+                <div class="album-handwritten-note">
+                  <div class="handwriting-display-row">
+                    <p class="handwriting-text" id="album-caption">Vacaciones familiares en la playa. Julio de 1998.</p>
+                  </div>
+                  <div class="handwriting-edit-row">
+                    <input type="text" id="album-custom-note-input" class="album-note-input" placeholder="✍️ Escribe aquí tu propia dedicatoria o pie de foto manuscrito en el álbum...">
+                    <button type="button" class="btn-save-album-note" id="btn-save-album-note">Guardar nota</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Controles de navegación secuencial lineal -->
+            <div class="album-sequential-controls">
+              <button class="album-nav-btn" id="btn-album-prev" title="Página anterior">
+                ◀ Hoja Anterior
+              </button>
+              <div class="linear-warning">
+                <span>📚 <strong>Continuidad Lineal (Carrete de 10):</strong> El álbum conserva exactamente las fotos que disparaste en Fase 1 y revelaste en Fase 2 con su exposición, enfoque y tus anotaciones.</span>
+              </div>
+              <button class="album-nav-btn" id="btn-album-next" title="Página siguiente">
+                Hoja Siguiente ▶
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================
+         LADO DERECHO: MUNDO DIGITAL (Google Photos / Software)
+         ==================================================== -->
+    <section class="screen-column digital-column" id="digital-side">
+      <!-- Encabezado con estética oficial de Google Photos -->
+      <div class="column-header google-header">
+        <div class="brand-tag google-brand">
+          <!-- Logo icónico del molinete de Google Photos en SVG -->
+          <svg class="google-photos-logo" viewBox="0 0 192 192" width="28" height="28">
+            <path fill="#4285F4" d="M96 0C122.5 0 144 21.5 144 48V96H48C21.5 96 0 74.5 0 48C0 21.5 21.5 0 48 0H96Z" opacity="0.9"/>
+            <path fill="#EA4335" d="M192 96C192 122.5 170.5 144 144 144H96V48C96 21.5 117.5 0 144 0C170.5 0 192 21.5 192 48V96Z" opacity="0.9"/>
+            <path fill="#34A853" d="M96 192C69.5 192 48 170.5 48 144V96H144C170.5 96 192 117.5 192 144C192 170.5 170.5 192 144 192H96Z" opacity="0.9"/>
+            <path fill="#FBBC05" d="M0 96C0 69.5 21.5 48 48 48H96V144C96 170.5 74.5 192 48 192C21.5 192 0 170.5 0 144V96Z" opacity="0.9"/>
+          </svg>
+          <div>
+            <h3>Google Photos</h3>
+            <small>Copia de seguridad en la nube • Algoritmos IA activados</small>
+          </div>
+        </div>
+
+        <!-- Botón para ver con las gafas teóricas en esta fase -->
+        <button class="btn-manovich-glasses google-glasses" data-target-modal="modal-theory-digital">
+          <span class="glasses-icon">👓</span>
+          <span>Gafas de Manovich</span>
+        </button>
+      </div>
+
+      <!-- ==================== FASE 1: DIGITAL (La Toma) ==================== -->
+      <div class="stage-phase active" id="digital-phase-1">
+        <div class="card-interface digital-card smartphone-card">
+          <!-- Smartphone moderno sin marcos -->
+          <div class="smartphone-bezel">
+            <div class="smartphone-speaker"></div>
+            <div class="smartphone-camera-hole"></div>
+
+            <!-- Pantalla del smartphone (Cámara con visor inteligente) -->
+            <div class="smartphone-screen" id="digital-screen">
+              <!-- Indicadores superiores del OS (batería, wifi, cloud sync) -->
+              <div class="screen-os-bar">
+                <span class="os-time">18:42</span>
+                <div class="os-icons">
+                  <span class="cloud-status-icon" title="Sincronización en segundo plano">☁️ Rec</span>
+                  <span>5G</span>
+                  <span>100% 🔋</span>
+                </div>
+              </div>
+
+              <!-- Escena en vivo con HUD inteligente (Realidad mediada) -->
+              <div class="camera-hud-overlay">
+                <!-- Cuadrícula áurea / regla de tercios -->
+                <div class="rule-of-thirds-grid">
+                  <div class="grid-line vert-1"></div>
+                  <div class="grid-line vert-2"></div>
+                  <div class="grid-line horiz-1"></div>
+                  <div class="grid-line horiz-2"></div>
+                </div>
+
+                <!-- Recuadros de detección inteligente por Visión IA (Dinámico según la escena) -->
+                <div class="ai-focus-box" id="ai-focus-box">
+                  <div class="focus-bracket tl"></div>
+                  <div class="focus-bracket tr"></div>
+                  <div class="focus-bracket bl"></div>
+                  <div class="focus-bracket br"></div>
+                  <span class="ai-confidence-tag" id="ai-confidence-tag">IA: Analizando sujeto...</span>
+                </div>
+
+                <!-- Escena en tiempo real -->
+                <div class="current-scene-view digital-view" id="digital-current-scene">
+                  <!-- Renderizado SVG dinámico de la escena digital -->
+                </div>
+
+                <!-- Feedback de flash digital suave -->
+                <div class="digital-shutter-flash" id="digital-shutter-flash"></div>
+              </div>
+
+              <!-- Controles de captura del smartphone -->
+              <div class="smartphone-bottom-controls">
+                <div class="thumbnail-preview-btn" id="digital-last-thumb" title="Última foto tomada">
+                  <div class="thumb-mini" id="thumb-mini-box"></div>
+                </div>
+
+                <!-- Botón de disparo digital capacitivo -->
+                <button class="smartphone-shutter-btn" id="btn-digital-shoot" title="Capturar imagen digitalmente">
+                  <div class="inner-shutter-circle"></div>
+                </button>
+
+                <div class="switch-lens-btn" id="btn-switch-filter" title="Cambiar optimizador de escenas IA">
+                  <span>✨ IA HDR</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cuadro de estado fenomenológico del disparo digital -->
+          <div class="digital-status-box">
+            <div class="status-header">
+              <span class="status-icon">⚡</span>
+              <strong>Condición Postfotográfica: Superabundancia e Inmediatez (Homo Photographicus)</strong>
+            </div>
+            <p id="digital-status-msg">
+              Disparo infinito con coste marginal cero (<em>Homo photographicus</em>, Fontcuberta). La pantalla AMOLED ofrece retroalimentación instantánea (WYSIWYG): pasamos del <em>"esto ha sido"</em> al <em>"yo estaba allí"</em> en un presente en suspensión mientras la IA procesa el HDR y sincroniza el archivo en la nube.
+            </p>
+            <div class="status-metric digital-metrics">
+              <span>Almacenamiento: <strong>Ilimitado en la nube</strong></span>
+              <span>Procesamiento: <strong>32 cálculos de exposición simultáneos</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== FASE 2: DIGITAL (La Nube y el Algoritmo) ==================== -->
+      <div class="stage-phase" id="digital-phase-2">
+        <div class="card-interface digital-card cloud-card">
+          <div class="cloud-header">
+            <span class="cloud-sync-badge">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/>
+              </svg>
+              Cloud Pipeline: Google Photos Neural Engine
+            </span>
+            <div class="server-latency">Latencia: 24 ms • Sincronizado</div>
+          </div>
+
+          <!-- Pipeline de procesamiento algorítmico interactivo -->
+          <div class="digital-pipeline-container">
+            <!-- Pestañas interactivas para explorar la imagen desglosada según Manovich -->
+            <div class="pipeline-tabs" role="tablist">
+              <button class="pipe-tab active" data-layer="binary" id="tab-binary">1. Representación Numérica (Píxeles/Hex)</button>
+              <button class="pipe-tab" data-layer="exif" id="tab-exif">2. Metadatos EXIF (Geolocalización)</button>
+              <button class="pipe-tab" data-layer="vision" id="tab-vision">3. Visión por Computador (Etiquetas IA)</button>
+            </div>
+
+            <!-- Vista 1: Representación Numérica (Matriz de datos y código discreto) -->
+            <div class="pipeline-view active" id="view-binary">
+              <div class="binary-deconstruct-grid">
+                <div class="matrix-canvas-box">
+                  <div class="zoom-pixel-preview" id="pixel-matrix-preview">
+                    <!-- Cuadrícula de píxeles ampliada con valores RGB -->
+                  </div>
+                  <div class="pixel-info-legend">Zoom al 1600%: El continuo visual se divide en elementos discretos medibles</div>
+                </div>
+                <div class="code-stream-panel">
+                  <div class="code-title">Matriz Numérica f(x, y) ➔ [R, G, B, A]</div>
+                  <pre class="code-stream" id="code-stream-dump">
+[0000, 0000]: #F4E2C1 (R:244, G:226, B:193)
+[0000, 0001]: #F6E5C6 (R:246, G:229, B:198)
+[0000, 0002]: #F8E9CB (R:248, G:233, B:203)
+[0001, 0000]: #E8D3AE (R:232, G:211, B:174)
+[0001, 0001]: #EAD7B3 (R:234, G:215, B:179)
+// Cuantificación matemática discreta
+// Principio 1 de Manovich: Representación Numérica
+                  </pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Vista 2: Metadatos EXIF -->
+            <div class="pipeline-view" id="view-exif">
+              <div class="exif-data-card">
+                <div class="exif-header">
+                  <strong>Información de la Toma (Capa Oculta de Software)</strong>
+                  <span class="exif-status-badge">JSON Formatted</span>
+                </div>
+                <div class="exif-grid-fields" id="exif-display-fields">
+                  <!-- Inyectado por JavaScript según la foto actual -->
+                </div>
+                <!-- Mini mapa de coordenadas satélite simulado -->
+                <div class="gps-minimap-box">
+                  <div class="minimap-graphic" id="gps-minimap">
+                    <div class="map-grid-lines"></div>
+                    <div class="map-pin">📍</div>
+                    <div class="map-coords-label" id="gps-coords-label">Lat: 48.8584° N, Lon: 2.2945° E (París, Francia)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Vista 3: Visión por Computador y Embeddings -->
+            <div class="pipeline-view" id="view-vision">
+              <div class="ai-tags-scanner-panel">
+                <div class="scanner-hero">
+                  <div class="scanner-image-wrapper" id="scanner-image-target">
+                    <!-- Imagen escaneada con bounding boxes superpuestos -->
+                    <div class="scanner-line"></div>
+                    <div class="detected-box box-subject" id="box-subject">
+                      <span class="detected-label">Sujeto principal (99.1%)</span>
+                    </div>
+                  </div>
+                  <div class="scanner-sidebar-tags">
+                    <h5>Etiquetas Semánticas Generadas Automáticamente:</h5>
+                    <div class="semantic-tag-list" id="semantic-tag-list">
+                      <!-- Tags inyectados dinámicamente -->
+                    </div>
+                  </div>
+                </div>
+                <div class="ai-insight-box">
+                  <strong>Transcodificación y Postfotografía:</strong> Cuando el píxel sustituye al haluro de plata se quiebra la <em>indexicalidad</em> física (Peirce/Fontcuberta). Tu recuerdo personal es transcodificado (Manovich) en un <em>embedding</em> de 512 dimensiones para la enciclopedización del saber y la sociabilidad digital.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== FASE 3: DIGITAL (Google Photos: Base de Datos) ==================== -->
+      <div class="stage-phase" id="digital-phase-3">
+        <div class="card-interface digital-card gphotos-database-card">
+          <!-- Barra de búsqueda inteligente de Google Photos -->
+          <div class="gphotos-search-bar">
+            <div class="search-input-wrapper">
+              <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#5f6368" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="gphotos-search-input" placeholder="Buscar 'París', 'Mascotas', 'Familia', 'Playa'..." aria-label="Buscar en la base de datos de fotos">
+              <button class="clear-search-btn" id="btn-clear-search" title="Limpiar búsqueda" style="display: none;">✕</button>
+            </div>
+            <div class="gphotos-user-avatar" title="Cuenta de Google de Usuario">
+              <span>CD</span>
+            </div>
+          </div>
+
+          <!-- Chips de sugerencias de búsqueda en la Base de Datos -->
+          <div class="search-chips-container">
+            <span class="chips-label">Consultas rápidas (Queries):</span>
+            <div class="chips-scroll">
+              <button class="filter-chip active" data-filter="all">Todas (∞ Nube)</button>
+              <button class="filter-chip" data-filter="Personal">📤 Tus Fotos</button>
+              <button class="filter-chip" data-filter="París">🗼 París</button>
+              <button class="filter-chip" data-filter="Familia">👨‍👩‍👧 Familia</button>
+              <button class="filter-chip" data-filter="Mascotas">🐕 Mascotas</button>
+              <button class="filter-chip" data-filter="Playa">🏖️ Playa</button>
+              <button class="filter-chip" data-filter="Comida">🍕 Comida</button>
+              <button class="filter-chip" data-filter="2024">📅 Año 2024</button>
+            </div>
+          </div>
+
+          <!-- Consola en vivo de la consulta a la Base de Datos (Para demostrar Manovich) -->
+          <div class="database-query-monitor">
+            <div class="db-monitor-header">
+              <span class="db-led"></span>
+              <span class="db-title">Motor Relacional SQL / Vector Search</span>
+              <span class="db-time" id="query-exec-time">Consulta: 14 ms</span>
+            </div>
+            <div class="db-query-text" id="db-query-statement">
+              <code>SELECT * FROM photos_library WHERE tags LIKE '%todos%' ORDER BY timestamp DESC;</code>
+            </div>
+          </div>
+
+          <!-- Cuadrícula fluida de Google Photos -->
+          <div class="gphotos-grid-area">
+            <div class="grid-section-header">
+              <span class="grid-date-label" id="grid-results-count">Mostrando todos los recuerdos indexados en la nube (Sin límite de fotos)</span>
+              <span class="grid-layout-toggle">Cuadrícula inteligente</span>
+            </div>
+
+            <div class="gphotos-thumbnail-grid" id="gphotos-grid">
+              <!-- Las tarjetas de fotos se inyectan dinámicamente mediante JS -->
+            </div>
+          </div>
+
+          <!-- Detalle de la foto seleccionada en Google Photos (Variabilidad y no-destructividad) -->
+          <div class="photo-inspector-modal" id="photo-inspector" style="display: none;">
+            <div class="inspector-content">
+              <button class="inspector-close-btn" id="btn-close-inspector">✕</button>
+              <div class="inspector-body">
+                <div class="inspector-image-pane" id="inspector-image"></div>
+                <div class="inspector-meta-pane">
+                  <h4 id="inspector-title">Título de Foto</h4>
+                  <p class="inspector-date" id="inspector-date">24 jul 2023, 19:42</p>
+                  
+                  <div class="inspector-chips" id="inspector-chips"></div>
+
+                  <!-- Demostración del Principio de Variabilidad de Manovich -->
+                  <div class="variability-controls">
+                    <label>Principio de Variabilidad (Edición Algorítmica No Destructiva):</label>
+                    <div class="filter-buttons">
+                      <button class="v-filter-btn active" data-vfilter="normal">Original</button>
+                      <button class="v-filter-btn" data-vfilter="warm">Cálido (+20% K)</button>
+                      <button class="v-filter-btn" data-vfilter="cool">Frío (Cian)</button>
+                      <button class="v-filter-btn" data-vfilter="bw">B&W Remediado</button>
+                    </div>
+                    <small class="v-note">El archivo RAW original no se modifica; el software aplica un shader CSS en tiempo real.</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ========================================================
+       MODALES TEÓRICOS: "VER CON LAS GAFAS DE MANOVICH"
+       (Específicos para cada fase y columna)
+       ======================================================== -->
+
+  <!-- Modal Teórico: Analógico -->
+  <div class="theory-modal-backdrop" id="modal-theory-analog" role="dialog" aria-hidden="true">
+    <div class="theory-modal-card">
+      <div class="modal-header-row analog-modal-head">
+        <div class="modal-title-wrap">
+          <span class="modal-badge">ANÁLISIS TEÓRICO PEC2</span>
+          <h3 id="analog-modal-title">La Huella Fotoquímica según Manovich y Bolter & Grusin</h3>
+        </div>
+        <button class="btn-close-modal" aria-label="Cerrar modal">✕</button>
+      </div>
+
+      <div class="modal-body-content" id="analog-modal-body">
+        <!-- Contenido pedagógico dinámico según la fase activa -->
+      </div>
+
+      <div class="modal-footer-row">
+        <button class="btn-ack-theory" id="btn-ack-analog">Comprendido • Volver a la Experiencia</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Teórico: Digital -->
+  <div class="theory-modal-backdrop" id="modal-theory-digital" role="dialog" aria-hidden="true">
+    <div class="theory-modal-card">
+      <div class="modal-header-row digital-modal-head">
+        <div class="modal-title-wrap">
+          <span class="modal-badge">ANÁLISIS TEÓRICO PEC2</span>
+          <h3 id="digital-modal-title">El Algoritmo de Google Photos: Principios de Nuevos Medios</h3>
+        </div>
+        <button class="btn-close-modal" aria-label="Cerrar modal">✕</button>
+      </div>
+
+      <div class="modal-body-content" id="digital-modal-body">
+        <!-- Contenido pedagógico dinámico según la fase activa -->
+      </div>
+
+      <div class="modal-footer-row">
+        <button class="btn-ack-theory" id="btn-ack-digital">Comprendido • Volver a la Experiencia</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODAL MAESTRO: DOSSIER TEÓRICO COMPLETO (PEC2)
+       ======================================================== -->
+  <div class="theory-modal-backdrop" id="modal-theory-master" role="dialog" aria-hidden="true">
+    <div class="theory-modal-card dossier-card">
+      <div class="modal-header-row master-modal-head">
+        <div class="modal-title-wrap">
+          <span class="modal-badge">DOSSIER PEDAGÓGICO GLOBAL</span>
+          <h3>Marco Conceptual: Remediación y Transcodificación en la Fotografía</h3>
+        </div>
+        <button class="btn-close-modal" aria-label="Cerrar dossier">✕</button>
+      </div>
+
+      <div class="modal-body-content dossier-content">
+        <!-- Sección 1: Bolter & Grusin -->
+        <section class="dossier-section">
+          <h4>1. La Remediación (Jay David Bolter & Richard Grusin, 1999)</h4>
+          <p>
+            Bolter y Grusin definen la <strong>remediación</strong> como la manera en que los nuevos medios digitales representan, refactorizan y se apropian de las formas, contenidos y convenciones de los medios analógicos precedentes. La remediación opera mediante una tensión constante entre dos lógicas complementarias:
+          </p>
+          <div class="concept-boxes-grid">
+            <div class="concept-box">
+              <h5>A. Inmediatez Transparente (Transparent Immediacy)</h5>
+              <p>
+                El deseo del medio de borrarse a sí mismo, de volverse invisible para que el observador sienta que está ante la realidad sin intermediación técnica ("la pantalla como ventana transparente"). Google Photos busca esto mediante la previsualización a pantalla completa instantánea, el enfoque automático asistido por IA y la eliminación de la fricción del revelado químico.
+              </p>
+            </div>
+            <div class="concept-box">
+              <h5>B. Hipermediación (Hypermediacy)</h5>
+              <p>
+                La fascinación simultánea por la presencia de la interfaz y la multiplicidad de ventanas, metadatos y medios combinados. Lejos de ocultar la máquina, Google Photos nos recuerda constantemente su presencia mediante etiquetas ("Rostro detectado"), barras de búsqueda semántica, geolocalización en mapas por satélite y notificaciones de memorias ("Un día como hoy hace 4 años").
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sección 2: Lev Manovich -->
+        <section class="dossier-section">
+          <h4>2. Los Principios de los Nuevos Medios (Lev Manovich, 2001)</h4>
+          <p>
+            En <em>El lenguaje de los nuevos medios de comunicación</em>, Manovich identifica las transformaciones esenciales que sufre la cultura al cruzar la frontera del ordenador:
+          </p>
+          <div class="manovich-principles-list">
+            <div class="m-principle-item">
+              <span class="m-num">1</span>
+              <div>
+                <strong>Representación Numérica:</strong> Todos los nuevos medios se componen de código digital continuo a discreto (<code>0</code> y <code>1</code>). Una foto ya no es grano de plata sobre gelatina, sino una matriz numérica de píxeles <code>f(x, y)</code> sujeta a algoritmos matemáticos (compresión JPEG, optimización HDR).
+              </div>
+            </div>
+            <div class="m-principle-item">
+              <span class="m-num">2</span>
+              <div>
+                <strong>Modularidad:</strong> La estructura fractal de los nuevos medios. El píxel compone el canal, el canal compone la imagen, la imagen se asocia al metadato EXIF, y las imágenes se agrupan en colecciones modulares que pueden descomponerse y reensamblarse sin destruirse.
+              </div>
+            </div>
+            <div class="m-principle-item">
+              <span class="m-num">3</span>
+              <div>
+                <strong>Automatización:</strong> Dado que los medios son numéricos y modulares, muchas operaciones de creación, manipulación y acceso pueden automatizarse. Google Photos no requiere que clasifiques tus fotos: una red neuronal convolucional reconoce automáticamente "gatos", "playas" o "atardeceres".
+              </div>
+            </div>
+            <div class="m-principle-item">
+              <span class="m-num">4</span>
+              <div>
+                <strong>Variabilidad:</strong> Un objeto de los nuevos medios no está fijado de una vez para siempre (como la copia en papel baritado del laboratorio). Puede existir en infinitas versiones: redimensionado, filtrado, reencuadrado sin destruir el original.
+              </div>
+            </div>
+            <div class="m-principle-item">
+              <span class="m-num">5</span>
+              <div>
+                <strong>Transcodificación Cultural:</strong> La dimensión más profunda: la interacción entre la <em>capa informática</em> (estructuras de datos, árboles de búsqueda, algoritmos de indexación) y la <em>capa cultural</em> (el recuerdo familiar, la nostalgia, la biografía personal). Google Photos traslada las categorías del software a la forma en que los seres humanos organizamos y recordamos nuestras vidas.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sección 3: Base de Datos vs Narrativa -->
+        <section class="dossier-section">
+          <h4>3. La Base de Datos vs. La Narrativa (Capítulo 5 de Manovich)</h4>
+          <p>
+            Manovich postula que <strong>la base de datos se ha convertido en la forma cultural arquetípica de la era informática</strong>, rivalizando con la narrativa lineal clásica:
+          </p>
+          <table class="dossier-table">
+            <thead>
+              <tr>
+                <th>Dimensión</th>
+                <th>Álbum Analógico Físico (Narrativa)</th>
+                <th>Google Photos (Base de Datos)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Estructura</strong></td>
+                <td>Sintagma lineal cerrado. Orden cronológico fijado por quien compuso el álbum físico página a página.</td>
+                <td>Paradigma no lineal abierto. Colección indexada de elementos discretos independientes.</td>
+              </tr>
+              <tr>
+                <td><strong>Acceso</strong></td>
+                <td>Secuencial: Para ir a la foto 35, debes atravesar físicamente las páginas 1 a 34.</td>
+                <td>Aleatorio y relacional: Consulta directa (Query) mediante metadatos o tags de visión computacional.</td>
+              </tr>
+              <tr>
+                <td><strong>Materialidad</strong></td>
+                <td>Soporte químico fotosensible finito (papel baritado, esquinas autoadhesivas). Se degrada físicamente con los años.</td>
+                <td>Ficheros binarios distribuidos en servidores en la nube. Inmunes al paso del tiempo biológico pero sujetos a obsolescencia de software.</td>
+              </tr>
+              <tr>
+                <td><strong>Construcción del Sentido</strong></td>
+                <td>Biografía íntima encuadernada. Narración con principio, nudo y final ("Esto ha sido").</td>
+                <td>Recombinación algorítmica constante: "Creaciones automáticas", collages generados por IA y sociabilidad digital ("Yo estaba allí").</td>
+              </tr>
+              <tr>
+                <td><strong>Estatuto y Autoría (Fontcuberta)</strong></td>
+                <td><strong>Fotografía argéntica:</strong> Huella indexical (Peirce), escasez de exposiciones, autoría ligada al disparo técnico y función de archivo de memoria.</td>
+                <td><strong>Postfotografía (<em>Homo photographicus</em>):</strong> Superabundancia visual, inmaterialidad, adopción digital, coautoría del receptor (Jauss) y prescripción de sentido.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- Sección 4: Joan Fontcuberta y la Crítica Postfotográfica -->
+        <section class="dossier-section">
+          <h4>4. La Postfotografía y la Furia de las Imágenes (Joan Fontcuberta, 2016; Paula Velasco Padial, 2017)</h4>
+          <p>
+            En <em>La furia de las imágenes. Notas sobre la postfotografía</em> (2016) —analizado críticamente por Paula Velasco Padial (2017)—, <strong>Joan Fontcuberta</strong> examina la mutación de la imagen tras la sustitución del nitrato de plata por el píxel y la irrupción de internet y las redes sociales (la "segunda revolución digital"). La <strong>postfotografía</strong> habita el espacio híbrido de la sociabilidad digital como consecuencia de la <em>superabundancia visual</em> y se apoya en tres factores: <strong>inmaterialidad y transmitabilidad</strong>, <strong>profusión y disponibilidad</strong>, y su aporte a la <strong>enciclopedización del saber y la comunicación</strong>.
+          </p>
+
+          <div class="concept-boxes-grid">
+            <div class="concept-box">
+              <h5>A. Del "Esto ha sido" al "Yo estaba allí"</h5>
+              <p>
+                Frente a la fotografía tradicional como guardiana del pasado y la memoria, la postfotografía habita un <em>"presente en suspensión, eternizado"</em>. En la era <em>selfie</em>, la imagen actúa como mensaje instantáneo (<em>"imago, ergo sum"</em>): no buscamos tanto mostrar el mundo como señalar nuestro estar en él. No obstante, como matiza <strong>Paula Velasco Padial</strong>, la fotografía siempre fue <em>escritura y lenguaje</em>, <em>arte y documento</em>, y todo "esto ha sido" contuvo siempre una subjetividad implícita (un <em>"para mí"</em>) y una vocación social desde su democratización en el siglo XIX.
+              </p>
+            </div>
+            <div class="concept-box">
+              <h5>B. Homo Photographicus, Adopción y Coautoría</h5>
+              <p>
+                Con la cámara integrada en el teléfono móvil emerge el <strong><em>Homo photographicus</em></strong> (en diálogo con el <em>Homo ludens</em> de <strong>Vilém Flusser</strong>): todos somos productores y consumidores universales de imágenes. Ante la <em>infoxicación</em>, el mérito artístico se desplaza de fabricar imágenes a <strong>"prescribir sentidos"</strong> desde una <em>ecología de las imágenes</em>: <strong>adoptar</strong> una imagen es elegirla y dotarla de valor intelectual o simbólico sin reclamar su posesión exclusiva, integrando al espectador como <strong>coautor activo</strong> (<strong>Hans Robert Jauss</strong>) en el encuentro ético de la mirada (<strong>Ariella Azoulay</strong>) y dentro del <em>acontecimiento-imagen</em> (<strong>Guy Debord</strong>).
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="modal-footer-row">
+        <button class="btn-ack-theory" id="btn-ack-master">Cerrar Dossier y Continuar Interactivo</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pie de página educativo -->
+  <footer class="app-footer">
+    <div class="footer-inner">
+      <span>Práctica Universitaria PEC2 • <strong>Cultura Digital</strong></span>
+      <span>Diseñado con HTML5, CSS3 y JavaScript Vainilla • Autor: <strong>Miguel Alcaide Bautista</strong> (Vibe Coding con Antigravity de Google)</span>
+      <span>Conceptos: <em>Bolter & Grusin (1999) • Lev Manovich (2001) • Joan Fontcuberta (2016)</em></span>
+    </div>
+  </footer>
+
+  <!-- Archivos independientes de las 36 fotos vectoriales de la colección -->
+  <script src="photos/photo-01.js"></script>
+  <script src="photos/photo-02.js"></script>
+  <script src="photos/photo-03.js"></script>
+  <script src="photos/photo-04.js"></script>
+  <script src="photos/photo-05.js"></script>
+  <script src="photos/photo-06.js"></script>
+  <script src="photos/photo-07.js"></script>
+  <script src="photos/photo-08.js"></script>
+  <script src="photos/photo-09.js"></script>
+  <script src="photos/photo-10.js"></script>
+  <script src="photos/photo-11.js"></script>
+  <script src="photos/photo-12.js"></script>
+  <script src="photos/photo-13.js"></script>
+  <script src="photos/photo-14.js"></script>
+  <script src="photos/photo-15.js"></script>
+  <script src="photos/photo-16.js"></script>
+  <script src="photos/photo-17.js"></script>
+  <script src="photos/photo-18.js"></script>
+  <script src="photos/photo-19.js"></script>
+  <script src="photos/photo-20.js"></script>
+  <script src="photos/photo-21.js"></script>
+  <script src="photos/photo-22.js"></script>
+  <script src="photos/photo-23.js"></script>
+  <script src="photos/photo-24.js"></script>
+  <script src="photos/photo-25.js"></script>
+  <script src="photos/photo-26.js"></script>
+  <script src="photos/photo-27.js"></script>
+  <script src="photos/photo-28.js"></script>
+  <script src="photos/photo-29.js"></script>
+  <script src="photos/photo-30.js"></script>
+  <script src="photos/photo-31.js"></script>
+  <script src="photos/photo-32.js"></script>
+  <script src="photos/photo-33.js"></script>
+  <script src="photos/photo-34.js"></script>
+  <script src="photos/photo-35.js"></script>
+  <script src="photos/photo-36.js"></script>
+  <script src="photos/manifest.js"></script>
+
+  <!-- Lógica y simulación interactiva (Módulos en js/) -->
+  <script src="js/state.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/theory.js"></script>
+  <script src="js/analog.js"></script>
+  <script src="js/digital.js"></script>
+  <script src="js/album.js"></script>
+  <script src="js/main.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+

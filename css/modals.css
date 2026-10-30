@@ -1,0 +1,261 @@
+/* ========================================================
+   MODALES TEÓRICOS DE MANOVICH Y RESPONSIVIDAD
+   ======================================================== */
+
+.theory-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.theory-modal-backdrop.open { display: flex; }
+
+.theory-modal-card {
+  background: #ffffff;
+  border-radius: 16px;
+  max-width: 680px;
+  width: 100%;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  animation: modalPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.dossier-card { max-width: 820px; }
+
+@keyframes modalPop {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal-header-row {
+  padding: 18px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0;
+}
+.analog-modal-head { background: #f5ede0; border-bottom-color: #d4c0a8; }
+.digital-modal-head { background: #e8f0fe; border-bottom-color: #d2e3fc; }
+.master-modal-head { background: #1e1e24; color: #ffffff; }
+
+.modal-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #4285f4;
+  display: block;
+}
+.analog-modal-head .modal-badge { color: #8c6b32; }
+.master-modal-head .modal-badge { color: #fbbc05; }
+
+.modal-title-wrap h3 { font-size: 1.15rem; margin-top: 2px; }
+
+.btn-close-modal {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #555;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-close-modal:hover { background: rgba(0, 0, 0, 0.08); }
+.master-modal-head .btn-close-modal { color: #fff; }
+.master-modal-head .btn-close-modal:hover { background: rgba(255, 255, 255, 0.15); }
+
+.modal-body-content {
+  padding: 24px;
+  overflow-y: auto;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-footer-row {
+  padding: 14px 24px;
+  border-top: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: flex-end;
+  background: #fafafa;
+}
+
+.btn-ack-theory {
+  background: #202124;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+.btn-ack-theory:hover { background: #3c4043; }
+
+.dossier-section { display: flex; flex-direction: column; gap: 10px; }
+.dossier-section h4 {
+  font-size: 1.05rem;
+  color: #1a73e8;
+  border-bottom: 2px solid #e8f0fe;
+  padding-bottom: 4px;
+}
+
+.concept-boxes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 8px;
+}
+.concept-box {
+  background: #f8f9fa;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  padding: 14px;
+}
+.concept-box h5 { font-size: 0.85rem; color: #202124; margin-bottom: 6px; }
+
+.manovich-principles-list { display: flex; flex-direction: column; gap: 10px; margin-top: 6px; }
+.m-principle-item {
+  display: flex;
+  gap: 12px;
+  background: #f8f9fa;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border-left: 3px solid #4285f4;
+}
+.m-num {
+  background: #4285f4;
+  color: #fff;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.dossier-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  margin-top: 10px;
+}
+.dossier-table th, .dossier-table td {
+  border: 1px solid #dadce0;
+  padding: 10px 12px;
+  text-align: left;
+}
+.dossier-table th { background: #f1f3f4; color: #202124; }
+
+/* ========================================================
+   RESPONSIVIDAD (MÓVILES Y TABLETS)
+   Corrige superposiciones en el álbum móvil y la cuadrícula
+   ======================================================== */
+@media (max-width: 992px) {
+  .split-screen-container { grid-template-columns: 1fr; }
+  .analog-column { border-right: none; border-bottom: 2px solid #3b281c; }
+  .main-header { flex-direction: column; align-items: stretch; padding: 12px 16px; }
+  .phase-navigator { justify-content: center; flex-wrap: wrap; }
+  .header-controls { justify-content: center; }
+  .concept-boxes-grid { grid-template-columns: 1fr; }
+  .binary-deconstruct-grid { grid-template-columns: 1fr; }
+  .inspector-body { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 680px) {
+  .screen-column { padding: 14px; }
+  .analog-card, .digital-card { padding: 14px; }
+
+  /* Cámara analógica en móvil sin desbordes ni solapamientos */
+  .top-deck-chassis {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 12px;
+    padding: 12px;
+  }
+  .top-center-prism {
+    margin-top: 0;
+    height: auto;
+  }
+  .rear-door-leather {
+    grid-template-columns: 1fr;
+  }
+  .leather-grip-panel {
+    display: none;
+  }
+  .viewfinder-eyepiece-housing:hover .viewfinder-round-eyepiece,
+  .viewfinder-eyepiece-housing:focus-within .viewfinder-round-eyepiece,
+  .viewfinder-eyepiece-housing.is-expanded .viewfinder-round-eyepiece {
+    width: min(280px, 82vw);
+    height: 175px;
+  }
+
+  /* Tira de cuarto oscuro de 5 fotos en móvil */
+  .film-strip-5-grid {
+    grid-template-columns: repeat(5, minmax(52px, 1fr));
+    overflow-x: auto;
+  }
+
+  /* Álbum físico y sobre de 10 fotos en móvil sin superponerse nunca */
+  .album-lab-envelope-strip {
+    grid-template-columns: repeat(5, minmax(54px, 1fr));
+    gap: 6px;
+  }
+  .album-page {
+    padding: 14px 10px;
+    min-height: auto;
+  }
+  .mounted-photo-frame {
+    padding: 10px;
+    max-width: 100%;
+  }
+  .physical-photo-print {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    min-height: 175px;
+  }
+  .album-meta-bar-below {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  .album-sequential-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .handwriting-edit-row {
+    flex-direction: column;
+  }
+
+  /* Álbum móvil de Google Photos (Fase 3): evita que las imágenes se superpongan */
+  .gphotos-thumbnail-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    max-height: 420px;
+  }
+  .gphoto-card {
+    aspect-ratio: 4 / 3;
+    min-height: 105px;
+  }
+}
+
