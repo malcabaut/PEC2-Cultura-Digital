@@ -43,9 +43,9 @@ function getDiagnosisForShot(shotData) {
 
   if (!shotData.wasShotByUser) {
     return {
-      shortLabel: `⬛ Sin disparar (-3EV Max)`,
-      negShortLabel: `⬜ Sin exponer (-3EV Max)`,
-      detailLabel: `⬛ FOTO NO TOMADA: Subexpuesta al máximo (-3.0 EV • 100% sin luz porque el obturador no se abrió en Fase 1)`,
+      shortLabel: `⬛ Foto no tomada`,
+      negShortLabel: `⬛ Foto no tomada`,
+      detailLabel: `⬛ FOTO NO TOMADA`,
       cssClass: 'exposure-underexposed',
       badgeClass: 'badge-under'
     };
@@ -167,7 +167,7 @@ function updateDarkroomTray() {
       const photo = photos[pIdx];
       const shotData = evaluateFrameShotData(pIdx, photo);
       const diag = getDiagnosisForShot(shotData);
-      const coverSvg = photo.svg.replace('<svg ', '<svg preserveAspectRatio="xMidYMid slice" ');
+      const coverSvg = renderUniquePhotoSvg(photo.svg);
 
       const cell = document.createElement('div');
       cell.className = `strip-5-frame ${slot === AppState.darkroomSelectedSlot ? 'selected' : ''}`;
@@ -181,13 +181,13 @@ function updateDarkroomTray() {
         const negStyle = getPhotoChemicalFilterStyles(shotData, 'negative');
         stateClass = `stage-negative-inverted ${diag.cssClass}`;
         footerBadge = diag.negShortLabel || '🎞️ Negativo Invertido';
-        innerSvgHtml = coverSvg;
+        innerSvgHtml = shotData.wasShotByUser ? coverSvg : '';
         holderInlineFilter = `style="filter: ${negStyle.filterCss} !important;"`;
       } else if (batchObj.stage === 2) {
         const posStyle = getPhotoChemicalFilterStyles(shotData, 'positive');
         stateClass = `stage-positive-revealed ${diag.cssClass}`;
         footerBadge = diag.shortLabel;
-        innerSvgHtml = coverSvg;
+        innerSvgHtml = shotData.wasShotByUser ? coverSvg : '';
         holderInlineFilter = `style="filter: ${posStyle.filterCss} !important;"`;
       }
 
@@ -239,14 +239,17 @@ function updateDarkroomTray() {
   if (progressPill) progressPill.textContent = `Paso ${batchObj.stage} de 2 (${stageProgress}%)`;
 
   if (latentImage && selectedPhoto) {
-    const coverSvg = selectedPhoto.svg.replace('<svg ', '<svg preserveAspectRatio="xMidYMid slice" ');
+    const coverSvg = renderUniquePhotoSvg(selectedPhoto.svg);
+    const frameTitlePart = selectedShot.wasShotByUser ? ` (${selectedPhoto.title})` : '';
 
     if (batchObj.stage === 0) {
       latentImage.innerHTML = '';
       latentImage.className = 'latent-image-emerging stage-latent-hidden';
       latentImage.style.filter = '';
       if (trayDiagnosis) {
-        trayDiagnosis.textContent = `Foto #${String(selectedPhotoIdx + 1).padStart(2, '0')} (${selectedPhoto.title}) • ⬛ Emulsión opaca: Pulsa el botón inferior para pasar al Paso 1 (Negativo)`;
+        trayDiagnosis.textContent = selectedShot.wasShotByUser
+          ? `Foto #${String(selectedPhotoIdx + 1).padStart(2, '0')}${frameTitlePart} • ⬛ Emulsión opaca: Pulsa el botón inferior para pasar al Paso 1 (Negativo)`
+          : `Foto #${String(selectedPhotoIdx + 1).padStart(2, '0')} • ⬛ FOTO NO TOMADA`;
       }
       if (timeElapsed) {
         timeElapsed.textContent = `Paso Actual: 1️⃣ Emulsión Oculta (Fotos ${startIdx + 1}–${endIdx} de 10)`;
@@ -261,11 +264,13 @@ function updateDarkroomTray() {
       }
     } else if (batchObj.stage === 1) {
       const negStyle = getPhotoChemicalFilterStyles(selectedShot, 'negative');
-      latentImage.innerHTML = coverSvg;
+      latentImage.innerHTML = selectedShot.wasShotByUser ? coverSvg : '';
       latentImage.className = `latent-image-emerging stage-negative-inverted`;
       latentImage.style.filter = negStyle.filterCss;
       if (trayDiagnosis) {
-        trayDiagnosis.textContent = `Foto #${String(selectedPhotoIdx + 1).padStart(2, '0')} • 🎞️ ${negStyle.negDescription} • ƒ/${selectedShot.aperture} • 1/${selectedShot.speed}s`;
+        trayDiagnosis.textContent = selectedShot.wasShotByUser
+          ? `Foto #${String(selectedPhotoIdx + 1).padStart(2, '0')}${frameTitlePart} • 🎞️ ${negStyle.negDescription} • ƒ/${selectedShot.aperture} • 1/${selectedShot.speed}s`
+          : `Foto #${String(selectedPhotoIdx + 1).padStart(2, '0')} • ⬛ FOTO NO TOMADA`;
       }
       if (timeElapsed) {
         timeElapsed.textContent = `Paso Actual: 2️⃣ ${selectedDiag.negShortLabel || 'Negativo Invertido'} (Fotos ${startIdx + 1}–${endIdx} de 10)`;
@@ -280,11 +285,13 @@ function updateDarkroomTray() {
       }
     } else {
       const posStyle = getPhotoChemicalFilterStyles(selectedShot, 'positive');
-      latentImage.innerHTML = coverSvg;
+      latentImage.innerHTML = selectedShot.wasShotByUser ? coverSvg : '';
       latentImage.className = `latent-image-emerging stage-positive-revealed`;
       latentImage.style.filter = posStyle.filterCss;
       if (trayDiagnosis) {
-        trayDiagnosis.textContent = `Foto #${String(selectedPhotoIdx + 1).padStart(2, '0')} (${selectedPhoto.title}) • ${selectedDiag.detailLabel}`;
+        trayDiagnosis.textContent = selectedShot.wasShotByUser
+          ? `Foto #${String(selectedPhotoIdx + 1).padStart(2, '0')}${frameTitlePart} • ${selectedDiag.detailLabel}`
+          : `Foto #${String(selectedPhotoIdx + 1).padStart(2, '0')} • ⬛ FOTO NO TOMADA`;
       }
       if (timeElapsed) {
         timeElapsed.textContent = `Paso Actual: 3️⃣ ¡Tira ${batchIdx + 1} Revelada y Lista para el Álbum! (${selectedDiag.shortLabel})`;
@@ -348,7 +355,7 @@ function updatePipelineViews() {
     const existingSvg = scannerTarget.querySelector('svg');
     if (existingSvg) existingSvg.remove();
     const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = currentPhoto.svg.replace('<svg ', '<svg preserveAspectRatio="xMidYMid slice" ');
+    tempDiv.innerHTML = renderUniquePhotoSvg(currentPhoto.svg);
     if (tempDiv.firstElementChild) {
       scannerTarget.prepend(tempDiv.firstElementChild);
     }
@@ -446,13 +453,13 @@ function renderAlbumPage() {
         stateBadge = diag.negShortLabel || '🎞️ Negativo';
         thumbVisualClass = `env-negative`;
         thumbStyleAttr = `style="filter: ${negStyle.filterCss};"`;
-        thumbInner = p.svg.replace('<svg ', '<svg preserveAspectRatio="xMidYMid slice" ');
+        thumbInner = wasShot ? renderUniquePhotoSvg(p.svg) : '';
       } else if (devStage === 2) {
         const posStyle = getPhotoChemicalFilterStyles(shotEval, 'positive');
         stateBadge = mountState.mounted ? `📌 ${diag.shortLabel}` : `✨ ${diag.shortLabel}`;
         thumbVisualClass = `env-positive`;
         thumbStyleAttr = `style="filter: ${posStyle.filterCss};"`;
-        thumbInner = p.svg.replace('<svg ', '<svg preserveAspectRatio="xMidYMid slice" ');
+        thumbInner = wasShot ? renderUniquePhotoSvg(p.svg) : '';
       }
 
       slotBtn.innerHTML = `
@@ -482,7 +489,7 @@ function renderAlbumPage() {
   const shotData = evaluateFrameShotData(pageIdx, photo);
   const devStage = getFrameDevelopmentStage(pageIdx);
   const mountState = getOrInitAlbumPageMount(pageIdx, photo);
-  const coverSvg = photo.svg.replace('<svg ', '<svg preserveAspectRatio="xMidYMid slice" ');
+  const coverSvg = renderUniquePhotoSvg(photo.svg);
 
   // Actualizar estado visual de las 4 esquineras interactivas
   const cornersCount = Object.values(mountState.corners).filter(Boolean).length;
@@ -531,7 +538,7 @@ function renderAlbumPage() {
     } else if (devStage === 1) {
       // Se quedó a medias en Negativo (Paso 1 de Fase 2): muestra el negativo con la densidad real de plata según los EV (-3 a +3)
       const negStyle = getPhotoChemicalFilterStyles(shotData, 'negative');
-      photoContainer.innerHTML = coverSvg;
+      photoContainer.innerHTML = shotData.wasShotByUser ? coverSvg : '';
       photoContainer.style.filter = negStyle.filterCss;
       if (mountOverlay) {
         mountOverlay.style.display = 'flex';
@@ -544,12 +551,13 @@ function renderAlbumPage() {
       }
       if (badgeEl) {
         badgeEl.className = 'photo-exposure-badge badge-shaky';
-        badgeEl.textContent = `🎞️ ${negStyle.negDescription} • ƒ/${shotData.aperture} • 1/${shotData.speed}s`;
+        const techSpec = shotData.wasShotByUser ? ` • ƒ/${shotData.aperture} • 1/${shotData.speed}s` : '';
+        badgeEl.textContent = `🎞️ ${negStyle.negDescription}${techSpec}`;
       }
     } else {
       // devStage === 2: Foto revelada en positivo con su porcentaje proporcional al exposímetro (-3 a +3 EV)
       const posStyle = getPhotoChemicalFilterStyles(shotData, 'positive');
-      photoContainer.innerHTML = coverSvg;
+      photoContainer.innerHTML = shotData.wasShotByUser ? coverSvg : '';
       photoContainer.style.filter = posStyle.filterCss;
 
       if (badgeEl) {
@@ -590,9 +598,12 @@ function renderAlbumPage() {
     traceEl.textContent = `${shotStr} ➔ ${revStr} ➔ ${mntStr}`;
   }
 
+  const defaultCaption = shotData.wasShotByUser
+    ? photo.analogCaption
+    : 'Fotograma sin exponer (la foto nunca fue disparada en el carrete).';
   const finalCaption = mountState.customNote && mountState.customNote.trim()
     ? `“${mountState.customNote.trim()}”`
-    : photo.analogCaption;
+    : defaultCaption;
   if (captionEl) captionEl.textContent = finalCaption;
   if (noteInput) noteInput.value = mountState.customNote || '';
   if (pageIndicator) pageIndicator.textContent = `Fotograma ${String(pageIdx + 1).padStart(2, '0')} de ${photos.length}`;

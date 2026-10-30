@@ -82,7 +82,7 @@ function initDigitalCamera() {
 
       const currentPhoto = getCurrentPhoto();
       if (thumbMini && currentPhoto) {
-        thumbMini.innerHTML = currentPhoto.svg.replace('<svg ', '<svg preserveAspectRatio="xMidYMid slice" ');
+        thumbMini.innerHTML = renderUniquePhotoSvg(currentPhoto.svg);
       }
 
       if (currentPhoto) {
@@ -177,7 +177,7 @@ function renderGooglePhotosGrid(items = null) {
     card.setAttribute('data-id', photo.id);
     card.title = `${photo.title} (${photo.year})`;
 
-    const coverSvg = photo.svg.replace('<svg ', '<svg preserveAspectRatio="xMidYMid slice" ');
+    const coverSvg = renderUniquePhotoSvg(photo.svg);
     card.innerHTML = `
       <div class="gphoto-card-img">${coverSvg}</div>
       <div class="gphoto-card-badge">${photo.tags[0]} • ${photo.year}</div>
@@ -195,7 +195,7 @@ function openPhotoInspector(photo) {
   const dateEl = document.getElementById('inspector-date');
   const chipsEl = document.getElementById('inspector-chips');
 
-  const coverSvg = photo.svg.replace('<svg ', '<svg preserveAspectRatio="xMidYMid slice" ');
+  const coverSvg = renderUniquePhotoSvg(photo.svg);
   if (imgPane) imgPane.innerHTML = coverSvg;
   if (titleEl) titleEl.textContent = photo.title;
   if (dateEl) dateEl.textContent = photo.date;

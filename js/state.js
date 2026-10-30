@@ -68,7 +68,7 @@ function buildActiveReel(randomizeNewSelection = true) {
   }
 
   // Las primeras posiciones del carrete analógico son hasta 5 fotos reales subidas por el usuario y el resto aleatorias hasta completar 10
-  // Seleccionamos un 30% de fotos (3 de las 10) que vienen bien calibradas de fábrica, incluyendo siempre la segunda foto (índice 1)
+  // Seleccionamos un 30% de fotos (3 de las 10) que coinciden con la luz/enfoque actual de la cámara, incluyendo siempre la segunda foto (índice 1)
   const otherIndices = [0, 2, 3, 4, 5, 6, 7, 8, 9].sort(() => Math.random() - 0.5);
   const presetOptimalSet = new Set([1, otherIndices[0], otherIndices[1]]);
   window.AppState.presetOptimalIndices = Array.from(presetOptimalSet);
@@ -85,6 +85,48 @@ function buildActiveReel(randomizeNewSelection = true) {
   window.AppState.reelPhotos = combined;
   return combined;
 }
+
+/**
+ * Ajusta los niveles de luz (sceneEV) y distancia de enfoque (targetFocus) de la foto entrante
+ * SIN tocar jamás los diales de velocidad, diafragma ni el anillo de enfoque de la cámara:
+ * - Si la foto pertenece al 30% (incluida la 2ª foto), la escena tiene exactamente la luz y distancia que ya marca la cámara.
+ * - En el 70% restante, la escena cambia sus niveles de luz y distancia para que el usuario tenga que ajustar la cámara.
+ */
+function adaptIncomingPhotoLightToFixedCamera(photo) {
+  if (!photo) return;
+  const ap = window.AppState.aperture || 8.0;
+  const sp = window.AppState.shutterSpeed || 500;
+  const iso = window.AppState.iso || 400;
+  const currentFoc = typeof window.AppState.userFocus === 'number' ? window.AppState.userFocus : 20;
+
+  const evCam = typeof window.getDiscreteCameraEV === 'function'
+    ? window.getDiscreteCameraEV(ap, sp, iso)
+    : Math.round(Math.log2((ap * ap) * sp) - Math.log2(iso / 100));
+
+  if (photo.isPresetOptimal) {
+    // La escena entrante coincide exactamente (0.0 EV) con cómo dejó el usuario la velocidad, el diafragma y el enfoque
+    photo.sceneEV = evCam;
+    photo.targetFocus = currentFoc;
+  } else {
+    // La foto entrante difiere en pasos enteros exactos de EV (-2, -1, +1, +2, +3, -3 EV)
+    // para que con 1, 2 o 3 clics de rueda de Velocidad o Diafragma quede clavada en 0.0 EV
+    const evShifts = [-2, -1, 1, 2, -2, 2, -1, 1];
+    const shift = evShifts[(photo.reelSlot || 0) % evShifts.length];
+    let targetSceneEV = evCam + shift;
+    // Mantener dentro del rango físico alcanzable por la cámara sin trepidación (EV 7 a EV 16)
+    if (targetSceneEV < 7) targetSceneEV = evCam + Math.abs(shift);
+    if (targetSceneEV > 15) targetSceneEV = evCam - Math.abs(shift);
+    photo.sceneEV = targetSceneEV;
+
+    const focusShifts = [35, -35, 45, -30, 40];
+    const fShift = focusShifts[(photo.reelSlot || 0) % focusShifts.length];
+    let newTarget = currentFoc + fShift;
+    if (newTarget > 92) newTarget = Math.max(12, currentFoc - 38);
+    if (newTarget < 12) newTarget = Math.min(90, currentFoc + 38);
+    photo.targetFocus = Math.round(newTarget);
+  }
+}
+window.adaptIncomingPhotoLightToFixedCamera = adaptIncomingPhotoLightToFixedCamera;
 
 /**
  * Reinicia el carrete de 10 fotos sorteando una nueva selección aleatoria (manteniendo o no las subidas)
@@ -137,6 +179,22 @@ function getCurrentPhoto() {
   if (list.length === 0) return null;
   return list[window.AppState.currentSceneIndex % list.length];
 }
+
+/**
+ * Prepara el SVG de una fotografía con IDs internos únicos por instancia
+ * para evitar que múltiples copias de un mismo SVG en el DOM colisionen en sus <defs> (linearGradient/radialGradient)
+ * cuando una copia oculta en otra pestaña hace que url(#id) se vea negro en el Álbum o la Galería.
+ */
+window._svgInstanceSeq = 0;
+function renderUniquePhotoSvg(svgStr) {
+  if (!svgStr) return '';
+  const uid = `u${++window._svgInstanceSeq}`;
+  return svgStr
+    .replace('<svg ', '<svg preserveAspectRatio="xMidYMid slice" ')
+    .replace(/\bid="([^"]+)"/g, `id="$1-${uid}"`)
+    .replace(/url\(#([^)]+)\)/g, `url(#$1-${uid})`);
+}
+window.renderUniquePhotoSvg = renderUniquePhotoSvg;
 
 /**
  * Devuelve si un fotograma del carrete (0..9) ya ha sido revelado en el cuarto oscuro (Fase 2)

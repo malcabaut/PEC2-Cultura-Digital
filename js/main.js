@@ -33,13 +33,11 @@ function renderSceneInViewfinders() {
   const prismTop = document.getElementById('prism-top-image');
   const prismBottom = document.getElementById('prism-bottom-image');
 
-  const coverSvg = scene.svg.replace('<svg ', '<svg preserveAspectRatio="xMidYMid slice" ');
-
-  if (analogContainer) analogContainer.innerHTML = coverSvg;
-  if (digitalContainer) digitalContainer.innerHTML = coverSvg;
-  if (prismTop) prismTop.innerHTML = coverSvg;
-  if (prismBottom) prismBottom.innerHTML = coverSvg;
-  if (thumbMini && !thumbMini.innerHTML.trim()) thumbMini.innerHTML = coverSvg;
+  if (analogContainer) analogContainer.innerHTML = renderUniquePhotoSvg(scene.svg);
+  if (digitalContainer) digitalContainer.innerHTML = renderUniquePhotoSvg(scene.svg);
+  if (prismTop) prismTop.innerHTML = renderUniquePhotoSvg(scene.svg);
+  if (prismBottom) prismBottom.innerHTML = renderUniquePhotoSvg(scene.svg);
+  if (thumbMini && !thumbMini.innerHTML.trim()) thumbMini.innerHTML = renderUniquePhotoSvg(scene.svg);
 
   updateDigitalHUD(scene);
 }

@@ -5,15 +5,40 @@
  * ========================================================
  */
 
+// Escalas fotográficas estándar de pasos completos (1 clic = exactamente ±1.0 EV)
+const FULL_STOP_SPEEDS = [1000, 500, 250, 125, 60, 30, 15, 8, 4];
+const FULL_STOP_APERTURES = [1.4, 2.0, 2.8, 4.0, 5.6, 8.0, 11.0, 16.0];
+window.FULL_STOP_SPEEDS = FULL_STOP_SPEEDS;
+window.FULL_STOP_APERTURES = FULL_STOP_APERTURES;
+
+/**
+ * Calcula el EV exacto por pasos enteros de rueda (Ley de Reciprocidad exacta):
+ * - Subir 1 paso de Diafragma (ej. f/5.6 -> f/8) = +1 EV de cierre (-1.0 EV de luz en el exposímetro)
+ * - Bajar 1 paso de Velocidad (ej. 1/500 -> 1/250) = -1 EV de obturación (+1.0 EV de luz en el exposímetro)
+ * Por tanto, +1 paso de F y -1 paso de V suman 0.0 EV exactos y dejan la aguja en el mismo punto.
+ */
+function getDiscreteCameraEV(aperture, speed, iso = 400) {
+  const apIdx = FULL_STOP_APERTURES.indexOf(Number(aperture));
+  const spIdx = FULL_STOP_SPEEDS.indexOf(Number(speed));
+  // f/1.4 -> +1 EV, f/2 -> +2 EV, ..., f/8 -> +6 EV, f/16 -> +8 EV
+  const evAperture = apIdx >= 0 ? (apIdx + 1) : Math.round(Math.log2(aperture * aperture));
+  // 1/1000s -> +10 EV, 1/500s -> +9 EV, 1/250s -> +8 EV, ..., 1/4s -> +2 EV
+  const evSpeed = spIdx >= 0 ? (10 - spIdx) : Math.round(Math.log2(speed));
+  const evIso = Math.round(Math.log2(iso / 100)); // ISO 400 -> 2 EV
+  return (evAperture + evSpeed) - evIso;
+}
+window.getDiscreteCameraEV = getDiscreteCameraEV;
+
 function calculateExposureDelta(sceneEV, aperture, speed, iso = 400) {
-  const evCamera = Math.log2((aperture * aperture) * speed) - Math.log2(iso / 100);
-  const deltaEV = sceneEV - evCamera;
-  const clampedMeterEV = Math.max(-3.0, Math.min(3.0, deltaEV));
+  const evCamera = getDiscreteCameraEV(aperture, speed, iso);
+  const deltaEV = Math.round((evCamera - sceneEV) * 10) / 10; // Espera: si cierro diafragma (subo apIdx) entra MENOS luz -> deltaEV baja (-1 EV). Es decir: deltaEV = sceneEV - evCamera
+  const realDeltaEV = Math.round((sceneEV - evCamera) * 10) / 10;
+  const clampedMeterEV = Math.max(-3.0, Math.min(3.0, realDeltaEV));
   // Porcentaje de desviación sobre el rango del exposímetro (-3 a +3 EV -> 0% a 100%)
   const meterPercent = Math.min(100, Math.round((Math.abs(clampedMeterEV) / 3.0) * 100));
   return {
     evCamera: evCamera,
-    deltaEV: deltaEV,
+    deltaEV: realDeltaEV,
     clampedMeterEV: clampedMeterEV,
     meterPercent: meterPercent,
     isShaky: speed <= 30
@@ -40,22 +65,24 @@ function getPhotoChemicalFilterStyles(shotData, stage = 'positive') {
   const blurPart = blurPx > 0 ? ` blur(${blurPx.toFixed(1)}px)` : '';
 
   if (stage === 'negative') {
-    // En el NEGATIVO físico de haluros de plata:
-    // - Sobreexposición (+EV, mucha luz): precipita mucha plata metálica opaca -> el negativo se ve MUY DENSO y OSCURO (casi negro en +3 EV)
-    // - Subexposición (-EV, poca luz): apenas reacciona la plata -> el negativo queda PÁLIDO/TRANSPARENTE/BLANQUEADO (casi velado claro en -3 EV)
-    if (clamped >= 2.85) {
+    if (shotData && !shotData.wasShotByUser) {
+      return {
+        filterCss: `brightness(0) contrast(1) saturate(0)`,
+        percent: 100,
+        negDescription: `⬛ FOTO NO TOMADA`
+      };
+    } else if (clamped <= -2.85) {
+      return {
+        filterCss: `brightness(0) contrast(1) saturate(0)`,
+        percent: 100,
+        negDescription: `⬛ Subexpuesta al 100% (-3.0 EV al mínimo del exposímetro)`
+      };
+    } else if (clamped >= 2.85) {
       // Tope +3 EV en negativo: emulsión totalmente ennegrecida por exceso de plata
       return {
         filterCss: `invert(1) hue-rotate(180deg) brightness(0.06) contrast(2.4)${blurPart}`,
         percent: 100,
         negDescription: `Negativo Denso 100% (Ennegrecido por +3.0 EV al máximo del exposímetro)`
-      };
-    } else if (clamped <= -2.85) {
-      // Tope -3 EV en negativo: celuloide transparente/claro sin apenas plata revelada
-      return {
-        filterCss: `invert(1) hue-rotate(180deg) brightness(2.8) contrast(0.25) opacity(0.35)${blurPart}`,
-        percent: 100,
-        negDescription: `Negativo Transparente 100% (Sin plata por -3.0 EV al mínimo del exposímetro)`
       };
     } else if (clamped > 0.4) {
       // Sobreexpuesto en negativo (+1 a +2.8 EV): se oscurece proporcionalmente (ej. en +2 EV está ~67% denso/oscuro)
@@ -83,21 +110,23 @@ function getPhotoChemicalFilterStyles(shotData, stage = 'positive') {
     };
   }
 
-  // En POSITIVO (Copia final en Cuarto Oscuro y Álbum Físico):
-  // - Al máximo +3 EV: foto prácticamente BLANCA (100% quemada)
-  // - Al mínimo -3 EV: foto prácticamente NEGRA (100% subexpuesta)
-  // - En +2 EV / -2 EV (~67%): fuertemente sobreexpuesta o subexpuesta en proporción exacta
-  if (clamped >= 2.85) {
+  if (shotData && !shotData.wasShotByUser) {
+    return {
+      filterCss: `brightness(0) contrast(1) saturate(0)`,
+      percent: 100,
+      posDescription: `⬛ FOTO NO TOMADA`
+    };
+  } else if (clamped <= -2.85) {
+    return {
+      filterCss: `brightness(0) contrast(1) saturate(0)`,
+      percent: 100,
+      posDescription: `⬛ NEGRA / SUBEXPUESTA AL 100% (${clamped.toFixed(1)} EV al mínimo del exposímetro)`
+    };
+  } else if (clamped >= 2.85) {
     return {
       filterCss: `brightness(5.5) contrast(0.12) saturate(0.05)${blurPart}`,
       percent: 100,
       posDescription: `⬜ BLANCA / QUEMADA AL 100% (+${clamped.toFixed(1)} EV al tope del exposímetro)`
-    };
-  } else if (clamped <= -2.85) {
-    return {
-      filterCss: `brightness(0.04) contrast(2.6) saturate(0.1)${blurPart}`,
-      percent: 100,
-      posDescription: `⬛ NEGRA / SUBEXPUESTA AL 100% (${clamped.toFixed(1)} EV al mínimo del exposímetro)`
     };
   } else if (clamped > 0.5) {
     // Escala continua entre +0.5 EV y +2.85 EV (ej. +2.0 EV = 67% sobreexpuesta)
@@ -294,8 +323,8 @@ function initAnalogCamera() {
   // =========================================================================
   // 1. RUEDAS CIRCULARES MOVIBLES: VELOCIDAD Y DIAFRAGMA
   // =========================================================================
-  const SPEED_VALUES = [1000, 500, 250, 125, 60, 30, 15, 4, 1];
-  const APERTURE_VALUES = [1.4, 2.0, 2.8, 4.0, 5.6, 8.0, 11.0, 16.0];
+  const SPEED_VALUES = FULL_STOP_SPEEDS;
+  const APERTURE_VALUES = FULL_STOP_APERTURES;
 
   const speedWheel = document.getElementById('wheel-shutter-speed');
   const speedRotor = document.getElementById('speed-wheel-rotor');
@@ -433,33 +462,22 @@ function initAnalogCamera() {
   function applyScenePresetCalibration() {
     const currentPhoto = getCurrentPhoto();
     if (!currentPhoto) return;
-    const vfSlider = document.getElementById('viewfinder-focus-slider');
-    const opt = findOptimalSettingsForPhoto(currentPhoto);
 
-    if (currentPhoto.isPresetOptimal) {
-      AppState.aperture = opt.aperture;
-      AppState.shutterSpeed = opt.speed;
-      AppState.userFocus = opt.focus;
-      if (vfSlider) vfSlider.value = opt.focus;
-      if (presetBadge) {
+    // La velocidad, el diafragma y el anillo de enfoque de la cámara NUNCA se mueven solos al cambiar de foto;
+    // se quedan exactamente donde estaban en el último disparo, y es la nueva foto la que tiene sus propios niveles de luz
+    if (typeof window.adaptIncomingPhotoLightToFixedCamera === 'function') {
+      window.adaptIncomingPhotoLightToFixedCamera(currentPhoto);
+    }
+
+    if (presetBadge) {
+      if (currentPhoto.isPresetOptimal) {
         presetBadge.style.display = 'inline-flex';
-        presetBadge.textContent = `✨ Foto #${String(AppState.currentSceneIndex + 1).padStart(2, '0')} pre-ajustada (lista para disparar)`;
-      }
-    } else {
-      // Descalibramos ligeramente para invitar a ajustar o usar los botones automáticos
-      const targetF = opt.focus;
-      AppState.userFocus = targetF > 50 ? Math.max(10, targetF - 32) : Math.min(92, targetF + 32);
-      if (vfSlider) vfSlider.value = AppState.userFocus;
-      // Desplazar exposición un par de pasos para que no esté clavada
-      const aIdx = APERTURE_VALUES.indexOf(opt.aperture);
-      AppState.aperture = APERTURE_VALUES[(aIdx + 3) % APERTURE_VALUES.length];
-      const sIdx = SPEED_VALUES.indexOf(opt.speed);
-      AppState.shutterSpeed = SPEED_VALUES[(sIdx + 2) % 6];
-      if (presetBadge) {
+        presetBadge.textContent = `✨ Luz de la escena #${String(AppState.currentSceneIndex + 1).padStart(2, '0')} coincide con tu cámara`;
+      } else {
         presetBadge.style.display = 'none';
       }
     }
-    syncRotaryWheelsVisual();
+
     updateLightMeterDisplay();
     updateFocusSimulation();
     if (typeof window.updateGuidedStepsUI === 'function') window.updateGuidedStepsUI();

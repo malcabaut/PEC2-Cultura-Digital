@@ -1096,7 +1096,7 @@
 
 .strip-frame-optic {
   height: 62px;
-  background: #090404;
+  background: #000000;
   border-radius: 3px;
   position: relative;
   overflow: hidden;
@@ -1106,6 +1106,7 @@
 .strip-svg-holder {
   width: 100%;
   height: 100%;
+  background: #000000;
   transition: opacity 0.4s ease, filter 0.4s ease;
 }
 
@@ -1233,7 +1234,7 @@
 .paper-in-tray {
   width: 240px;
   height: 138px;
-  background: #140909;
+  background: #000000;
   border: 2px solid #5a2d2d;
   border-radius: 4px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.75);
@@ -1245,6 +1246,7 @@
 .latent-image-emerging {
   width: 100%;
   height: 100%;
+  background: #000000;
   transition: opacity 0.45s ease, filter 0.45s ease;
 }
 
@@ -1498,7 +1500,7 @@
 .env-slot-preview {
   width: 100%;
   height: 36px;
-  background: #1a1412;
+  background: #000000;
   border-radius: 3px;
   overflow: hidden;
   position: relative;
@@ -1519,7 +1521,7 @@
 }
 
 .env-slot-preview.env-negative svg {
-  filter: invert(1) hue-rotate(180deg);
+  /* El filtro exacto de exposición o negro total lo aplica JS en el contenedor */
 }
 
 .env-slot-status {
@@ -1650,7 +1652,7 @@
   align-items: center;
   justify-content: center;
   filter: sepia(0.28) contrast(0.98);
-  background: #1c1613;
+  background: #000000;
   position: relative;
   border-radius: 2px;
 }
