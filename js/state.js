@@ -1,8 +1,11 @@
 /**
  * ========================================================
  * js/state.js - Estado Global de la Simulación Fotográfica
- * Gestiona el carrete de 10 fotos aleatorias, subida de hasta
- * 5 fotos reales del usuario, continuidad toma -> revelado -> álbum
+ * Gestiona la colección de 36 fotografías vectoriales disponibles
+ * (photos/photo-01.js a photo-36.js + manifest.js), el carrete activo
+ * de 12 exposiciones (reveladas en 3 tiras de 4 fotos: 1–4, 5–8 y 9–12),
+ * la subida de hasta 12 fotos reales del propio usuario y la continuidad
+ * toma -> revelado -> álbum.
  * ========================================================
  */
 
@@ -26,9 +29,9 @@ window.AppState = {
   userFocus: 20,              // Anillo de enfoque manual (0 a 100)
   isPeekingViewfinder: false, // Si mira por el visor óptico o la cámara exterior
 
-  // Carrete activo analógico de 12 fotos (aleatorias de las 36 + hasta 5 fotos reales para el carrete)
+  // Carrete activo analógico de 12 exposiciones (seleccionadas de las 36 vectoriales + hasta 12 fotos reales subidas por el usuario)
   reelPhotos: [],
-  userUploadedPhotos: [],     // Fotos reales subidas por el usuario (sin límite en la nube digital, hasta 5 entran en el carrete analógico)
+  userUploadedPhotos: [],     // Fotos reales subidas por el usuario (sin límite en la nube digital, hasta 12 entran en el carrete analógico)
   digitalExtraShots: [],      // Capturas adicionales infinitas tomadas con el smartphone digital
 
   // Registro de disparos físicos en el carrete de 12 (en orden de toma: índice 0..11)
@@ -133,7 +136,7 @@ function adaptIncomingPhotoLightToFixedCamera(photo) {
 window.adaptIncomingPhotoLightToFixedCamera = adaptIncomingPhotoLightToFixedCamera;
 
 /**
- * Reinicia el carrete de 10 fotos sorteando una nueva selección aleatoria (manteniendo o no las subidas)
+ * Reinicia el carrete de 12 exposiciones sorteando una nueva selección aleatoria de la colección de 36 (manteniendo o no las hasta 12 fotos subidas por el usuario)
  */
 function resetAndRandomizeReel(clearUserUploads = false) {
   if (clearUserUploads) {
@@ -162,7 +165,7 @@ function resetAndRandomizeReel(clearUserUploads = false) {
 }
 
 /**
- * Devuelve las 10 fotos del carrete analógico (Fase 1 analógica, Cuarto Oscuro y Álbum Físico)
+ * Devuelve las 12 fotos del carrete analógico activo (Fase 1 analógica, Cuarto Oscuro en 3 tiras de 4 y Álbum Físico)
  */
 function getPhotos() {
   if (!window.AppState.reelPhotos || window.AppState.reelPhotos.length === 0) {
@@ -173,7 +176,7 @@ function getPhotos() {
 
 /**
  * Devuelve TODAS las fotos de la base de datos digital de Google Photos (sin límite de fotos:
- * incluye las fotos subidas por el usuario, las capturas digitales extra y las 24 de la colección)
+ * incluye las fotos subidas por el usuario, las capturas digitales extra y las 36 de la colección)
  */
 function getDigitalPhotos() {
   const fullLib = window.PhotoLibrary || [];
