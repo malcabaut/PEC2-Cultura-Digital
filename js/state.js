@@ -9,7 +9,7 @@
  * ========================================================
  */
 
-window.AppState = {
+var AppState = window.AppState = {
   currentPhase: 1,
   soundEnabled: true,
   analogPhotosLeft: 12,       // Carrete de 12 exposiciones (formato real 135)
@@ -27,7 +27,6 @@ window.AppState = {
   iso: 400,                   // Película Kodak Gold 400 ISO fija
   currentDeltaEV: 0,          // Desviación del exposímetro frente a la escena
   userFocus: 20,              // Anillo de enfoque manual (0 a 100)
-  isPeekingViewfinder: false, // Si mira por el visor óptico o la cámara exterior
 
   // Carrete activo analógico de 12 exposiciones (seleccionadas de las 36 vectoriales + hasta 12 fotos reales subidas por el usuario)
   reelPhotos: [],
@@ -200,10 +199,14 @@ window._svgInstanceSeq = 0;
 function renderUniquePhotoSvg(svgStr) {
   if (!svgStr) return '';
   const uid = `u${++window._svgInstanceSeq}`;
-  return svgStr
-    .replace('<svg ', '<svg preserveAspectRatio="xMidYMid slice" ')
+  let result = svgStr;
+  if (!result.includes('preserveAspectRatio=')) {
+    result = result.replace('<svg ', '<svg preserveAspectRatio="xMidYMid slice" ');
+  }
+  return result
     .replace(/\bid="([^"]+)"/g, `id="$1-${uid}"`)
-    .replace(/url\(#([^)]+)\)/g, `url(#$1-${uid})`);
+    .replace(/url\(#([^)]+)\)/g, `url(#$1-${uid})`)
+    .replace(/href="#([^"]+)"/g, `href="#$1-${uid}"`);
 }
 window.renderUniquePhotoSvg = renderUniquePhotoSvg;
 

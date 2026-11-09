@@ -209,9 +209,9 @@
     height: 175px;
   }
 
-  /* Tira de cuarto oscuro de 5 fotos en móvil */
+  /* Tira de cuarto oscuro de 4 fotos en móvil */
   .film-strip-5-grid {
-    grid-template-columns: repeat(5, minmax(52px, 1fr));
+    grid-template-columns: repeat(4, minmax(52px, 1fr));
     overflow-x: auto;
   }
 

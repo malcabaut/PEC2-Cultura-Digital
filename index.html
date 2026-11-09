@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>De la Emulsión al Algoritmo | Cultura Digital PEC2</title>
-  <meta name="description" content="Recurso educativo interactivo para Cultura Digital: Remediación (Bolter y Grusin, 2000), Transcodificación y Software (Manovich, 2005, 2013), Apropiación e Hibridación (Alberich-Pascual, 2018), Postfotografía (Fontcuberta, 2016) y Espiral Creativa (Resnick, 2007) a través del paso de la fotografía analógica a Google Photos.">
+  <meta name="description"
+    content="Recurso educativo interactivo para Cultura Digital: Remediación (Bolter y Grusin, 2000), Transcodificación y Software (Manovich, 2005, 2013), Apropiación e Hibridación (Alberich-Pascual, 2018), Postfotografía (Fontcuberta, 2016) y Espiral Creativa (Resnick, 2007) a través del paso de la fotografía analógica a Google Photos.">
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- Fuentes web con fallbacks seguros del sistema -->
-  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Fraunces:opsz,wght@9..144,400;9..144,700&family=Google+Sans:wght@400;500;700&family=Inter:wght@300;400;500;600;700&family=Special+Elite&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Fraunces:opsz,wght@9..144,400;9..144,700&family=Google+Sans:wght@400;500;700&family=Inter:wght@300;400;500;600;700&family=Special+Elite&display=swap"
+    rel="stylesheet">
 </head>
+
 <body>
 
   <!-- ========================================================
@@ -20,7 +25,9 @@
     <div class="header-branding">
       <div class="badge-pec">PEC2 • CULTURA DIGITAL</div>
       <h1 class="header-title">De la Emulsión al Algoritmo</h1>
-      <p class="header-subtitle">Remediación (Bolter y Grusin, 2000 [orig. 1999]), Transcodificación y Software (Manovich, 2005, 2013), Apropiación (Alberich-Pascual, 2018), Postfotografía (Fontcuberta, 2016) y Espiral Creativa (Resnick, 2007)</p>
+      <p class="header-subtitle">Remediación (Bolter y Grusin, 2000 [orig. 1999]), Transcodificación y Software
+        (Manovich, 2005, 2013), Apropiación (Alberich-Pascual, 2018), Postfotografía (Fontcuberta, 2016) y Espiral
+        Creativa (Resnick, 2007)</p>
     </div>
 
     <!-- Navegación central por etapas del ciclo fotográfico -->
@@ -56,7 +63,8 @@
 
     <!-- Controles auxiliares: Sonido, Modo comparativa y Teoría General -->
     <div class="header-controls">
-      <button class="control-btn" id="btn-sound-toggle" title="Activar/Desactivar efectos de audio sintetizados" aria-label="Alternar sonido">
+      <button class="control-btn" id="btn-sound-toggle" title="Activar/Desactivar efectos de audio sintetizados"
+        aria-label="Alternar sonido">
         <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
           <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
           <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" id="audio-waves"></path>
@@ -64,7 +72,8 @@
         <span id="sound-label">Sonido: ON</span>
       </button>
 
-      <button class="control-btn highlight-btn" id="btn-theory-master" title="Ver dossier teórico y glosario conceptual">
+      <button class="control-btn highlight-btn" id="btn-theory-master"
+        title="Ver dossier teórico y glosario conceptual">
         <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="10"></circle>
           <line x1="12" y1="16" x2="12" y2="12"></line>
@@ -123,16 +132,23 @@
         <!-- Barra de Guía Paso a Paso Interactiva -->
         <div class="interactive-guide-bar" id="analog-step-guide" aria-live="polite">
           <div class="guide-steps-pills">
-            <span class="g-step active" id="g-step-1" title="1. Enfoca el prisma y ajusta luz (o usa los botones AUTO)">1️⃣ Enfocar y Medir Luz</span>
+            <span class="g-step active" id="g-step-1"
+              title="1. Enfoca el prisma y ajusta luz (o usa los botones AUTO)">1️⃣ Enfocar y Medir Luz</span>
             <span class="g-sep">➔</span>
-            <span class="g-step" id="g-step-2" title="2. Pulsa el disparador cromado para exponer la película">2️⃣ Disparar Foto</span>
+            <span class="g-step" id="g-step-2" title="2. Pulsa el disparador cromado para exponer la película">2️⃣
+              Disparar Foto</span>
             <span class="g-sep">➔</span>
-            <span class="g-step" id="g-step-3" title="3. Gira la manivela 3 vueltas para avanzar al siguiente fotograma">3️⃣ Bobinar Manivela (3 vueltas)</span>
+            <span class="g-step" id="g-step-3"
+              title="3. Gira la manivela 3 vueltas para avanzar al siguiente fotograma">3️⃣ Bobinar Manivela (3
+              vueltas)</span>
             <span class="g-sep">➔</span>
-            <span class="g-step" id="g-step-4" title="4. Pasa al Cuarto Oscuro (Fase 2) y luego al Álbum (Fase 3)">4️⃣ Revelar (Fase 2) y Montar (Fase 3)</span>
+            <span class="g-step" id="g-step-4" title="4. Pasa al Cuarto Oscuro (Fase 2) y luego al Álbum (Fase 3)">4️⃣
+              Revelar (Fase 2) y Montar (Fase 3)</span>
           </div>
           <div class="guide-current-hint" id="guide-live-hint">
-            💡 <strong>Qué hacer ahora:</strong> Pasa el ratón por el visor (o pulsa <em>🎯 Auto-Enfoque</em> y <em>⚖️ Auto-Balance EV</em>) y dispara con el botón cromado. <em>(¡El 30% del carrete, incluida la 2ª foto, ya viene pre-ajustado!)</em>
+            💡 <strong>Qué hacer ahora:</strong> Pasa el ratón por el visor (o pulsa <em>🎯 Auto-Enfoque</em> y <em>⚖️
+              Auto-Balance EV</em>) y dispara con el botón cromado. <em>(¡El 30% del carrete, incluida la 2ª foto, ya
+              viene pre-ajustado!)</em>
           </div>
         </div>
 
@@ -152,18 +168,23 @@
           <!-- Módulo para cargar hasta 12 fotos reales propias (el carrete completo) y meter un carrete nuevo de 12 -->
           <div class="custom-reel-toolbar" id="custom-reel-toolbar">
             <div class="reel-toolbar-info">
-              <span class="reel-badge-pill" id="reel-composition-badge">🎞️ Carrete virgen (12 exp.): 12 escenas por fotografiar (0/12 tuyas)</span>
-              <small>Sube tus propias fotos reales (hasta las 12 del carrete) para simular con tus recuerdos en el visor, cuarto oscuro, álbum y Google Photos.</small>
+              <span class="reel-badge-pill" id="reel-composition-badge">🎞️ Carrete virgen (12 exp.): 12 escenas por
+                fotografiar (0/12 tuyas)</span>
+              <small>Sube tus propias fotos reales (hasta las 12 del carrete) para simular con tus recuerdos en el
+                visor, cuarto oscuro, álbum y Google Photos.</small>
             </div>
             <div class="reel-toolbar-actions">
-              <label for="input-user-photos" class="btn-upload-photos" id="lbl-upload-photos" title="Subir hasta 12 fotos reales desde tu dispositivo (máximo el tamaño del carrete)">
+              <label for="input-user-photos" class="btn-upload-photos" id="lbl-upload-photos"
+                title="Subir hasta 12 fotos reales desde tu dispositivo (máximo el tamaño del carrete)">
                 📤 Subir tus fotos (<span id="user-photos-count">0</span>/12)
               </label>
               <input type="file" id="input-user-photos" accept="image/*" multiple style="display: none;">
-              <button type="button" class="btn-shuffle-reel" id="btn-shuffle-reel" title="Meter un carrete virgen nuevo de 12 exposiciones y reiniciar el revelado y el álbum">
+              <button type="button" class="btn-shuffle-reel" id="btn-shuffle-reel"
+                title="Meter un carrete virgen nuevo de 12 exposiciones y reiniciar el revelado y el álbum">
                 🎞️ Meter Carrete Nuevo
               </button>
-              <button type="button" class="btn-clear-uploads" id="btn-clear-uploads" style="display: none;" title="Quitar tus fotos subidas">
+              <button type="button" class="btn-clear-uploads" id="btn-clear-uploads" style="display: none;"
+                title="Quitar tus fotos subidas">
                 🗑️ Limpiar
               </button>
             </div>
@@ -204,7 +225,9 @@
 
                 <!-- IZQUIERDA: Manivela de Rebobinado/Arrastre (Girar varias vueltas con el ratón) -->
                 <div class="top-left-section">
-                  <div class="rewind-crank-assembly" id="rewind-crank-wheel" title="Arrastra en círculos con el ratón dando 3 vueltas para bobinar el carrete">
+                  <div class="rewind-crank-assembly" id="rewind-crank-wheel" role="button" tabindex="0"
+                    title="Arrastra en círculos con el ratón dando 3 vueltas para bobinar el carrete (o pulsa Enter/Espacio/W, o haz doble clic)"
+                    aria-label="Manivela de arrastre y rebobinado (3 vueltas)">
                     <svg class="crank-progress-ring" viewBox="0 0 88 88">
                       <circle class="crank-ring-bg" cx="44" cy="44" r="39"></circle>
                       <circle class="crank-ring-fill" id="crank-progress-circle" cx="44" cy="44" r="39"></circle>
@@ -241,7 +264,9 @@
                   <!-- CÍRCULO 1: Dial de Velocidad de Obturación Giratorio -->
                   <div class="rotary-dial-unit">
                     <div class="dial-index-marker">▼</div>
-                    <div class="rotary-wheel speed-wheel" id="wheel-shutter-speed" title="Arrastra o gira para cambiar la Velocidad de Obturación">
+                    <div class="rotary-wheel speed-wheel" id="wheel-shutter-speed" role="slider" tabindex="0"
+                      aria-label="Velocidad de Obturación" aria-valuenow="500"
+                      title="Arrastra, gira la rueda o usa las flechas del teclado para cambiar la Velocidad">
                       <div class="wheel-rotor" id="speed-wheel-rotor">
                         <span class="wheel-num" style="--angle: 0deg;">1000</span>
                         <span class="wheel-num" style="--angle: 40deg;">500</span>
@@ -264,7 +289,9 @@
                   <!-- CÍRCULO 2: Dial de Diafragma Movible (ƒ/) -->
                   <div class="rotary-dial-unit">
                     <div class="dial-index-marker aperture-marker">▼</div>
-                    <div class="rotary-wheel aperture-wheel" id="wheel-aperture" title="Arrastra o gira para mover el Diafragma (ƒ/)">
+                    <div class="rotary-wheel aperture-wheel" id="wheel-aperture" role="slider" tabindex="0"
+                      aria-label="Diafragma" aria-valuenow="8.0"
+                      title="Arrastra, gira la rueda o usa las flechas del teclado para cambiar el Diafragma">
                       <div class="wheel-rotor" id="aperture-wheel-rotor">
                         <span class="wheel-num" style="--angle: 0deg;">1.4</span>
                         <span class="wheel-num" style="--angle: 45deg;">2</span>
@@ -289,7 +316,9 @@
                       <span class="counter-s-dot">S•</span>
                       <span id="analog-top-counter">12</span>
                     </div>
-                    <button class="chrome-shutter-release" id="btn-analog-shoot" title="Pulsar botón disparador mecánico">
+                    <button class="chrome-shutter-release" id="btn-analog-shoot"
+                      title="Pulsar botón disparador mecánico (o pulsa la barra espaciadora)"
+                      aria-label="Disparador mecánico analógico">
                       <span class="shutter-chrome-collar">
                         <span class="shutter-thread-hole"></span>
                       </span>
@@ -369,9 +398,13 @@
 
                     <!-- Controles del minijuego de enfoque (visibles cuando el visor se agranda) -->
                     <div class="viewfinder-focus-subcontrols">
-                      <button type="button" class="focus-step-btn" id="btn-focus-near" title="Enfocar más cerca">◀ 0.7m</button>
-                      <input type="range" id="viewfinder-focus-slider" min="0" max="100" value="20" class="focus-slider-internal" title="Desliza para alinear el prisma de imagen partida">
-                      <button type="button" class="focus-step-btn" id="btn-focus-far" title="Enfocar hacia infinito">∞ ▶</button>
+                      <button type="button" class="focus-step-btn" id="btn-focus-near" title="Enfocar más cerca">◀
+                        0.7m</button>
+                      <input type="range" id="viewfinder-focus-slider" min="0" max="100" value="20"
+                        class="focus-slider-internal" title="Desliza para alinear el prisma de imagen partida"
+                        aria-label="Anillo de enfoque manual">
+                      <button type="button" class="focus-step-btn" id="btn-focus-far" title="Enfocar hacia infinito">∞
+                        ▶</button>
                     </div>
 
                     <span class="turret-brand-name">PENTAX • 35mm</span>
@@ -414,16 +447,20 @@
             <div class="camera-assist-toolbar" id="camera-assist-toolbar">
               <div class="assist-toolbar-label">
                 <span>🛠️ Asistentes rápidos:</span>
-                <small id="preset-photo-badge" class="preset-ready-badge" style="display: none;">✨ ¡Foto pre-calibrada lista!</small>
+                <small id="preset-photo-badge" class="preset-ready-badge" style="display: none;">✨ ¡Foto pre-calibrada
+                  lista!</small>
               </div>
               <div class="assist-buttons-group">
-                <button type="button" class="btn-camera-assist" id="btn-auto-focus" title="Alinear automáticamente el prisma de imagen partida para enfocar con nitidez">
+                <button type="button" class="btn-camera-assist" id="btn-auto-focus"
+                  title="Alinear automáticamente el prisma de imagen partida para enfocar con nitidez">
                   🎯 Enfoque Automático
                 </button>
-                <button type="button" class="btn-camera-assist" id="btn-auto-exposure" title="Ajustar automáticamente el Diafragma y la Velocidad para clavar el exposímetro en 0.0 EV">
+                <button type="button" class="btn-camera-assist" id="btn-auto-exposure"
+                  title="Ajustar automáticamente el Diafragma y la Velocidad para clavar el exposímetro en 0.0 EV">
                   ⚖️ Balance Auto (0.0 EV)
                 </button>
-                <button type="button" class="btn-camera-assist btn-assist-both" id="btn-auto-all" title="Enfocar y equilibrar la luz a la vez con un solo clic">
+                <button type="button" class="btn-camera-assist btn-assist-both" id="btn-auto-all"
+                  title="Enfocar y equilibrar la luz a la vez con un solo clic">
                   ✨ Todo Óptimo
                 </button>
               </div>
@@ -437,7 +474,10 @@
               <strong>Condición Analógica: Incertidumbre, Enfoque y Exposímetro Manual</strong>
             </div>
             <p id="analog-status-msg">
-              <strong>Pasa el ratón por encima del visor ocular</strong> para agrandarlo y alinear el minijuego del prisma de enfoque. Gira las <strong>ruedas circulares de Velocidad y Diafragma</strong> arriba a la derecha, pulsa el botón disparador cromado y luego <strong>da 3 vueltas completas a la manivela izquierda</strong> con el ratón para bobinar el carrete de 12 fotos al siguiente fotograma.
+              <strong>Pasa el ratón por encima del visor ocular</strong> para agrandarlo y alinear el minijuego del
+              prisma de enfoque. Gira las <strong>ruedas circulares de Velocidad y Diafragma</strong> arriba a la
+              derecha, pulsa el botón disparador cromado y luego <strong>da 3 vueltas completas a la manivela
+                izquierda</strong> con el ratón para bobinar el carrete de 12 fotos al siguiente fotograma.
             </p>
             <div class="status-metric">
               <span id="meter-diagnosis-pill">Exposímetro: <strong>Equilibrado (0.0 EV)</strong></span>
@@ -494,11 +534,13 @@
             <!-- CUBETA QUÍMICA INTERACTIVA (Agitar con el ratón o botón para pasar de Oculto -> Invertido -> Revelado) -->
             <div class="chemical-tray-area">
               <div class="tray-header-row">
-                <span class="tray-label" id="darkroom-tray-title">Cubeta Química: Mueve el ratón en el líquido para agitar los químicos</span>
+                <span class="tray-label" id="darkroom-tray-title">Cubeta Química: Mueve el ratón en el líquido para
+                  agitar los químicos</span>
                 <span class="tray-progress-pill" id="darkroom-progress-pill">Progreso baño: 0%</span>
               </div>
 
-              <div class="tray-fluid" id="darkroom-tray" title="Mueve el ratón de lado a lado dentro de la cubeta para agitar el líquido revelador">
+              <div class="tray-fluid" id="darkroom-tray"
+                title="Mueve el ratón de lado a lado dentro de la cubeta para agitar el líquido revelador">
                 <div class="paper-in-tray" id="darkroom-paper">
                   <div class="latent-image-emerging" id="latent-image">
                     <!-- Vista ampliada del fotograma seleccionado en su estado actual (Oculto / Invertido / Revelado) -->
@@ -529,7 +571,10 @@
 
             <!-- Nota de diagnóstico de exposición y enfoque -->
             <div class="darkroom-friction-note" id="darkroom-exposure-summary">
-              <strong>Proceso Fotoquímico en 3 pasos (de 4 en 4 fotos):</strong> Al principio la emulsión es opaca y no se ve nada. En el <strong>Paso 1</strong> emergen las 4 fotos con los <strong>colores invertidos (negativo)</strong>. En el <strong>Paso 2</strong> se positivan mostrando la imagen final según la <strong>exposición (diafragma/velocidad) y el enfoque</strong> con que las tomaste.
+              <strong>Proceso Fotoquímico en 3 pasos (de 4 en 4 fotos):</strong> Al principio la emulsión es opaca y no
+              se ve nada. En el <strong>Paso 1</strong> emergen las 4 fotos con los <strong>colores invertidos
+                (negativo)</strong>. En el <strong>Paso 2</strong> se positivan mostrando la imagen final según la
+              <strong>exposición (diafragma/velocidad) y el enfoque</strong> con que las tomaste.
             </div>
           </div>
         </div>
@@ -555,10 +600,12 @@
                 <span class="c-pill" id="album-stat-mounted">📒 En Álbum: 0/12</span>
               </div>
               <div class="album-quick-actions">
-                <button type="button" class="btn-quick-mount-all" id="btn-quick-mount-all" title="Revelar y colocar automáticamente las 12 copias en las páginas del álbum">
+                <button type="button" class="btn-quick-mount-all" id="btn-quick-mount-all"
+                  title="Revelar y colocar automáticamente las 12 copias en las páginas del álbum">
                   ✨ Colocar Todo el Carrete
                 </button>
-                <button type="button" class="btn-reset-album-order" id="btn-reset-album-order" title="Restaurar el orden original de las páginas del álbum">
+                <button type="button" class="btn-reset-album-order" id="btn-reset-album-order"
+                  title="Restaurar el orden original de las páginas del álbum">
                   ↺ Orden Original
                 </button>
               </div>
@@ -582,11 +629,13 @@
               <span class="album-gold-emblem">⚜️</span>
               <div class="album-title-editable-wrap">
                 <label for="album-main-title-input">TÍTULO EN PORTADA DEL ÁLBUM:</label>
-                <input type="text" id="album-main-title-input" class="album-main-title-input" value="RECUERDOS Y VIAJES DE FAMILIA (1998–2024)" aria-label="Título de portada del álbum físico">
+                <input type="text" id="album-main-title-input" class="album-main-title-input"
+                  value="RECUERDOS Y VIAJES DE FAMILIA (1998–2024)" aria-label="Título de portada del álbum físico">
               </div>
             </div>
             <div class="album-spread-tabs" id="album-spread-tabs">
-              <button type="button" class="spread-tab active" data-spread="0">📖 Pliego 1 (Págs. 1–2 • Fotos 1–4)</button>
+              <button type="button" class="spread-tab active" data-spread="0">📖 Pliego 1 (Págs. 1–2 • Fotos
+                1–4)</button>
               <button type="button" class="spread-tab" data-spread="1">📖 Pliego 2 (Págs. 3–4 • Fotos 5–8)</button>
               <button type="button" class="spread-tab" data-spread="2">📖 Pliego 3 (Págs. 5–6 • Fotos 9–12)</button>
             </div>
@@ -632,13 +681,16 @@
                 <span class="slot-selected-badge" id="album-selected-slot-badge">📌 Hueco Seleccionado: #01</span>
                 <span class="slot-exposure-summary" id="album-exposure-badge">Exposición Óptima (ƒ/8.0 • 1/500s)</span>
                 <div class="slot-move-controls">
-                  <button type="button" class="btn-slot-swap" id="btn-swap-prev" title="Intercambiar posición con la foto anterior del álbum">⬅ Mover Antes</button>
-                  <button type="button" class="btn-slot-swap" id="btn-swap-next" title="Intercambiar posición con la foto siguiente del álbum">Mover Después ➡</button>
+                  <button type="button" class="btn-slot-swap" id="btn-swap-prev"
+                    title="Intercambiar posición con la foto anterior del álbum">⬅ Mover Antes</button>
+                  <button type="button" class="btn-slot-swap" id="btn-swap-next"
+                    title="Intercambiar posición con la foto siguiente del álbum">Mover Después ➡</button>
                 </div>
               </div>
               <div class="handwriting-edit-row">
                 <span class="pen-icon-label">✒️ Pie de foto manuscrito:</span>
-                <input type="text" id="album-custom-note-input" class="album-note-input" placeholder="Escribe a mano la fecha, el lugar o quiénes salen detrás o debajo de la foto...">
+                <input type="text" id="album-custom-note-input" class="album-note-input"
+                  placeholder="Escribe a mano la fecha, el lugar o quiénes salen detrás o debajo de la foto...">
                 <button type="button" class="btn-save-album-note" id="btn-save-album-note">Escribir en Álbum</button>
               </div>
             </div>
@@ -649,7 +701,9 @@
                 ◀ Pasar Hoja Anterior
               </button>
               <div class="linear-warning">
-                <span>📚 <strong>Orden Fijo y Manual (Sintagma Físico):</strong> Organizar las copias en papel exige pegarlas una a una y rotularlas a mano. Para buscar un recuerdo viejo hay que pasar las hojas físicamente.</span>
+                <span>📚 <strong>Orden Fijo y Manual (Sintagma Físico):</strong> Organizar las copias en papel exige
+                  pegarlas una a una y rotularlas a mano. Para buscar un recuerdo viejo hay que pasar las hojas
+                  físicamente.</span>
               </div>
               <button class="album-nav-btn" id="btn-album-next" title="Pasar al siguiente pliego del álbum">
                 Pasar Hoja Siguiente ▶
@@ -671,10 +725,16 @@
         <div class="brand-tag google-brand">
           <!-- Logo icónico del molinete de Google Photos en SVG -->
           <svg class="google-photos-logo" viewBox="0 0 192 192" width="28" height="28">
-            <path fill="#4285F4" d="M96 0C122.5 0 144 21.5 144 48V96H48C21.5 96 0 74.5 0 48C0 21.5 21.5 0 48 0H96Z" opacity="0.9"/>
-            <path fill="#EA4335" d="M192 96C192 122.5 170.5 144 144 144H96V48C96 21.5 117.5 0 144 0C170.5 0 192 21.5 192 48V96Z" opacity="0.9"/>
-            <path fill="#34A853" d="M96 192C69.5 192 48 170.5 48 144V96H144C170.5 96 192 117.5 192 144C192 170.5 170.5 192 144 192H96Z" opacity="0.9"/>
-            <path fill="#FBBC05" d="M0 96C0 69.5 21.5 48 48 48H96V144C96 170.5 74.5 192 48 192C21.5 192 0 170.5 0 144V96Z" opacity="0.9"/>
+            <path fill="#4285F4" d="M96 0C122.5 0 144 21.5 144 48V96H48C21.5 96 0 74.5 0 48C0 21.5 21.5 0 48 0H96Z"
+              opacity="0.9" />
+            <path fill="#EA4335"
+              d="M192 96C192 122.5 170.5 144 144 144H96V48C96 21.5 117.5 0 144 0C170.5 0 192 21.5 192 48V96Z"
+              opacity="0.9" />
+            <path fill="#34A853"
+              d="M96 192C69.5 192 48 170.5 48 144V96H144C170.5 96 192 117.5 192 144C192 170.5 170.5 192 144 192H96Z"
+              opacity="0.9" />
+            <path fill="#FBBC05"
+              d="M0 96C0 69.5 21.5 48 48 48H96V144C96 170.5 74.5 192 48 192C21.5 192 0 170.5 0 144V96Z" opacity="0.9" />
           </svg>
           <div>
             <h3>Google Photos</h3>
@@ -762,7 +822,10 @@
               <strong>Condición Postfotográfica: Superabundancia e Inmediatez (Homo Photographicus)</strong>
             </div>
             <p id="digital-status-msg">
-              Disparo infinito con coste marginal cero (<em>Homo photographicus</em>, Fontcuberta). La pantalla AMOLED ofrece retroalimentación instantánea (WYSIWYG): pasamos del <em>"esto ha sido"</em> al <em>"yo estaba allí"</em> en un presente en suspensión mientras la IA procesa el HDR y sincroniza el archivo en la nube.
+              Disparo infinito con coste marginal cero (<em>Homo photographicus</em>, Fontcuberta). La pantalla AMOLED
+              ofrece retroalimentación instantánea (WYSIWYG): pasamos del <em>"esto ha sido"</em> al <em>"yo estaba
+                allí"</em> en un presente en suspensión mientras la IA procesa el HDR y sincroniza el archivo en la
+              nube.
             </p>
             <div class="status-metric digital-metrics">
               <span>Almacenamiento: <strong>Ilimitado en la nube</strong></span>
@@ -778,7 +841,8 @@
           <div class="cloud-header">
             <span class="cloud-sync-badge">
               <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/>
+                <path
+                  d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
               </svg>
               Cloud Pipeline: Google Photos Neural Engine
             </span>
@@ -789,9 +853,11 @@
           <div class="digital-pipeline-container">
             <!-- Pestañas interactivas para explorar la imagen desglosada según Manovich -->
             <div class="pipeline-tabs" role="tablist">
-              <button class="pipe-tab active" data-layer="binary" id="tab-binary">1. Representación Numérica (Píxeles/Hex)</button>
+              <button class="pipe-tab active" data-layer="binary" id="tab-binary">1. Representación Numérica
+                (Píxeles/Hex)</button>
               <button class="pipe-tab" data-layer="exif" id="tab-exif">2. Metadatos EXIF (Geolocalización)</button>
-              <button class="pipe-tab" data-layer="vision" id="tab-vision">3. Visión por Computador (Etiquetas IA)</button>
+              <button class="pipe-tab" data-layer="vision" id="tab-vision">3. Visión por Computador (Etiquetas
+                IA)</button>
             </div>
 
             <!-- Vista 1: Representación Numérica (Matriz de datos y código discreto) -->
@@ -801,7 +867,8 @@
                   <div class="zoom-pixel-preview" id="pixel-matrix-preview">
                     <!-- Cuadrícula de píxeles ampliada con valores RGB -->
                   </div>
-                  <div class="pixel-info-legend">Zoom al 1600%: El continuo visual se divide en elementos discretos medibles</div>
+                  <div class="pixel-info-legend">Zoom al 1600%: El continuo visual se divide en elementos discretos
+                    medibles</div>
                 </div>
                 <div class="code-stream-panel">
                   <div class="code-title">Matriz Numérica f(x, y) ➔ [R, G, B, A]</div>
@@ -833,7 +900,8 @@
                   <div class="minimap-graphic" id="gps-minimap">
                     <div class="map-grid-lines"></div>
                     <div class="map-pin">📍</div>
-                    <div class="map-coords-label" id="gps-coords-label">Lat: 48.8584° N, Lon: 2.2945° E (París, Francia)</div>
+                    <div class="map-coords-label" id="gps-coords-label">Lat: 48.8584° N, Lon: 2.2945° E (París, Francia)
+                    </div>
                   </div>
                 </div>
               </div>
@@ -858,7 +926,10 @@
                   </div>
                 </div>
                 <div class="ai-insight-box">
-                  <strong>Transcodificación y Postfotografía:</strong> Cuando el píxel sustituye al haluro de plata se quiebra la <em>indexicalidad</em> física (Peirce/Fontcuberta). Tu recuerdo personal es transcodificado (Manovich) en un <em>embedding</em> de 512 dimensiones para la enciclopedización del saber y la sociabilidad digital.
+                  <strong>Transcodificación y Postfotografía:</strong> Cuando el píxel sustituye al haluro de plata se
+                  quiebra la <em>indexicalidad</em> física (Peirce/Fontcuberta). Tu recuerdo personal es transcodificado
+                  (Manovich) en un <em>embedding</em> de 512 dimensiones para la enciclopedización del saber y la
+                  sociabilidad digital.
                 </div>
               </div>
             </div>
@@ -872,12 +943,16 @@
           <!-- Barra de búsqueda inteligente de Google Photos -->
           <div class="gphotos-search-bar">
             <div class="search-input-wrapper">
-              <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#5f6368" stroke-width="2">
+              <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#5f6368"
+                stroke-width="2">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
-              <input type="text" id="gphotos-search-input" placeholder="Prueba a buscar 'fotos del viaje a París', 'Abuelo', 'Toby', 'Playa'..." aria-label="Buscar en la base de datos de fotos">
-              <button class="clear-search-btn" id="btn-clear-search" title="Limpiar búsqueda" style="display: none;">✕</button>
+              <input type="text" id="gphotos-search-input"
+                placeholder="Prueba a buscar 'fotos del viaje a París', 'Abuelo', 'Toby', 'Playa'..."
+                aria-label="Buscar en la base de datos de fotos">
+              <button class="clear-search-btn" id="btn-clear-search" title="Limpiar búsqueda"
+                style="display: none;">✕</button>
             </div>
             <div class="gphotos-user-avatar" title="Cuenta de Google de Usuario">
               <span>CD</span>
@@ -893,19 +968,23 @@
                 <small>Agrupación biométrica</small>
               </div>
               <div class="faces-avatars-row" id="gphotos-faces-row">
-                <button type="button" class="face-avatar-btn" data-smart-query="Familia" data-album-title="Recuerdos en Familia" data-album-sub="Reconocimiento facial IA • Rostros agrupados">
+                <button type="button" class="face-avatar-btn" data-smart-query="Familia"
+                  data-album-title="Recuerdos en Familia" data-album-sub="Reconocimiento facial IA • Rostros agrupados">
                   <span class="face-ring face-abuelo">👴</span>
                   <span class="face-name">Abuelo</span>
                 </button>
-                <button type="button" class="face-avatar-btn" data-smart-query="Retrato" data-album-title="Retratos y Amigos" data-album-sub="Cluster biométrico • 512-d FaceNet">
+                <button type="button" class="face-avatar-btn" data-smart-query="Retrato"
+                  data-album-title="Retratos y Amigos" data-album-sub="Cluster biométrico • 512-d FaceNet">
                   <span class="face-ring face-elena">👩</span>
                   <span class="face-name">Elena</span>
                 </button>
-                <button type="button" class="face-avatar-btn" data-smart-query="Mascotas" data-album-title="Toby y Mascotas" data-album-sub="Detección de mascotas IA • 99.8% conf.">
+                <button type="button" class="face-avatar-btn" data-smart-query="Mascotas"
+                  data-album-title="Toby y Mascotas" data-album-sub="Detección de mascotas IA • 99.8% conf.">
                   <span class="face-ring face-toby">🐕</span>
                   <span class="face-name">Toby</span>
                 </button>
-                <button type="button" class="face-avatar-btn" data-smart-query="Personal" data-album-title="Tus Fotos Subidas" data-album-sub="Sincronización automática en la nube">
+                <button type="button" class="face-avatar-btn" data-smart-query="Personal"
+                  data-album-title="Tus Fotos Subidas" data-album-sub="Sincronización automática en la nube">
                   <span class="face-ring face-user">📤</span>
                   <span class="face-name">Tú</span>
                 </button>
@@ -919,21 +998,27 @@
                 <small>Búsqueda espacial GPS</small>
               </div>
               <div class="places-pills-row" id="gphotos-places-row">
-                <button type="button" class="place-map-pill" data-smart-query="París" data-album-title="Viaje a París 🇫🇷" data-album-sub="📍 48.8584° N, 2.2945° E • Francia • Álbum geolocalizado">
+                <button type="button" class="place-map-pill" data-smart-query="París"
+                  data-album-title="Viaje a París 🇫🇷"
+                  data-album-sub="📍 48.8584° N, 2.2945° E • Francia • Álbum geolocalizado">
                   <span class="place-pin">🗼</span>
                   <div class="place-txt">
                     <strong>París, Francia</strong>
                     <small>48.85° N, 2.29° E</small>
                   </div>
                 </button>
-                <button type="button" class="place-map-pill" data-smart-query="Playa" data-album-title="Escapadas a la Costa 🏖️" data-album-sub="📍 36.1342° N, 5.8456° W • Costa y Mar • GPS EXIF">
+                <button type="button" class="place-map-pill" data-smart-query="Playa"
+                  data-album-title="Escapadas a la Costa 🏖️"
+                  data-album-sub="📍 36.1342° N, 5.8456° W • Costa y Mar • GPS EXIF">
                   <span class="place-pin">🏖️</span>
                   <div class="place-txt">
                     <strong>Costa y Playa</strong>
                     <small>36.13° N, 5.84° W</small>
                   </div>
                 </button>
-                <button type="button" class="place-map-pill" data-smart-query="Naturaleza" data-album-title="Rutas de Montaña y Naturaleza 🏔️" data-album-sub="📍 Pirineos y Picos • Altitud y Coordenadas GPS">
+                <button type="button" class="place-map-pill" data-smart-query="Naturaleza"
+                  data-album-title="Rutas de Montaña y Naturaleza 🏔️"
+                  data-album-sub="📍 Pirineos y Picos • Altitud y Coordenadas GPS">
                   <span class="place-pin">🏔️</span>
                   <div class="place-txt">
                     <strong>Montaña</strong>
@@ -946,15 +1031,29 @@
 
           <!-- 3. TOQUES DE BÚSQUEDA Y GENERACIÓN INSTANTÁNEA DE ÁLBUMES ESTRUCTURADOS -->
           <div class="search-chips-container">
-            <span class="chips-label">✨ Un toque para estructurar tu Álbum Inteligente al momento (Remediación + Transcodificación):</span>
+            <span class="chips-label">✨ Un toque para estructurar tu Álbum Inteligente al momento (Remediación +
+              Transcodificación):</span>
             <div class="chips-scroll">
               <button class="filter-chip active" data-filter="all">📚 Biblioteca Completa (∞)</button>
-              <button class="filter-chip smart-album-chip" data-filter="París" data-album-title="Fotos del viaje a París 🗼" data-album-sub="Álbum estructurado al instante • GPS: París, Francia • Orden cronológico">✨ "Fotos del viaje a París"</button>
-              <button class="filter-chip smart-album-chip" data-filter="Familia" data-album-title="Celebraciones en Familia 👨‍👩‍👧" data-album-sub="Álbum automático por reconocimiento facial y eventos">✨ "Álbum Familiar"</button>
-              <button class="filter-chip smart-album-chip" data-filter="Mascotas" data-album-title="Aventuras de nuestras Mascotas 🐕" data-album-sub="Recopilación automática IA • Perros y gatos">✨ "Recuerdos de Mascotas"</button>
-              <button class="filter-chip smart-album-chip" data-filter="Playa" data-album-title="Veranos en la Playa 🏖️" data-album-sub="Geolocalización costera + Visión por computador">✨ "Veranos en la Playa"</button>
-              <button class="filter-chip smart-album-chip" data-filter="Comida" data-album-title="Ruta Gastronómica y Cenas 🍕" data-album-sub="Clasificación semántica de platos y reuniones">✨ "Cenas y Gastronomía"</button>
-              <button class="filter-chip smart-album-chip" data-filter="2024" data-album-title="Lo Mejor del Año 2024 📅" data-album-sub="Resumen anual automatizado por metadatos de fecha">✨ "Resumen Año 2024"</button>
+              <button class="filter-chip smart-album-chip" data-filter="París"
+                data-album-title="Fotos del viaje a París 🗼"
+                data-album-sub="Álbum estructurado al instante • GPS: París, Francia • Orden cronológico">✨ "Fotos del
+                viaje a París"</button>
+              <button class="filter-chip smart-album-chip" data-filter="Familia"
+                data-album-title="Celebraciones en Familia 👨‍👩‍👧"
+                data-album-sub="Álbum automático por reconocimiento facial y eventos">✨ "Álbum Familiar"</button>
+              <button class="filter-chip smart-album-chip" data-filter="Mascotas"
+                data-album-title="Aventuras de nuestras Mascotas 🐕"
+                data-album-sub="Recopilación automática IA • Perros y gatos">✨ "Recuerdos de Mascotas"</button>
+              <button class="filter-chip smart-album-chip" data-filter="Playa"
+                data-album-title="Veranos en la Playa 🏖️"
+                data-album-sub="Geolocalización costera + Visión por computador">✨ "Veranos en la Playa"</button>
+              <button class="filter-chip smart-album-chip" data-filter="Comida"
+                data-album-title="Ruta Gastronómica y Cenas 🍕"
+                data-album-sub="Clasificación semántica de platos y reuniones">✨ "Cenas y Gastronomía"</button>
+              <button class="filter-chip smart-album-chip" data-filter="2024"
+                data-album-title="Lo Mejor del Año 2024 📅"
+                data-album-sub="Resumen anual automatizado por metadatos de fecha">✨ "Resumen Año 2024"</button>
             </div>
           </div>
 
@@ -981,20 +1080,23 @@
                 <span class="ia-badge-ai" id="instant-album-count-badge">4 recuerdos</span>
               </div>
               <h4 id="instant-album-title">Fotos del viaje a París</h4>
-              <p id="instant-album-subtitle">Álbum estructurado al momento • Orden cronológico, mapa de ruta y rostros etiquetados</p>
+              <p id="instant-album-subtitle">Álbum estructurado al momento • Orden cronológico, mapa de ruta y rostros
+                etiquetados</p>
               <div class="instant-album-meta-tags" id="instant-album-meta-pills">
                 <span>📍 Mapa GPS activo</span>
                 <span>👤 Reconocimiento facial</span>
                 <span>⚡ Creado en 12 ms</span>
               </div>
             </div>
-            <button type="button" class="btn-close-instant-album" id="btn-close-instant-album" title="Volver a toda la biblioteca">✕ Ver todo</button>
+            <button type="button" class="btn-close-instant-album" id="btn-close-instant-album"
+              title="Volver a toda la biblioteca">✕ Ver todo</button>
           </div>
 
           <!-- Cuadrícula fluida de Google Photos -->
           <div class="gphotos-grid-area">
             <div class="grid-section-header">
-              <span class="grid-date-label" id="grid-results-count">Mostrando todos los recuerdos indexados en la nube (Sin límite de fotos)</span>
+              <span class="grid-date-label" id="grid-results-count">Mostrando todos los recuerdos indexados en la nube
+                (Sin límite de fotos)</span>
               <span class="grid-layout-toggle" id="grid-mode-indicator">Orden cronológico automático</span>
             </div>
 
@@ -1004,16 +1106,18 @@
           </div>
 
           <!-- Detalle de la foto seleccionada en Google Photos (Variabilidad y no-destructividad) -->
-          <div class="photo-inspector-modal" id="photo-inspector" style="display: none;">
+          <div class="photo-inspector-modal" id="photo-inspector" role="dialog" aria-modal="true"
+            aria-labelledby="inspector-title" style="display: none;">
             <div class="inspector-content">
-              <button class="inspector-close-btn" id="btn-close-inspector">✕</button>
+              <button class="inspector-close-btn" id="btn-close-inspector"
+                aria-label="Cerrar inspector de fotografía">✕</button>
               <div class="inspector-body">
                 <div class="inspector-image-pane" id="inspector-image"></div>
                 <div class="inspector-meta-pane">
                   <h4 id="inspector-title">Título de Foto</h4>
                   <p class="inspector-date" id="inspector-date">24 jul 2023, 19:42</p>
                   <p class="inspector-gps-line" id="inspector-gps">📍 48.8584° N, 2.2945° E</p>
-                  
+
                   <div class="inspector-chips" id="inspector-chips"></div>
 
                   <!-- Demostración del Principio de Variabilidad de Manovich -->
@@ -1025,7 +1129,8 @@
                       <button class="v-filter-btn" data-vfilter="cool">Frío (Cian)</button>
                       <button class="v-filter-btn" data-vfilter="bw">B&W Remediado</button>
                     </div>
-                    <small class="v-note">El archivo RAW original no se modifica; el software aplica un shader CSS en tiempo real.</small>
+                    <small class="v-note">El archivo RAW original no se modifica; el software aplica un shader CSS en
+                      tiempo real.</small>
                   </div>
                 </div>
               </div>
@@ -1045,7 +1150,8 @@
        ======================================================== -->
 
   <!-- Modal Teórico: Analógico -->
-  <div class="theory-modal-backdrop" id="modal-theory-analog" role="dialog" aria-hidden="true">
+  <div class="theory-modal-backdrop" id="modal-theory-analog" role="dialog" aria-modal="true"
+    aria-labelledby="analog-modal-title" aria-hidden="true">
     <div class="theory-modal-card">
       <div class="modal-header-row analog-modal-head">
         <div class="modal-title-wrap">
@@ -1066,7 +1172,8 @@
   </div>
 
   <!-- Modal Teórico: Digital -->
-  <div class="theory-modal-backdrop" id="modal-theory-digital" role="dialog" aria-hidden="true">
+  <div class="theory-modal-backdrop" id="modal-theory-digital" role="dialog" aria-modal="true"
+    aria-labelledby="digital-modal-title" aria-hidden="true">
     <div class="theory-modal-card">
       <div class="modal-header-row digital-modal-head">
         <div class="modal-title-wrap">
@@ -1089,12 +1196,13 @@
   <!-- ========================================================
        MODAL MAESTRO: DOSSIER TEÓRICO COMPLETO (PEC2)
        ======================================================== -->
-  <div class="theory-modal-backdrop" id="modal-theory-master" role="dialog" aria-hidden="true">
+  <div class="theory-modal-backdrop" id="modal-theory-master" role="dialog" aria-modal="true"
+    aria-labelledby="master-modal-title" aria-hidden="true">
     <div class="theory-modal-card dossier-card">
       <div class="modal-header-row master-modal-head">
         <div class="modal-title-wrap">
           <span class="modal-badge">DOSSIER PEDAGÓGICO GLOBAL</span>
-          <h3>Marco Conceptual: Remediación y Transcodificación en la Fotografía</h3>
+          <h3 id="master-modal-title">Marco Conceptual: Remediación y Transcodificación en la Fotografía</h3>
         </div>
         <button class="btn-close-modal" aria-label="Cerrar dossier">✕</button>
       </div>
@@ -1102,21 +1210,36 @@
       <div class="modal-body-content dossier-content">
         <!-- Sección 1: Bolter y Grusin + Alberich-Pascual -->
         <section class="dossier-section">
-          <h4>1. La Remediación como Apropiación e Hibridación (Bolter y Grusin, 2000 [orig. 1999]; Alberich-Pascual, 2018)</h4>
+          <h4>1. La Remediación como Apropiación e Hibridación (Bolter y Grusin, 2000 [orig. 1999]; Alberich-Pascual,
+            2018)</h4>
           <p>
-            Siguiendo a <strong>Jay David Bolter y Richard Grusin</strong> (2000 [orig. 1999], 45) y el análisis sobre creatividad multimedia de <strong>Jordi Alberich-Pascual</strong> (2018), la <strong>remediación</strong> constituye un proceso de <strong>apropiación e hibridación</strong> mediante el cual los nuevos medios digitales representan, refactorizan y se apropian de las técnicas, formas y significación social de los medios analógicos precedentes. En este sentido, Google Photos no se limita a establecer una simple comparación con el álbum familiar físico, sino que <strong>se apropia de sus formas, metáforas visuales</strong> (cuadrículas de copias, portadas destacadas, páginas cronológicas) y de su <strong>significación social</strong> (el ritual de preservar y compartir la biografía íntima) para redefinirlas algorítmicamente mediante una doble lógica:
+            Siguiendo a <strong>Jay David Bolter y Richard Grusin</strong> (2000 [orig. 1999], 45) y el análisis sobre
+            creatividad multimedia de <strong>Jordi Alberich-Pascual</strong> (2018), la <strong>remediación</strong>
+            constituye un proceso de <strong>apropiación e hibridación</strong> mediante el cual los nuevos medios
+            digitales representan, refactorizan y se apropian de las técnicas, formas y significación social de los
+            medios analógicos precedentes. En este sentido, Google Photos no se limita a establecer una simple
+            comparación con el álbum familiar físico, sino que <strong>se apropia de sus formas, metáforas
+              visuales</strong> (cuadrículas de copias, portadas destacadas, páginas cronológicas) y de su
+            <strong>significación social</strong> (el ritual de preservar y compartir la biografía íntima) para
+            redefinirlas algorítmicamente mediante una doble lógica:
           </p>
           <div class="concept-boxes-grid">
             <div class="concept-box">
               <h5>A. Inmediatez Transparente (Transparent Immediacy)</h5>
               <p>
-                El deseo del medio de borrarse a sí mismo, de volverse invisible para que el observador sienta que está ante la realidad sin intermediación técnica ("la pantalla como ventana transparente"). Google Photos busca esto mediante la previsualización a pantalla completa instantánea, el enfoque automático asistido por IA y la eliminación de la fricción del revelado químico.
+                El deseo del medio de borrarse a sí mismo, de volverse invisible para que el observador sienta que está
+                ante la realidad sin intermediación técnica ("la pantalla como ventana transparente"). Google Photos
+                busca esto mediante la previsualización a pantalla completa instantánea, el enfoque automático asistido
+                por IA y la eliminación de la fricción del revelado químico.
               </p>
             </div>
             <div class="concept-box">
               <h5>B. Hipermediación (Hypermediacy)</h5>
               <p>
-                La fascinación simultánea por la presencia de la interfaz y la multiplicidad de ventanas, metadatos y medios combinados. Lejos de ocultar la máquina, Google Photos nos recuerda constantemente su presencia mediante etiquetas ("Rostro detectado"), barras de búsqueda semántica, geolocalización en mapas por satélite y notificaciones de memorias ("Un día como hoy hace 4 años").
+                La fascinación simultánea por la presencia de la interfaz y la multiplicidad de ventanas, metadatos y
+                medios combinados. Lejos de ocultar la máquina, Google Photos nos recuerda constantemente su presencia
+                mediante etiquetas ("Rostro detectado"), barras de búsqueda semántica, geolocalización en mapas por
+                satélite y notificaciones de memorias ("Un día como hoy hace 4 años").
               </p>
             </div>
           </div>
@@ -1126,37 +1249,52 @@
         <section class="dossier-section">
           <h4>2. Los Principios de los Nuevos Medios y el Software al Mando (Lev Manovich, 2005 [2001], 2013)</h4>
           <p>
-            En <em>El lenguaje de los nuevos medios de comunicación</em> (2005 [2001]) y <em>El software toma el mando</em> (2013), <strong>Lev Manovich</strong> identifica las transformaciones estructurales que experimenta la imagen cuando el software asume el control de la producción cultural:
+            En <em>El lenguaje de los nuevos medios de comunicación</em> (2005 [2001]) y <em>El software toma el
+              mando</em> (2013), <strong>Lev Manovich</strong> identifica las transformaciones estructurales que
+            experimenta la imagen cuando el software asume el control de la producción cultural:
           </p>
           <div class="manovich-principles-list">
             <div class="m-principle-item">
               <span class="m-num">1</span>
               <div>
-                <strong>Representación Numérica:</strong> Todos los nuevos medios se componen de código digital continuo a discreto (<code>0</code> y <code>1</code>). Una foto ya no es grano de plata sobre gelatina, sino una matriz numérica de píxeles <code>f(x, y)</code> sujeta a algoritmos matemáticos (compresión JPEG, optimización HDR).
+                <strong>Representación Numérica:</strong> Todos los nuevos medios se componen de código digital continuo
+                a discreto (<code>0</code> y <code>1</code>). Una foto ya no es grano de plata sobre gelatina, sino una
+                matriz numérica de píxeles <code>f(x, y)</code> sujeta a algoritmos matemáticos (compresión JPEG,
+                optimización HDR).
               </div>
             </div>
             <div class="m-principle-item">
               <span class="m-num">2</span>
               <div>
-                <strong>Modularidad:</strong> La estructura fractal de los nuevos medios. El píxel compone el canal, el canal compone la imagen, la imagen se asocia al metadato EXIF, y las imágenes se agrupan en colecciones modulares que pueden descomponerse y reensamblarse sin destruirse.
+                <strong>Modularidad:</strong> La estructura fractal de los nuevos medios. El píxel compone el canal, el
+                canal compone la imagen, la imagen se asocia al metadato EXIF, y las imágenes se agrupan en colecciones
+                modulares que pueden descomponerse y reensamblarse sin destruirse.
               </div>
             </div>
             <div class="m-principle-item">
               <span class="m-num">3</span>
               <div>
-                <strong>Automatización:</strong> Dado que los medios son numéricos y modulares, muchas operaciones de creación, manipulación y acceso pueden automatizarse (Manovich, 2005, 2013). Google Photos no requiere que clasifiques tus fotos: una red neuronal convolucional reconoce automáticamente "gatos", "playas" o "atardeceres".
+                <strong>Automatización:</strong> Dado que los medios son numéricos y modulares, muchas operaciones de
+                creación, manipulación y acceso pueden automatizarse (Manovich, 2005, 2013). Google Photos no requiere
+                que clasifiques tus fotos: una red neuronal convolucional reconoce automáticamente "gatos", "playas" o
+                "atardeceres".
               </div>
             </div>
             <div class="m-principle-item">
               <span class="m-num">4</span>
               <div>
-                <strong>Variabilidad:</strong> Un objeto de los nuevos medios no está fijado de una vez para siempre (como la copia en papel baritado del laboratorio). Puede existir en infinitas versiones: redimensionado, filtrado, reencuadrado sin destruir el original.
+                <strong>Variabilidad:</strong> Un objeto de los nuevos medios no está fijado de una vez para siempre
+                (como la copia en papel baritado del laboratorio). Puede existir en infinitas versiones: redimensionado,
+                filtrado, reencuadrado sin destruir el original.
               </div>
             </div>
             <div class="m-principle-item">
               <span class="m-num">5</span>
               <div>
-                <strong>Transcodificación Cultural:</strong> La dimensión más profunda: la interacción entre la <em>capa informática</em> (estructuras de datos, árboles de búsqueda, algoritmos de indexación) y la <em>capa cultural</em> (el recuerdo familiar, la nostalgia, la biografía personal). Google Photos traslada las categorías del software a la forma en que los seres humanos organizamos y recordamos nuestras vidas.
+                <strong>Transcodificación Cultural:</strong> La dimensión más profunda: la interacción entre la <em>capa
+                  informática</em> (estructuras de datos, árboles de búsqueda, algoritmos de indexación) y la <em>capa
+                  cultural</em> (el recuerdo familiar, la nostalgia, la biografía personal). Google Photos traslada las
+                categorías del software a la forma en que los seres humanos organizamos y recordamos nuestras vidas.
               </div>
             </div>
           </div>
@@ -1166,7 +1304,8 @@
         <section class="dossier-section">
           <h4>3. La Base de Datos vs. La Narrativa (Manovich, 2005 [2001], Cap. 5)</h4>
           <p>
-            Manovich (2005 [2001]) postula que <strong>la base de datos se ha convertido en la forma cultural arquetípica de la era informática</strong>, rivalizando con la narrativa lineal clásica:
+            Manovich (2005 [2001]) postula que <strong>la base de datos se ha convertido en la forma cultural
+              arquetípica de la era informática</strong>, rivalizando con la narrativa lineal clásica:
           </p>
           <table class="dossier-table">
             <thead>
@@ -1179,28 +1318,38 @@
             <tbody>
               <tr>
                 <td><strong>Estructura</strong></td>
-                <td>Sintagma lineal cerrado. Orden cronológico fijado por quien compuso el álbum físico página a página.</td>
+                <td>Sintagma lineal cerrado. Orden cronológico fijado por quien compuso el álbum físico página a página.
+                </td>
                 <td>Paradigma no lineal abierto. Colección indexada de elementos discretos independientes.</td>
               </tr>
               <tr>
                 <td><strong>Acceso</strong></td>
-                <td>Secuencial: Para ir a la foto 12, debes atravesar físicamente los pliegos anteriores hoja a hoja.</td>
-                <td>Aleatorio y relacional: Consulta directa (Query) mediante metadatos o tags de visión computacional.</td>
+                <td>Secuencial: Para ir a la foto 12, debes atravesar físicamente los pliegos anteriores hoja a hoja.
+                </td>
+                <td>Aleatorio y relacional: Consulta directa (Query) mediante metadatos o tags de visión computacional.
+                </td>
               </tr>
               <tr>
                 <td><strong>Materialidad</strong></td>
-                <td>Soporte químico fotosensible finito (papel baritado, esquinas autoadhesivas). Se degrada físicamente con los años.</td>
-                <td>Ficheros binarios distribuidos en servidores en la nube. Inmunes al paso del tiempo biológico pero sujetos a obsolescencia de software (Manovich, 2013).</td>
+                <td>Soporte químico fotosensible finito (papel baritado, esquinas autoadhesivas). Se degrada físicamente
+                  con los años.</td>
+                <td>Ficheros binarios distribuidos en servidores en la nube. Inmunes al paso del tiempo biológico pero
+                  sujetos a obsolescencia de software (Manovich, 2013).</td>
               </tr>
               <tr>
                 <td><strong>Construcción del Sentido</strong></td>
-                <td>Biografía íntima encuadernada. Narración con principio, nudo y final (noema barthesiano: "Esto ha sido", Barthes, 1989 [1980]).</td>
-                <td>Recombinación algorítmica constante: "Creaciones automáticas", collages generados por IA y sociabilidad digital ("Yo estaba allí", Fontcuberta, 2016).</td>
+                <td>Biografía íntima encuadernada. Narración con principio, nudo y final (noema barthesiano: "Esto ha
+                  sido", Barthes, 1989 [1980]).</td>
+                <td>Recombinación algorítmica constante: "Creaciones automáticas", collages generados por IA y
+                  sociabilidad digital ("Yo estaba allí", Fontcuberta, 2016).</td>
               </tr>
               <tr>
                 <td><strong>Estatuto y Autoría (Fontcuberta, 2016)</strong></td>
-                <td><strong>Fotografía argéntica:</strong> Huella indexical (Peirce), escasez de exposiciones (carrete de 12 fotos), autoría ligada al disparo técnico y función de archivo de memoria.</td>
-                <td><strong>Postfotografía (<em>Homo photographicus</em>):</strong> Superabundancia visual, inmaterialidad, adopción digital, coautoría del receptor y prescripción de sentido.</td>
+                <td><strong>Fotografía argéntica:</strong> Huella indexical (Peirce), Limitación del número de
+                  exposiciones por carrete (12, 24 o 36 fotografías), autoría ligada al disparo técnico y función de
+                  archivo de memoria.</td>
+                <td><strong>Postfotografía (<em>Homo photographicus</em>):</strong> Superabundancia visual,
+                  inmaterialidad, adopción digital, coautoría del receptor y prescripción de sentido.</td>
               </tr>
             </tbody>
           </table>
@@ -1210,20 +1359,40 @@
         <section class="dossier-section">
           <h4>4. La Postfotografía y la Furia de las Imágenes (Joan Fontcuberta, 2016; Paula Velasco Padial, 2017)</h4>
           <p>
-            En <em>La furia de las imágenes: Notas sobre la postfotografía</em> (2016) —analizado críticamente por Paula Velasco Padial (2017)—, <strong>Joan Fontcuberta</strong> examina la mutación de la imagen tras la sustitución del nitrato de plata por el píxel y la irrupción de internet y las redes sociales (la "segunda revolución digital"). La <strong>postfotografía</strong> habita el espacio híbrido de la sociabilidad digital como consecuencia de la <em>superabundancia visual</em> y se apoya en tres factores: <strong>inmaterialidad y transmitabilidad</strong>, <strong>profusión y disponibilidad</strong>, y su aporte a la <strong>enciclopedización del saber y la comunicación</strong>.
+            En <em>La furia de las imágenes: Notas sobre la postfotografía</em> (2016) —analizado críticamente por Paula
+            Velasco Padial (2017)—, <strong>Joan Fontcuberta</strong> examina la mutación de la imagen tras la
+            sustitución del nitrato de plata por el píxel y la irrupción de internet y las redes sociales (la "segunda
+            revolución digital"). La <strong>postfotografía</strong> habita el espacio híbrido de la sociabilidad
+            digital como consecuencia de la <em>superabundancia visual</em> y se apoya en tres factores:
+            <strong>inmaterialidad y transmitabilidad</strong>, <strong>profusión y disponibilidad</strong>, y su aporte
+            a la <strong>enciclopedización del saber y la comunicación</strong>.
           </p>
 
           <div class="concept-boxes-grid">
             <div class="concept-box">
               <h5>A. Del "Esto ha sido" (Barthes, 1989 [1980]) al "Yo estaba allí"</h5>
               <p>
-                Frente a la fotografía tradicional como guardiana del pasado y la memoria —cuyo noema formuló <strong>Roland Barthes</strong> en <em>La cámara lúcida</em> (1989 [1980]) como <em>"Esto ha sido"</em> (<em>Ça a été</em>)—, la postfotografía habita un <em>"presente en suspensión, eternizado"</em>. En la era <em>selfie</em>, la imagen actúa como mensaje instantáneo (<em>"imago, ergo sum"</em>): no buscamos tanto mostrar el mundo como señalar nuestro estar en él. No obstante, como matiza <strong>Paula Velasco Padial</strong> (2017), la fotografía siempre fue <em>escritura y lenguaje</em>, <em>arte y documento</em>, y todo "esto ha sido" contuvo siempre una subjetividad implícita (un <em>"para mí"</em>) y una vocación social desde su democratización en el siglo XIX.
+                Frente a la fotografía tradicional como guardiana del pasado y la memoria —cuyo noema formuló
+                <strong>Roland Barthes</strong> en <em>La cámara lúcida</em> (1989 [1980]) como <em>"Esto ha sido"</em>
+                (<em>Ça a été</em>)—, la postfotografía habita un <em>"presente en suspensión, eternizado"</em>. En la
+                era <em>selfie</em>, la imagen actúa como mensaje instantáneo (<em>"imago, ergo sum"</em>): no buscamos
+                tanto mostrar el mundo como señalar nuestro estar en él. No obstante, como matiza <strong>Paula Velasco
+                  Padial</strong> (2017), la fotografía siempre fue <em>escritura y lenguaje</em>, <em>arte y
+                  documento</em>, y todo "esto ha sido" contuvo siempre una subjetividad implícita (un <em>"para
+                  mí"</em>) y una vocación social desde su democratización en el siglo XIX.
               </p>
             </div>
             <div class="concept-box">
               <h5>B. Homo Photographicus, Adopción y Coautoría</h5>
               <p>
-                Con la cámara integrada en el teléfono móvil emerge el <strong><em>Homo photographicus</em></strong> (en diálogo con el <em>Homo ludens</em> de <strong>Vilém Flusser</strong>): todos somos productores y consumidores universales de imágenes. Ante la <em>infoxicación</em>, el mérito artístico se desplaza de fabricar imágenes a <strong>"prescribir sentidos"</strong> desde una <em>ecología de las imágenes</em>: <strong>adoptar</strong> una imagen es elegirla y dotarla de valor intelectual o simbólico sin reclamar su posesión exclusiva, integrando al espectador como <strong>coautor activo</strong> (<strong>Hans Robert Jauss</strong>) en el encuentro ético de la mirada (<strong>Ariella Azoulay</strong>) y dentro del <em>acontecimiento-imagen</em> (<strong>Guy Debord</strong>).
+                Con la cámara integrada en el teléfono móvil emerge el <strong><em>Homo photographicus</em></strong> (en
+                diálogo con el <em>Homo ludens</em> de <strong>Vilém Flusser</strong>): todos somos productores y
+                consumidores universales de imágenes. Ante la <em>infoxicación</em>, el mérito artístico se desplaza de
+                fabricar imágenes a <strong>"prescribir sentidos"</strong> desde una <em>ecología de las imágenes</em>:
+                <strong>adoptar</strong> una imagen es elegirla y dotarla de valor intelectual o simbólico sin reclamar
+                su posesión exclusiva, integrando al espectador como <strong>coautor activo</strong> (<strong>Hans
+                  Robert Jauss</strong>) en el encuentro ético de la mirada (<strong>Ariella Azoulay</strong>) y dentro
+                del <em>acontecimiento-imagen</em> (<strong>Guy Debord</strong>).
               </p>
             </div>
           </div>
@@ -1233,37 +1402,51 @@
         <section class="dossier-section">
           <h4>5. Diseño Metodológico: La Espiral del Pensamiento Creativo (Mitchel Resnick, 2007)</h4>
           <p>
-            El diseño pedagógico e interactivo de este artefacto digital se fundamenta en la <strong>Espiral del Pensamiento Creativo</strong> propuesta por <strong>Mitchel Resnick</strong> (2007), articulando un aprendizaje experiencial a través de cinco fases continuas:
+            El diseño pedagógico e interactivo de este artefacto digital se fundamenta en la <strong>Espiral del
+              Pensamiento Creativo</strong> propuesta por <strong>Mitchel Resnick</strong> (2007), articulando un
+            aprendizaje experiencial a través de cinco fases continuas:
           </p>
           <div class="manovich-principles-list">
             <div class="m-principle-item">
               <span class="m-num">1</span>
               <div>
-                <strong>Imaginar (Imagine):</strong> El usuario explora la transición entre la fotografía argéntica y la computacional, proyectando cómo se comporta una misma escena (o sus propios recuerdos subidos al carrete) bajo las leyes físicas de la óptica frente a la visión artificial.
+                <strong>Imaginar (Imagine):</strong> El usuario explora la transición entre la fotografía argéntica y la
+                computacional, proyectando cómo se comporta una misma escena (o sus propios recuerdos subidos al
+                carrete) bajo las leyes físicas de la óptica frente a la visión artificial.
               </div>
             </div>
             <div class="m-principle-item">
               <span class="m-num">2</span>
               <div>
-                <strong>Crear (Create):</strong> Mediante el minijuego del visor réflex (alineación del prisma de imagen partida y calibración del exposímetro TTL con los diales de diafragma y velocidad) y el montaje artesanal de copias con esquineros y dedicatorias manuscritas en el álbum físico.
+                <strong>Crear (Create):</strong> Mediante el minijuego del visor réflex (alineación del prisma de imagen
+                partida y calibración del exposímetro TTL con los diales de diafragma y velocidad) y el montaje
+                artesanal de copias con esquineros y dedicatorias manuscritas en el álbum físico.
               </div>
             </div>
             <div class="m-principle-item">
               <span class="m-num">3</span>
               <div>
-                <strong>Jugar (Play):</strong> La experimentación lúdica mediante el bobinado de la manivela de 3 vueltas, el revelado fotoquímico por lotes (3 tiras de 4 fotogramas) agitando la cubeta en el cuarto oscuro, y la ejecución de consultas relacionales (<em>queries</em>) y filtros no destructivos en el buscador de Google Photos.
+                <strong>Jugar (Play):</strong> La experimentación lúdica mediante el bobinado de la manivela de 3
+                vueltas, el revelado fotoquímico por lotes (3 tiras de 4 fotogramas) agitando la cubeta en el cuarto
+                oscuro, y la ejecución de consultas relacionales (<em>queries</em>) y filtros no destructivos en el
+                buscador de Google Photos.
               </div>
             </div>
             <div class="m-principle-item">
               <span class="m-num">4</span>
               <div>
-                <strong>Compartir (Share):</strong> La puesta en común tanto en el objeto-álbum familiar concebido para la lectura conjunta como en la nube postfotográfica de álbumes inteligentes automatizados y geolocalizados.
+                <strong>Compartir (Share):</strong> La puesta en común tanto en el objeto-álbum familiar concebido para
+                la lectura conjunta como en la nube postfotográfica de álbumes inteligentes automatizados y
+                geolocalizados.
               </div>
             </div>
             <div class="m-principle-item">
               <span class="m-num">5</span>
               <div>
-                <strong>Reflexionar (Reflect):</strong> La activación de las "Gafas de Manovich" en cada etapa y de este Dossier Teórico permite contrastar críticamente la fricción material del haluro de plata frente a la transcodificación, la remediación como apropiación y la automatización algorítmica, reiniciando la espiral con nuevas pruebas.
+                <strong>Reflexionar (Reflect):</strong> La activación de las "Gafas de Manovich" en cada etapa y de este
+                Dossier Teórico permite contrastar críticamente la fricción material del haluro de plata frente a la
+                transcodificación, la remediación como apropiación y la automatización algorítmica, reiniciando la
+                espiral con nuevas pruebas.
               </div>
             </div>
           </div>
@@ -1273,18 +1456,33 @@
         <section class="dossier-section">
           <h4>6. Referencias Bibliográficas y Declaración de Uso de IA (Estilo Chicago 17.ª ed.)</h4>
           <ul class="chicago-bibliography-list" style="line-height: 1.65; padding-left: 1.25rem; margin-bottom: 1rem;">
-            <li style="margin-bottom: 0.55rem;">Alberich-Pascual, Jordi. «Elementos de la creatividad multimedia: apropiación, remediación, hibridación». <em>Mosaic</em>, n.º 156 (2018). <a href="https://doi.org/10.7238/m.n156.1803" target="_blank" rel="noopener noreferrer">https://doi.org/10.7238/m.n156.1803</a>.</li>
-            <li style="margin-bottom: 0.55rem;">Barthes, Roland. <em>La cámara lúcida: Nota sobre la fotografía</em>. Barcelona: Paidós, 1989 [1980].</li>
-            <li style="margin-bottom: 0.55rem;">Bolter, Jay David y Richard Grusin. <em>Remediation: Understanding New Media</em>. Cambridge, MA: MIT Press, 2000 [1999].</li>
-            <li style="margin-bottom: 0.55rem;">Fontcuberta, Joan. <em>La furia de las imágenes: Notas sobre la postfotografía</em>. Barcelona: Galaxia Gutenberg, 2016.</li>
-            <li style="margin-bottom: 0.55rem;">Manovich, Lev. <em>El lenguaje de los nuevos medios de comunicación: La imagen en la era digital</em>. Barcelona: Paidós, 2005 [2001].</li>
-            <li style="margin-bottom: 0.55rem;">Manovich, Lev. <em>El software toma el mando</em>. Barcelona: Editorial UOC, 2013.</li>
-            <li style="margin-bottom: 0.55rem;">Resnick, Mitchel. «Sowing the Seeds for a More Creative Society». <em>Learning &amp; Leading with Technology</em> 35, n.º 4 (2007): 18–22.</li>
-            <li style="margin-bottom: 0.55rem;">Velasco Padial, Paula. «Reseña de <em>La furia de las imágenes: notas sobre la postfotografía</em>, de Joan Fontcuberta». <em>Arte, Individuo y Sociedad</em> 29, n.º 2 (2017): 425–427.</li>
+            <li style="margin-bottom: 0.55rem;">Alberich-Pascual, Jordi. «Elementos de la creatividad multimedia:
+              apropiación, remediación, hibridación». <em>Mosaic</em>, n.º 156 (2018). <a
+                href="https://doi.org/10.7238/m.n156.1803" target="_blank"
+                rel="noopener noreferrer">https://doi.org/10.7238/m.n156.1803</a>.</li>
+            <li style="margin-bottom: 0.55rem;">Barthes, Roland. <em>La cámara lúcida: Nota sobre la fotografía</em>.
+              Barcelona: Paidós, 1989 [1980].</li>
+            <li style="margin-bottom: 0.55rem;">Bolter, Jay David y Richard Grusin. <em>Remediation: Understanding New
+                Media</em>. Cambridge, MA: MIT Press, 2000 [1999].</li>
+            <li style="margin-bottom: 0.55rem;">Fontcuberta, Joan. <em>La furia de las imágenes: Notas sobre la
+                postfotografía</em>. Barcelona: Galaxia Gutenberg, 2016.</li>
+            <li style="margin-bottom: 0.55rem;">Manovich, Lev. <em>El lenguaje de los nuevos medios de comunicación: La
+                imagen en la era digital</em>. Barcelona: Paidós, 2005 [2001].</li>
+            <li style="margin-bottom: 0.55rem;">Manovich, Lev. <em>El software toma el mando</em>. Barcelona: Editorial
+              UOC, 2013.</li>
+            <li style="margin-bottom: 0.55rem;">Resnick, Mitchel. «Sowing the Seeds for a More Creative Society».
+              <em>Learning &amp; Leading with Technology</em> 35, n.º 4 (2007): 18–22.</li>
+            <li style="margin-bottom: 0.55rem;">Velasco Padial, Paula. «Reseña de <em>La furia de las imágenes: notas
+                sobre la postfotografía</em>, de Joan Fontcuberta». <em>Arte, Individuo y Sociedad</em> 29, n.º 2
+              (2017): 425–427.</li>
           </ul>
           <div class="concept-box" style="margin-top: 0.75rem;">
             <p style="margin: 0;">
-              <strong>Nota metodológica y citación de IA:</strong> Google. <em>Antigravity / Gemini</em> (Versión de 2026). Herramientas de inteligencia artificial utilizadas como apoyo en la codificación de prototipado web interactivo (<em>Vibe Coding</em>), estructuración de datos y revisión sintáctica. La autoría intelectual, el enfoque autoetnográfico y el análisis crítico corresponden íntegramente al alumno Miguel Alcaide Bautista.
+              <strong>Nota metodológica y citación de IA:</strong> Google. <em>Antigravity / Gemini</em> (Versión de
+              2026). Herramientas de inteligencia artificial utilizadas como apoyo en la codificación de prototipado web
+              interactivo (<em>Vibe Coding</em>), estructuración de datos y revisión sintáctica. La autoría intelectual,
+              el enfoque autoetnográfico y el análisis crítico corresponden íntegramente al alumno Miguel Alcaide
+              Bautista.
             </p>
           </div>
         </section>
@@ -1300,8 +1498,10 @@
   <footer class="app-footer">
     <div class="footer-inner">
       <span>Práctica Universitaria PEC2 • <strong>Cultura Digital (UOC)</strong></span>
-      <span>Diseñado con HTML5, CSS3 y JavaScript Vainilla • Autor: <strong>Miguel Alcaide Bautista</strong> (Vibe Coding con Antigravity de Google)</span>
-      <span>Referencias: <em>Bolter y Grusin (2000 [1999]) • Manovich (2005, 2013) • Alberich-Pascual (2018) • Fontcuberta (2016) • Resnick (2007)</em></span>
+      <span>Diseñado con HTML5, CSS3 y JavaScript Vainilla • Autor: <strong>Miguel Alcaide Bautista</strong> (Vibe
+        Coding con Antigravity de Google)</span>
+      <span>Referencias: <em>Bolter y Grusin (2000 [1999]) • Manovich (2005, 2013) • Alberich-Pascual (2018) •
+          Fontcuberta (2016) • Resnick (2007)</em></span>
     </div>
   </footer>
 
@@ -1354,5 +1554,5 @@
   <script src="js/main.js"></script>
   <script src="script.js"></script>
 </body>
-</html>
 
+</html>

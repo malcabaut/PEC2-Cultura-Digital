@@ -16,7 +16,7 @@ class ProceduralAudioEngine {
       if (AudioCtx) this.ctx = new AudioCtx();
     }
     if (this.ctx && this.ctx.state === 'suspended') {
-      this.ctx.resume();
+      this.ctx.resume().catch(() => {});
     }
   }
 
@@ -50,7 +50,7 @@ class ProceduralAudioEngine {
     noise.start(t);
 
     setTimeout(() => {
-      if (!this.ctx) return;
+      if (!this.ctx || !window.AppState || !window.AppState.soundEnabled) return;
       const t2 = this.ctx.currentTime;
       const osc = this.ctx.createOscillator();
       const g2 = this.ctx.createGain();
@@ -73,7 +73,7 @@ class ProceduralAudioEngine {
 
     for (let i = 0; i < 6; i++) {
       setTimeout(() => {
-        if (!this.ctx) return;
+        if (!this.ctx || !window.AppState || !window.AppState.soundEnabled) return;
         const t = this.ctx.currentTime;
         const osc = this.ctx.createOscillator();
         const g = this.ctx.createGain();
@@ -213,5 +213,5 @@ class ProceduralAudioEngine {
   }
 }
 
-window.AudioFX = new ProceduralAudioEngine();
+var AudioFX = window.AudioFX = new ProceduralAudioEngine();
 

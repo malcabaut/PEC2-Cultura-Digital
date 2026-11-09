@@ -1,10 +1,17 @@
 /**
  * ========================================================
- * js/digital.js - Lógica de Google Photos
- * HUD dinámico por visión IA, disparador digital, búsqueda y visor no destructivo
+ * js/digital.js - Lógica Integral de Google Photos y Fase Digital
+ *  - Fase 1: Smartphone HUD dinámico por visión artificial (detección semántica) y captura instantánea
+ *  - Fase 2: Pipeline de la nube (desconstrucción binaria de píxeles, metadatos EXIF y visión por computador)
+ *  - Fase 3: Motor relacional de Google Photos (consultas relacionales instantáneas, reconocimiento facial,
+ *            geolocalización EXIF, portada de álbum inteligente remediado, e inspector de variabilidad no destructiva)
  * ========================================================
  */
 
+/**
+ * Actualiza el visor del smartphone en Fase 1 con el recuadro de enfoque predictivo
+ * y la etiqueta semántica de confianza calculada por el modelo de visión IA.
+ */
 function updateDigitalHUD(photo) {
   if (!photo) return;
   const tagEl = document.getElementById('ai-confidence-tag');
@@ -64,6 +71,9 @@ function updateDigitalHUD(photo) {
   }
 }
 
+/**
+ * Inicializa la cámara digital del smartphone en Fase 1 (Disparo computacional y cambio de escena)
+ */
 function initDigitalCamera() {
   const btnDigitalShoot = document.getElementById('btn-digital-shoot');
   const btnFilter = document.getElementById('btn-switch-filter');
@@ -116,6 +126,127 @@ function initDigitalCamera() {
   }
 }
 
+/**
+ * Desconstrucción de Nuevos Medios (Fase 2 Digital):
+ * Muestra la descomposición de la fotografía en matriz numérica de píxeles,
+ * metadatos estructurados EXIF y segmentación semántica por visión por computador.
+ */
+function updatePipelineViews() {
+  const currentPhoto = getCurrentPhoto();
+  if (!currentPhoto) return;
+
+  // 1. Matriz de píxeles (Representación Numérica - Manovich, 2005)
+  const matrixBox = document.getElementById('pixel-matrix-preview');
+  if (matrixBox) {
+    matrixBox.innerHTML = '';
+    const sampleHexes = ['#3a88e9', '#5ca2f5', '#ff9800', '#ffd54f', '#2c2a29', '#4caf50', '#81c784', '#e91e63'];
+    for (let i = 0; i < 48; i++) {
+      const cell = document.createElement('div');
+      cell.className = 'pixel-cell';
+      const color = sampleHexes[Math.floor(Math.random() * sampleHexes.length)];
+      cell.style.backgroundColor = color;
+      cell.title = `Píxel (${i % 8}, ${Math.floor(i / 8)}): ${color}`;
+      matrixBox.appendChild(cell);
+    }
+  }
+
+  // 2. Metadatos EXIF (Modularidad de la Información)
+  const exifGrid = document.getElementById('exif-display-fields');
+  const gpsLabel = document.getElementById('gps-coords-label');
+  if (exifGrid && currentPhoto.exif) {
+    exifGrid.innerHTML = `
+      <div class="exif-item"><strong>Cámara:</strong> ${currentPhoto.exif.camera || 'Google Pixel'}</div>
+      <div class="exif-item"><strong>Óptica:</strong> ${currentPhoto.exif.lens || '24mm ƒ/1.85'}</div>
+      <div class="exif-item"><strong>Sensibilidad:</strong> ${currentPhoto.exif.iso || 'ISO 50'}</div>
+      <div class="exif-item"><strong>Resolución:</strong> ${currentPhoto.exif.dimensions || '4032 × 3024'}</div>
+      <div class="exif-item"><strong>Tamaño:</strong> ${currentPhoto.exif.fileSize || '3.4 MB'}</div>
+      <div class="exif-item"><strong>Fecha/Hora:</strong> ${currentPhoto.date || '2023'}</div>
+    `;
+  }
+  if (gpsLabel && currentPhoto.exif) {
+    gpsLabel.textContent = `GPS: ${currentPhoto.exif.gps || 'Coordenadas activas'}`;
+  }
+
+  // 3. Visión por Computador (Etiquetas IA y Transcodificación)
+  const scannerTarget = document.getElementById('scanner-image-target');
+  const tagList = document.getElementById('semantic-tag-list');
+  if (scannerTarget) {
+    const existingSvg = scannerTarget.querySelector('svg');
+    if (existingSvg) existingSvg.remove();
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = renderUniquePhotoSvg(currentPhoto.svg);
+    if (tempDiv.firstElementChild) {
+      scannerTarget.prepend(tempDiv.firstElementChild);
+    }
+  }
+
+  if (tagList) {
+    tagList.innerHTML = '';
+    const aiTags = currentPhoto.aiTags || [];
+    aiTags.forEach(tag => {
+      const tagBadge = document.createElement('span');
+      tagBadge.className = 'sem-tag';
+      tagBadge.innerHTML = `${tag.label} <span>(${tag.conf})</span>`;
+      tagList.appendChild(tagBadge);
+    });
+  }
+}
+
+/**
+ * Activa o actualiza la Portada de Álbum Inteligente en Google Photos (Fase 3 Digital)
+ * demostrando cómo el software remedia la portada y estructura del álbum familiar al instante
+ * (Bolter y Grusin, 2000 [orig. 1999]; Alberich-Pascual, 2018).
+ */
+function updateSmartAlbumHeroBanner(queryTerm, customTitle = null, customSub = null, filteredPhotos = []) {
+  const heroBox = document.getElementById('gphotos-instant-album-hero');
+  const coverSvgBox = document.getElementById('instant-album-cover-svg');
+  const titleEl = document.getElementById('instant-album-title');
+  const subEl = document.getElementById('instant-album-subtitle');
+  const countBadge = document.getElementById('instant-album-count-badge');
+  const metaPills = document.getElementById('instant-album-meta-pills');
+  const modeIndicator = document.getElementById('grid-mode-indicator');
+
+  if (!heroBox) return;
+
+  if (!queryTerm || queryTerm === 'all' || filteredPhotos.length === 0) {
+    heroBox.style.display = 'none';
+    if (modeIndicator) modeIndicator.textContent = 'Orden cronológico automático';
+    return;
+  }
+
+  heroBox.style.display = 'grid';
+  const coverPhoto = filteredPhotos[0];
+  if (coverSvgBox && coverPhoto) {
+    coverSvgBox.innerHTML = renderUniquePhotoSvg(coverPhoto.svg);
+  }
+
+  const cleanQuery = queryTerm.charAt(0).toUpperCase() + queryTerm.slice(1);
+  if (titleEl) {
+    titleEl.textContent = customTitle || `Álbum Inteligente: "${cleanQuery}"`;
+  }
+  if (subEl) {
+    subEl.textContent = customSub || `Portada y recopilación generadas al instante mediante metadatos EXIF, geolocalización y visión IA.`;
+  }
+  if (countBadge) {
+    countBadge.textContent = `${filteredPhotos.length} ${filteredPhotos.length === 1 ? 'recuerdo' : 'recuerdos'}`;
+  }
+  if (metaPills && coverPhoto) {
+    const sampleGps = (coverPhoto.exif && coverPhoto.exif.gps) ? coverPhoto.exif.gps.split('(')[0].trim() : 'GPS Activo';
+    const sampleTag = (coverPhoto.aiTags && coverPhoto.aiTags[0]) ? coverPhoto.aiTags[0].label : cleanQuery;
+    metaPills.innerHTML = `
+      <span>📍 ${sampleGps}</span>
+      <span>🤖 IA: ${sampleTag}</span>
+      <span>📅 ${coverPhoto.year}</span>
+    `;
+  }
+  if (modeIndicator) {
+    modeIndicator.textContent = '📖 Álbum Estructurado al Instante (IA)';
+  }
+}
+
+/**
+ * Ejecuta una consulta relacional (query) en la base de datos de Google Photos (Fase 3 Digital)
+ */
 function filterDatabasePhotos(queryTerm, customAlbumTitle = null, customAlbumSub = null) {
   const queryStatement = document.getElementById('db-query-statement');
   const execTimeEl = document.getElementById('query-exec-time');
@@ -126,12 +257,13 @@ function filterDatabasePhotos(queryTerm, customAlbumTitle = null, customAlbumSub
   let filtered = photos;
 
   if (queryTerm) {
+    const qLower = queryTerm.toLowerCase();
     filtered = photos.filter(p => {
-      const matchTitle = p.title.toLowerCase().includes(queryTerm);
-      const matchYear = p.year.toLowerCase().includes(queryTerm);
-      const matchTags = (p.tags || []).some(t => t.toLowerCase().includes(queryTerm));
-      const matchGps = (p.exif && p.exif.gps) ? p.exif.gps.toLowerCase().includes(queryTerm) : false;
-      const matchAi = (p.aiTags || []).some(ai => ai.label.toLowerCase().includes(queryTerm));
+      const matchTitle = (p.title || '').toLowerCase().includes(qLower);
+      const matchYear = String(p.year || '').toLowerCase().includes(qLower);
+      const matchTags = (p.tags || []).some(t => t.toLowerCase().includes(qLower));
+      const matchGps = (p.exif && p.exif.gps) ? p.exif.gps.toLowerCase().includes(qLower) : false;
+      const matchAi = (p.aiTags || []).some(ai => ai.label.toLowerCase().includes(qLower));
       return matchTitle || matchYear || matchTags || matchGps || matchAi;
     });
 
@@ -152,14 +284,14 @@ function filterDatabasePhotos(queryTerm, customAlbumTitle = null, customAlbumSub
       : `Mostrando ${filtered.length} recuerdos indexados en la nube (Sin límite • Total: ${photos.length})`;
   }
 
-  if (typeof window.updateSmartAlbumHeroBanner === 'function') {
-    window.updateSmartAlbumHeroBanner(queryTerm, customAlbumTitle, customAlbumSub, filtered);
-  }
-
+  updateSmartAlbumHeroBanner(queryTerm, customAlbumTitle, customAlbumSub, filtered);
   AudioFX.playDatabasePing();
   renderGooglePhotosGrid(filtered);
 }
 
+/**
+ * Renderiza la cuadrícula de recuerdos de Google Photos
+ */
 function renderGooglePhotosGrid(items = null) {
   const grid = document.getElementById('gphotos-grid');
   const resultsCountEl = document.getElementById('grid-results-count');
@@ -181,27 +313,43 @@ function renderGooglePhotosGrid(items = null) {
     return;
   }
 
+  const fragment = document.createDocumentFragment();
   photos.forEach(photo => {
     const card = document.createElement('div');
     card.className = 'gphoto-card';
     card.setAttribute('data-id', photo.id);
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
     const gpsShort = (photo.exif && photo.exif.gps)
       ? (photo.exif.gps.includes('(') ? photo.exif.gps.split('(')[1].replace(')', '') : photo.exif.gps)
       : '';
     card.title = `${photo.title} (${photo.year})${gpsShort ? ' • 📍 ' + gpsShort : ''}`;
+    card.setAttribute('aria-label', card.title);
 
     const coverSvg = renderUniquePhotoSvg(photo.svg);
+    const tagDisplay = (photo.tags && photo.tags[0]) ? photo.tags[0] : 'Foto';
     card.innerHTML = `
       <div class="gphoto-card-img">${coverSvg}</div>
       <div class="gphoto-card-top-gps">${gpsShort ? `📍 ${gpsShort.split(',')[0]}` : `📅 ${photo.year}`}</div>
-      <div class="gphoto-card-badge">${photo.tags[0]} • ${photo.year}</div>
+      <div class="gphoto-card-badge">${tagDisplay} • ${photo.year}</div>
     `;
 
     card.addEventListener('click', () => openPhotoInspector(photo));
-    grid.appendChild(card);
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openPhotoInspector(photo);
+      }
+    });
+    fragment.appendChild(card);
   });
+  grid.appendChild(fragment);
 }
 
+/**
+ * Abre el inspector modal de fotografía digital con metadatos EXIF, etiquetas semánticas
+ * y filtros algorítmicos no destructivos (Principio de Variabilidad de Manovich).
+ */
 function openPhotoInspector(photo) {
   const inspector = document.getElementById('photo-inspector');
   const imgPane = document.getElementById('inspector-image');
@@ -220,7 +368,7 @@ function openPhotoInspector(photo) {
 
   if (chipsEl) {
     chipsEl.innerHTML = '';
-    photo.tags.forEach(t => {
+    (photo.tags || []).forEach(t => {
       const chip = document.createElement('span');
       chip.className = 'sem-tag';
       chip.textContent = `#${t}`;
@@ -241,10 +389,19 @@ function openPhotoInspector(photo) {
   if (normalBtn) normalBtn.classList.add('active');
   applyVariabilityFilter('normal');
 
-  if (inspector) inspector.style.display = 'block';
+  if (inspector) {
+    inspector.style.display = 'block';
+    const closeBtn = document.getElementById('btn-close-inspector');
+    if (closeBtn) closeBtn.focus();
+  }
   AudioFX.playDatabasePing();
 }
 
+/**
+ * Principio de Variabilidad (Lev Manovich, 2005):
+ * Los filtros digitales en CSS operan sobre la matriz numérica en tiempo real sin destruir
+ * el archivo original almacenado en la nube.
+ */
 function applyVariabilityFilter(filterType) {
   const imgPane = document.getElementById('inspector-image');
   if (!imgPane) return;
@@ -265,3 +422,168 @@ function applyVariabilityFilter(filterType) {
   }
 }
 
+/**
+ * Inicializa todos los eventos de la base de datos de Google Photos, filtros, pestañas del pipeline,
+ * avatares faciales y botones de lugares EXIF con debouncing para un rendimiento óptimo.
+ */
+function initDigitalDatabaseAndUI() {
+  const searchInput = document.getElementById('gphotos-search-input');
+  const clearBtn = document.getElementById('btn-clear-search');
+  const filterChips = document.querySelectorAll('.filter-chip');
+  const faceButtons = document.querySelectorAll('.face-avatar-btn');
+  const placeButtons = document.querySelectorAll('.place-map-pill');
+  const btnCloseInstantAlbum = document.getElementById('btn-close-instant-album');
+  const btnCloseInspector = document.getElementById('btn-close-inspector');
+  const inspector = document.getElementById('photo-inspector');
+  const vFilterBtns = document.querySelectorAll('.v-filter-btn');
+  const pipeTabs = document.querySelectorAll('.pipe-tab');
+
+  const clearSmartActiveStates = () => {
+    faceButtons.forEach(b => b.classList.remove('active'));
+    placeButtons.forEach(b => b.classList.remove('active'));
+  };
+
+  // Pestañas del pipeline de la nube (Fase 2 Digital)
+  pipeTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      pipeTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      const targetLayer = tab.getAttribute('data-layer');
+      AppState.activePipelineLayer = targetLayer;
+
+      document.querySelectorAll('.pipeline-view').forEach(view => view.classList.remove('active'));
+      const activeView = document.getElementById(`view-${targetLayer}`);
+      if (activeView) activeView.classList.add('active');
+
+      AudioFX.playDatabasePing();
+    });
+  });
+
+  // Búsqueda en Google Photos con debounce de 120ms
+  let searchDebounceTimer = null;
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      clearTimeout(searchDebounceTimer);
+      searchDebounceTimer = setTimeout(() => {
+        const rawVal = e.target.value.trim();
+        const query = rawVal.toLowerCase();
+        if (clearBtn) clearBtn.style.display = query ? 'block' : 'none';
+        clearSmartActiveStates();
+
+        let effectiveQuery = query;
+        if (query.includes('parís') || query.includes('paris')) effectiveQuery = 'parís';
+        else if (query.includes('playa') || query.includes('costa')) effectiveQuery = 'playa';
+        else if (query.includes('mascota') || query.includes('perro') || query.includes('toby')) effectiveQuery = 'mascotas';
+        else if (query.includes('familia') || query.includes('abuelo')) effectiveQuery = 'familia';
+
+        filterDatabasePhotos(effectiveQuery, rawVal ? `Álbum: "${rawVal}"` : null, null);
+      }, 120);
+    });
+  }
+
+  const resetToAllLibrary = () => {
+    if (searchInput) searchInput.value = '';
+    if (clearBtn) clearBtn.style.display = 'none';
+    clearSmartActiveStates();
+    filterChips.forEach(c => c.classList.toggle('active', c.getAttribute('data-filter') === 'all'));
+    filterDatabasePhotos('');
+  };
+
+  if (clearBtn) clearBtn.addEventListener('click', resetToAllLibrary);
+  if (btnCloseInstantAlbum) btnCloseInstantAlbum.addEventListener('click', resetToAllLibrary);
+
+  // Chips temáticos de Google Photos
+  filterChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      filterChips.forEach(c => c.classList.remove('active'));
+      clearSmartActiveStates();
+      chip.classList.add('active');
+
+      const filterVal = chip.getAttribute('data-filter');
+      const albumTitle = chip.getAttribute('data-album-title');
+      const albumSub = chip.getAttribute('data-album-sub');
+      AppState.activeFilter = filterVal;
+
+      if (filterVal === 'all') {
+        if (searchInput) searchInput.value = '';
+        if (clearBtn) clearBtn.style.display = 'none';
+        filterDatabasePhotos('');
+      } else {
+        if (searchInput) searchInput.value = albumTitle ? albumTitle.replace(/[^\w\sáéíóúñÁÉÍÓÚÑ]/g, '').trim() : filterVal;
+        if (clearBtn) clearBtn.style.display = 'block';
+        filterDatabasePhotos(filterVal.toLowerCase(), albumTitle, albumSub);
+      }
+    });
+  });
+
+  // Agrupación Facial por IA (Clusters de Rostros)
+  faceButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const q = btn.getAttribute('data-smart-query') || '';
+      const aTitle = btn.getAttribute('data-album-title');
+      const aSub = btn.getAttribute('data-album-sub');
+      clearSmartActiveStates();
+      filterChips.forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      if (searchInput) searchInput.value = aTitle || q;
+      if (clearBtn) clearBtn.style.display = 'block';
+      filterDatabasePhotos(q.toLowerCase(), aTitle, aSub);
+    });
+  });
+
+  // Agrupación Geográfica EXIF (Lugares y Mapas)
+  placeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const q = btn.getAttribute('data-smart-query') || '';
+      const aTitle = btn.getAttribute('data-album-title');
+      const aSub = btn.getAttribute('data-album-sub');
+      clearSmartActiveStates();
+      filterChips.forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      if (searchInput) searchInput.value = aTitle || q;
+      if (clearBtn) clearBtn.style.display = 'block';
+      filterDatabasePhotos(q.toLowerCase(), aTitle, aSub);
+    });
+  });
+
+  // Cierre del inspector de foto
+  if (btnCloseInspector && inspector) {
+    btnCloseInspector.addEventListener('click', () => {
+      inspector.style.display = 'none';
+    });
+  }
+
+  // Filtros de variabilidad de Manovich
+  vFilterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      vFilterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filterType = btn.getAttribute('data-vfilter');
+      AppState.variabilityFilter = filterType;
+      applyVariabilityFilter(filterType);
+      AudioFX.playDatabasePing();
+    });
+  });
+}
+
+/**
+ * Inicializador general del módulo digital
+ */
+function initDigitalModule() {
+  initDigitalCamera();
+  initDigitalDatabaseAndUI();
+}
+
+// Exposición en el objeto global window
+window.updateDigitalHUD = updateDigitalHUD;
+window.initDigitalCamera = initDigitalCamera;
+window.updatePipelineViews = updatePipelineViews;
+window.updateSmartAlbumHeroBanner = updateSmartAlbumHeroBanner;
+window.filterDatabasePhotos = filterDatabasePhotos;
+window.renderGooglePhotosGrid = renderGooglePhotosGrid;
+window.openPhotoInspector = openPhotoInspector;
+window.applyVariabilityFilter = applyVariabilityFilter;
+window.initDigitalDatabaseAndUI = initDigitalDatabaseAndUI;
+window.initDigitalModule = initDigitalModule;

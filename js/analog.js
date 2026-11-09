@@ -272,35 +272,6 @@ function updateFocusSimulation() {
   }
 }
 
-/**
- * Alterna entre ver la cámara por fuera o asomar el ojo al visor óptico
- */
-function toggleCameraView(showViewfinder) {
-  AppState.isPeekingViewfinder = showViewfinder;
-  const exteriorView = document.getElementById('camera-exterior-view');
-  const interiorView = document.getElementById('viewfinder-interior-view');
-  const toggleBtn = document.getElementById('btn-toggle-camera-view');
-
-  if (showViewfinder) {
-    if (exteriorView) {
-      exteriorView.style.display = 'none';
-      exteriorView.classList.add('hidden');
-    }
-    if (interiorView) interiorView.style.display = 'flex';
-    if (toggleBtn) toggleBtn.innerHTML = '<span>📷 Ver Cámara Exterior</span>';
-    updateFocusSimulation();
-    updateLightMeterDisplay();
-  } else {
-    if (exteriorView) {
-      exteriorView.style.display = 'flex';
-      exteriorView.classList.remove('hidden');
-    }
-    if (interiorView) interiorView.style.display = 'none';
-    if (toggleBtn) toggleBtn.innerHTML = '<span>👁️ Mirar por Visor</span>';
-  }
-  AudioFX.playDialClick();
-}
-
 function initAnalogCamera() {
   const btnAnalogShoot = document.getElementById('btn-analog-shoot');
   const analogCounter = document.getElementById('analog-counter');
@@ -360,6 +331,7 @@ function initAnalogCamera() {
   }
   window.findOptimalSettingsForPhoto = findOptimalSettingsForPhoto;
 
+  // Sincronizar diales visuales y accesibilidad ARIA
   function syncRotaryWheelsVisual() {
     const sIdx = Math.max(0, SPEED_VALUES.indexOf(AppState.shutterSpeed));
     const speedAngle = -sIdx * 40; // 9 posiciones * 40° = 360°
@@ -368,6 +340,10 @@ function initAnalogCamera() {
       topSpeedDisplay.textContent = AppState.shutterSpeed === 1 ? '1s' : `1/${AppState.shutterSpeed}`;
     }
     if (speedSelect) speedSelect.value = String(AppState.shutterSpeed);
+    if (speedWheel) {
+      speedWheel.setAttribute('aria-label', `Velocidad de obturación: ${AppState.shutterSpeed === 1 ? '1s' : '1/' + AppState.shutterSpeed + 's'}`);
+      speedWheel.setAttribute('aria-valuenow', AppState.shutterSpeed);
+    }
 
     const aIdx = Math.max(0, APERTURE_VALUES.indexOf(AppState.aperture));
     const apertureAngle = -aIdx * 45; // 8 posiciones * 45° = 360°
@@ -376,6 +352,10 @@ function initAnalogCamera() {
       topApertureDisplay.textContent = `ƒ/${AppState.aperture.toFixed(1)}`;
     }
     if (apertureSelect) apertureSelect.value = String(AppState.aperture.toFixed(1));
+    if (apertureWheel) {
+      apertureWheel.setAttribute('aria-label', `Diafragma: ƒ/${AppState.aperture.toFixed(1)}`);
+      apertureWheel.setAttribute('aria-valuenow', AppState.aperture);
+    }
   }
 
   function stepSpeed(delta) {
@@ -400,11 +380,24 @@ function initAnalogCamera() {
 
   function attachRotatableDial(wheelEl, stepCallback) {
     if (!wheelEl) return;
+    wheelEl.setAttribute('tabindex', '0');
+    wheelEl.setAttribute('role', 'slider');
+
     let isDraggingDial = false;
     let startX = 0;
     let startY = 0;
     let accumDrag = 0;
     let movedDuringPress = false;
+
+    wheelEl.addEventListener('keydown', (e) => {
+      if (['ArrowRight', 'ArrowUp', 'PageUp'].includes(e.key)) {
+        e.preventDefault();
+        stepCallback(1);
+      } else if (['ArrowLeft', 'ArrowDown', 'PageDown'].includes(e.key)) {
+        e.preventDefault();
+        stepCallback(-1);
+      }
+    });
 
     wheelEl.addEventListener('pointerdown', (e) => {
       isDraggingDial = true;
@@ -698,6 +691,31 @@ function initAnalogCamera() {
       }
       advanceCrankByDegrees(40);
     }, { passive: false });
+
+    // Accesibilidad por teclado y atajo de doble clic para usuarios de touchpad/móvil
+    crankWheel.setAttribute('tabindex', '0');
+    crankWheel.setAttribute('role', 'button');
+    crankWheel.setAttribute('aria-label', 'Manivela de arrastre: Gira 3 vueltas, o pulsa Enter / Espacio / W, o haz doble clic para bobinado rápido');
+
+    crankWheel.addEventListener('keydown', (e) => {
+      if (['Enter', ' ', 'w', 'W'].includes(e.key)) {
+        e.preventDefault();
+        if (AppState.analogShutterArmed) {
+          if (statusMsg) {
+            statusMsg.innerHTML = '<strong>🔒 Manivela bloqueada:</strong> El carrete ya está bobinado al tope y no se puede mover más hasta que dispares la foto.';
+          }
+          return;
+        }
+        advanceCrankByDegrees(180); // Cada pulsación avanza 1/2 vuelta con carraca mecánica
+      }
+    });
+
+    crankWheel.addEventListener('dblclick', (e) => {
+      e.preventDefault();
+      if (!AppState.analogShutterArmed) {
+        advanceCrankByDegrees(TOTAL_DEG_REQUIRED);
+      }
+    });
   }
 
   updateCrankVisualUI();

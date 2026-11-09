@@ -165,7 +165,7 @@ function updateDarkroomTray() {
   if (step1) step1.className = `chem-step ${batchObj.stage === 0 ? 'next-step-blink' : batchObj.stage === 1 ? 'active' : 'done'}`;
   if (step2) step2.className = `chem-step ${batchObj.stage === 1 ? 'next-step-blink' : batchObj.stage === 2 ? 'active done' : ''}`;
 
-  // Renderizar la tira de 5 fotos en el orden del carrete de 10
+  // Renderizar la tira de 4 fotos en el orden del carrete de 12
   const stripGrid = document.getElementById('darkroom-strip-5');
   if (stripGrid) {
     stripGrid.innerHTML = '';
@@ -227,7 +227,7 @@ function updateDarkroomTray() {
     }
   }
 
-  // Actualizar la Cubeta Química con la foto seleccionada del lote de 5
+  // Actualizar la Cubeta Química con la foto seleccionada del lote de 4
   const selectedPhotoIdx = startIdx + AppState.darkroomSelectedSlot;
   const selectedPhoto = photos[selectedPhotoIdx];
   const selectedShot = evaluateFrameShotData(selectedPhotoIdx, selectedPhoto);
@@ -317,64 +317,6 @@ function updateDarkroomTray() {
         }
       }
     }
-  }
-}
-
-function updatePipelineViews() {
-  const currentPhoto = getCurrentPhoto();
-  if (!currentPhoto) return;
-
-  // 1. Matriz de píxeles
-  const matrixBox = document.getElementById('pixel-matrix-preview');
-  if (matrixBox) {
-    matrixBox.innerHTML = '';
-    const sampleHexes = ['#3a88e9', '#5ca2f5', '#ff9800', '#ffd54f', '#2c2a29', '#4caf50', '#81c784', '#e91e63'];
-    for (let i = 0; i < 48; i++) {
-      const cell = document.createElement('div');
-      cell.className = 'pixel-cell';
-      const color = sampleHexes[Math.floor(Math.random() * sampleHexes.length)];
-      cell.style.backgroundColor = color;
-      cell.title = `Píxel (${i % 8}, ${Math.floor(i / 8)}): ${color}`;
-      matrixBox.appendChild(cell);
-    }
-  }
-
-  // 2. Metadatos EXIF
-  const exifGrid = document.getElementById('exif-display-fields');
-  const gpsLabel = document.getElementById('gps-coords-label');
-  if (exifGrid) {
-    exifGrid.innerHTML = `
-      <div class="exif-item"><strong>Cámara:</strong> ${currentPhoto.exif.camera}</div>
-      <div class="exif-item"><strong>Óptica:</strong> ${currentPhoto.exif.lens}</div>
-      <div class="exif-item"><strong>Sensibilidad:</strong> ${currentPhoto.exif.iso}</div>
-      <div class="exif-item"><strong>Resolución:</strong> ${currentPhoto.exif.dimensions}</div>
-      <div class="exif-item"><strong>Tamaño:</strong> ${currentPhoto.exif.fileSize}</div>
-      <div class="exif-item"><strong>Fecha/Hora:</strong> ${currentPhoto.date}</div>
-    `;
-  }
-  if (gpsLabel) gpsLabel.textContent = `GPS: ${currentPhoto.exif.gps}`;
-
-  // 3. Visión por Computador (Etiquetas IA)
-  const scannerTarget = document.getElementById('scanner-image-target');
-  const tagList = document.getElementById('semantic-tag-list');
-  if (scannerTarget) {
-    const existingSvg = scannerTarget.querySelector('svg');
-    if (existingSvg) existingSvg.remove();
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = renderUniquePhotoSvg(currentPhoto.svg);
-    if (tempDiv.firstElementChild) {
-      scannerTarget.prepend(tempDiv.firstElementChild);
-    }
-  }
-
-  if (tagList) {
-    tagList.innerHTML = '';
-    currentPhoto.aiTags.forEach(tag => {
-      const tagBadge = document.createElement('span');
-      tagBadge.className = 'sem-tag';
-      tagBadge.innerHTML = `${tag.label} <span>(${tag.conf})</span>`;
-      tagList.appendChild(tagBadge);
-    });
   }
 }
 
@@ -737,58 +679,6 @@ function renderAlbumPage() {
   }
 }
 
-/**
- * Activa o actualiza la Portada de Álbum Inteligente en Google Photos (Fase 3 Digital)
- * demostrando cómo el software remedia la portada y estructura del álbum familiar al instante.
- */
-function updateSmartAlbumHeroBanner(queryTerm, customTitle = null, customSub = null, filteredPhotos = []) {
-  const heroBox = document.getElementById('gphotos-instant-album-hero');
-  const coverSvgBox = document.getElementById('instant-album-cover-svg');
-  const titleEl = document.getElementById('instant-album-title');
-  const subEl = document.getElementById('instant-album-subtitle');
-  const countBadge = document.getElementById('instant-album-count-badge');
-  const metaPills = document.getElementById('instant-album-meta-pills');
-  const modeIndicator = document.getElementById('grid-mode-indicator');
-
-  if (!heroBox) return;
-
-  if (!queryTerm || queryTerm === 'all' || filteredPhotos.length === 0) {
-    heroBox.style.display = 'none';
-    if (modeIndicator) modeIndicator.textContent = 'Orden cronológico automático';
-    return;
-  }
-
-  heroBox.style.display = 'grid';
-  const coverPhoto = filteredPhotos[0];
-  if (coverSvgBox && coverPhoto) {
-    coverSvgBox.innerHTML = renderUniquePhotoSvg(coverPhoto.svg);
-  }
-
-  const cleanQuery = queryTerm.charAt(0).toUpperCase() + queryTerm.slice(1);
-  if (titleEl) {
-    titleEl.textContent = customTitle || `Álbum Inteligente: "${cleanQuery}"`;
-  }
-  if (subEl) {
-    subEl.textContent = customSub || `Portada y recopilación generadas al instante mediante metadatos EXIF, geolocalización y visión IA.`;
-  }
-  if (countBadge) {
-    countBadge.textContent = `${filteredPhotos.length} ${filteredPhotos.length === 1 ? 'recuerdo' : 'recuerdos'}`;
-  }
-  if (metaPills && coverPhoto) {
-    const sampleGps = (coverPhoto.exif && coverPhoto.exif.gps) ? coverPhoto.exif.gps.split('(')[0].trim() : 'GPS Activo';
-    const sampleTag = (coverPhoto.aiTags && coverPhoto.aiTags[0]) ? coverPhoto.aiTags[0].label : cleanQuery;
-    metaPills.innerHTML = `
-      <span>📍 ${sampleGps}</span>
-      <span>🤖 IA: ${sampleTag}</span>
-      <span>📅 ${coverPhoto.year}</span>
-    `;
-  }
-  if (modeIndicator) {
-    modeIndicator.textContent = '📖 Álbum Estructurado al Instante (IA)';
-  }
-}
-window.updateSmartAlbumHeroBanner = updateSmartAlbumHeroBanner;
-
 function initDarkroomAndAlbum() {
   const btnDevelop = document.getElementById('btn-start-develop');
   const step0 = document.getElementById('chem-step-0');
@@ -981,24 +871,6 @@ function initDarkroomAndAlbum() {
     });
   }
 
-  // Pestañas del pipeline de Google Photos (Fase 2)
-  const pipeTabs = document.querySelectorAll('.pipe-tab');
-  pipeTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      pipeTabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-
-      const targetLayer = tab.getAttribute('data-layer');
-      AppState.activePipelineLayer = targetLayer;
-
-      document.querySelectorAll('.pipeline-view').forEach(view => view.classList.remove('active'));
-      const activeView = document.getElementById(`view-${targetLayer}`);
-      if (activeView) activeView.classList.add('active');
-
-      AudioFX.playDatabasePing();
-    });
-  });
-
   // Navegación secuencial por pliegos del álbum físico (Pliego Anterior / Pliego Siguiente)
   const btnPrev = document.getElementById('btn-album-prev');
   const btnNext = document.getElementById('btn-album-next');
@@ -1026,128 +898,7 @@ function initDarkroomAndAlbum() {
       }
     });
   }
-
-  // =========================================================================
-  // BUSCADOR INTELIGENTE, ROSTROS IA, GEOLOCALIZACIÓN Y ÁLBUMES ESTRUCTURADOS
-  // =========================================================================
-  const searchInput = document.getElementById('gphotos-search-input');
-  const clearBtn = document.getElementById('btn-clear-search');
-  const filterChips = document.querySelectorAll('.filter-chip');
-  const faceButtons = document.querySelectorAll('.face-avatar-btn');
-  const placeButtons = document.querySelectorAll('.place-map-pill');
-  const btnCloseInstantAlbum = document.getElementById('btn-close-instant-album');
-
-  const clearSmartActiveStates = () => {
-    faceButtons.forEach(b => b.classList.remove('active'));
-    placeButtons.forEach(b => b.classList.remove('active'));
-  };
-
-  if (searchInput) {
-    searchInput.addEventListener('input', (e) => {
-      const rawVal = e.target.value.trim();
-      const query = rawVal.toLowerCase();
-      if (clearBtn) clearBtn.style.display = query ? 'block' : 'none';
-      clearSmartActiveStates();
-
-      // Si el usuario escribe una frase como "fotos del viaje a París", extraemos el término clave o buscamos
-      let effectiveQuery = query;
-      if (query.includes('parís') || query.includes('paris')) effectiveQuery = 'parís';
-      else if (query.includes('playa') || query.includes('costa')) effectiveQuery = 'playa';
-      else if (query.includes('mascota') || query.includes('perro') || query.includes('toby')) effectiveQuery = 'mascotas';
-      else if (query.includes('familia') || query.includes('abuelo')) effectiveQuery = 'familia';
-
-      filterDatabasePhotos(effectiveQuery, rawVal ? `Álbum: "${rawVal}"` : null, null);
-    });
-  }
-
-  const resetToAllLibrary = () => {
-    if (searchInput) searchInput.value = '';
-    if (clearBtn) clearBtn.style.display = 'none';
-    clearSmartActiveStates();
-    filterChips.forEach(c => c.classList.toggle('active', c.getAttribute('data-filter') === 'all'));
-    filterDatabasePhotos('');
-  };
-
-  if (clearBtn) {
-    clearBtn.addEventListener('click', resetToAllLibrary);
-  }
-  if (btnCloseInstantAlbum) {
-    btnCloseInstantAlbum.addEventListener('click', resetToAllLibrary);
-  }
-
-  filterChips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      filterChips.forEach(c => c.classList.remove('active'));
-      clearSmartActiveStates();
-      chip.classList.add('active');
-
-      const filterVal = chip.getAttribute('data-filter');
-      const albumTitle = chip.getAttribute('data-album-title');
-      const albumSub = chip.getAttribute('data-album-sub');
-      AppState.activeFilter = filterVal;
-
-      if (filterVal === 'all') {
-        if (searchInput) searchInput.value = '';
-        if (clearBtn) clearBtn.style.display = 'none';
-        filterDatabasePhotos('');
-      } else {
-        if (searchInput) searchInput.value = albumTitle ? albumTitle.replace(/[^\w\sáéíóúñÁÉÍÓÚÑ]/g, '').trim() : filterVal;
-        if (clearBtn) clearBtn.style.display = 'block';
-        filterDatabasePhotos(filterVal.toLowerCase(), albumTitle, albumSub);
-      }
-    });
-  });
-
-  // Clic en Rostros (Reconocimiento Facial IA)
-  faceButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const q = btn.getAttribute('data-smart-query') || '';
-      const aTitle = btn.getAttribute('data-album-title');
-      const aSub = btn.getAttribute('data-album-sub');
-      clearSmartActiveStates();
-      filterChips.forEach(c => c.classList.remove('active'));
-      btn.classList.add('active');
-      if (searchInput) searchInput.value = aTitle || q;
-      if (clearBtn) clearBtn.style.display = 'block';
-      filterDatabasePhotos(q.toLowerCase(), aTitle, aSub);
-    });
-  });
-
-  // Clic en Lugares (Geolocalización Instantánea EXIF)
-  placeButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const q = btn.getAttribute('data-smart-query') || '';
-      const aTitle = btn.getAttribute('data-album-title');
-      const aSub = btn.getAttribute('data-album-sub');
-      clearSmartActiveStates();
-      filterChips.forEach(c => c.classList.remove('active'));
-      btn.classList.add('active');
-      if (searchInput) searchInput.value = aTitle || q;
-      if (clearBtn) clearBtn.style.display = 'block';
-      filterDatabasePhotos(q.toLowerCase(), aTitle, aSub);
-    });
-  });
-
-  // Modal del inspector
-  const btnCloseInspector = document.getElementById('btn-close-inspector');
-  const inspector = document.getElementById('photo-inspector');
-  const vFilterBtns = document.querySelectorAll('.v-filter-btn');
-
-  if (btnCloseInspector && inspector) {
-    btnCloseInspector.addEventListener('click', () => { inspector.style.display = 'none'; });
-  }
-
-  vFilterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      vFilterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const filterType = btn.getAttribute('data-vfilter');
-      AppState.variabilityFilter = filterType;
-      applyVariabilityFilter(filterType);
-      AudioFX.playDatabasePing();
-    });
-  });
 }
+
 
 

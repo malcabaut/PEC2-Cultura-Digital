@@ -1,8 +1,8 @@
 /**
  * ========================================================
  * js/main.js - Inicializador Principal del Interactivo
- * Coordina la navegación de fases, el carrete aleatorio de 10 fotos,
- * la carga de hasta 5 fotos reales del usuario y los modales teóricos
+ * Coordina la navegación de fases, el carrete activo de 12 fotos,
+ * la carga de hasta 12 fotos reales del usuario y los modales teóricos
  * ========================================================
  */
 
@@ -234,6 +234,9 @@ function switchPhase(phaseNumber) {
 
   AudioFX.playDatabasePing();
 }
+window.switchPhase = switchPhase;
+window.rotateNextScene = rotateNextScene;
+window.refreshEntireSimulationUI = refreshEntireSimulationUI;
 
 function initPhaseNavigation() {
   document.querySelectorAll('.phase-btn').forEach(btn => {
@@ -481,6 +484,45 @@ function initIdleNextStepHelper() {
   resetIdleTimer();
 }
 
+function initGlobalKeyboardShortcuts() {
+  window.addEventListener('keydown', (e) => {
+    // Evitar atajos si el usuario está interactuando con un campo de texto editable
+    const tag = (e.target && e.target.tagName) || '';
+    if (['INPUT', 'TEXTAREA', 'SELECT'].includes(tag) || e.target?.isContentEditable) {
+      if (e.key === 'Escape') {
+        e.target.blur();
+      }
+      return;
+    }
+
+    if (e.key === 'Escape') {
+      // Cerrar modales pedagógicos abiertos
+      document.querySelectorAll('.theory-modal-backdrop.open').forEach(modal => {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+      });
+      // Cerrar inspector de fotografía digital
+      const inspector = document.getElementById('photo-inspector');
+      if (inspector && inspector.style.display !== 'none') {
+        inspector.style.display = 'none';
+      }
+    } else if (e.key === '1') {
+      switchPhase(1);
+    } else if (e.key === '2') {
+      switchPhase(2);
+    } else if (e.key === '3') {
+      switchPhase(3);
+    } else if (e.key === ' ' && AppState.currentPhase === 1) {
+      // Barra espaciadora: Disparo fotoquímico si el obturador está armado
+      const btnShoot = document.getElementById('btn-analog-shoot');
+      if (btnShoot && AppState.analogShutterArmed && AppState.analogPhotosLeft > 0) {
+        e.preventDefault();
+        btnShoot.click();
+      }
+    }
+  });
+}
+
 // Inicialización cuando el DOM está listo
 document.addEventListener('DOMContentLoaded', () => {
   buildActiveReel(true);
@@ -490,8 +532,13 @@ document.addEventListener('DOMContentLoaded', () => {
   initTheoryGlassesModals();
   initUserPhotosAndReelControls();
   initAnalogCamera();
-  initDigitalCamera();
+  if (typeof initDigitalModule === 'function') {
+    initDigitalModule();
+  } else {
+    initDigitalCamera();
+  }
   initDarkroomAndAlbum();
+  initGlobalKeyboardShortcuts();
 
   // Render inicial de escenas
   refreshEntireSimulationUI();

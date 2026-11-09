@@ -12,7 +12,7 @@
  * ========================================================
  */
 
-window.TheoryContent = {
+var TheoryContent = window.TheoryContent = {
   phase1: {
     analog: {
       title: 'Fase 1 (Analógico): Indexicalidad, Huella Física y el “Esto ha sido”',
